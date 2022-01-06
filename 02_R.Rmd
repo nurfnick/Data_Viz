@@ -22,9 +22,9 @@ summary(cars)
 ```
 
 
-I just left the above, it is what prints whenever you start a Rmd file.  I find it useful to ready once in your life.  Don't include it on your projects please!
+I just left the above, it is what prints whenever you start a Rmd file.  I find it useful to read once in your life.  Don't include it on your projects please!
 
-I am going to run through everything I did in python in 01_Python but this time in R.  I think you'll find some things easier and others much harder.  I still haven't decided which language I preffere as they both have their place.
+I am going to try to run through everything I did in python in 01_Python but this time in R.  I think you'll find some things easier and others much harder.  I still haven't decided which language I preffere as they both have their place.
 
 First you should notice that it is a little more challenging to get RStudio going.  That is a serious problem for students.  I also find the coding a little clunkier than python especially for the basics (for loops, function defining).  R is much better at statistics and the tidyverse is a killer library for data munging and vizualization.
 
@@ -42,21 +42,25 @@ There is one issue I'll fix here.  R is interpreting 'Class' as `int`.  I want i
 df <- df %>% mutate(Class = as.factor(Class))
 ```
 
-Okay, on to vizulaizations!
+Okay, on to vizulaizations!  Here is the barchart using ggplot.  I'll return to how this works in a bit.
 
 ```{r}
 ggplot(data = df, aes(x = Class)) +
   geom_bar()
 ```
 
-Or in base R
+Or in base R, it looks much easier
 
 ```{r}
 barplot(table(df$Class))
 ```
 
-BTW, `table` is a sweet command that I totally tried to use in python...
+BTW, `table` is a sweet command that I totally tried to use in python...  It counts how many have the categrories.  It will work with multiple columns too.
+```{r}
+table(df$Class)
+```
 
+I said no more pies but I was hungry...
 ```{r}
 pie(table(df$Class))
 ```
@@ -66,7 +70,7 @@ MMMM, pie!
 
 ### Quantitative Data
 
-I'll move through these quickly, keep in mind base R does not have many options but ggplot does!
+I'll move through these quickly, keep in mind base R does not have many options but ggplot does!  Here are all the base ones I know off the top of my head.
 
 ```{r}
 hist(df$Alcohol)
@@ -78,13 +82,14 @@ boxplot(df$Alcohol)
 
 ```{r}
 plot(df$Alcohol,df$Ash)
+abline(lm(df$Ash~df$Alcohol), col="red") #this is the linear regression line
 ```
 
 Let's get to ggplot and talk about how it works.  You chain together multiple commands using the `+` this allows you to do a bunch without nesting parentheses!  You call ggplot, give it data, then aes will define the aesthetics for the rest of the graph.  This alone won't do anything, then you'll have to call what kind of graph.  After that you can add loads more!
 ```{r}
-ggplot(df, aes(x = Alcohol, y = Ash, color = Class))+
-  geom_smooth(se = FALSE) +
-  geom_point()
+ggplot(df, aes(x = Alcohol, y = Ash, color = Class))+ #setting up the graph
+  geom_smooth(se = FALSE, method = lm) + # putting regression lines
+  geom_point() # including the points
 ```
 
 ```{r}
@@ -92,16 +97,19 @@ ggplot(df, aes(y = Flavanoids, color = Class)) +
   geom_boxplot()
 ```
 
+Next, I wanted to recreate the graph I did in python.  I used some data transformation here using `pivot_longer` to make the data in a tidier form.
 ```{r}
 pivot_longer(df[c('Class','Flavanoids','Hue')],cols = c('Flavanoids','Hue')) %>%
   ggplot(aes(x = name, y = value, color = Class)) +
   geom_boxplot()
 ```
 
+On to the stats.  This is the 5 number `summary`
 ```{r}
 summary(df$Alcohol)
 ```
 
+I should include a mean and standard deviation
 ```{r}
 mean(df$Alcohol)
 ```
@@ -110,6 +118,8 @@ mean(df$Alcohol)
 sd(df$Alcohol)
 ```
 
+
+I put a bunch of these together.  The dplyr package is awesome for combining different things.
 ```{r}
 df %>% 
   group_by(Class) %>%
@@ -123,7 +133,7 @@ df %>%
 3. Gather the iris dataset and load it into your notebook.  https://raw.githubusercontent.com/nurfnick/Data_Viz/main/iris.csv
 4. Examine the dataset.
 5. Create a boxplot of the categorical variable
-5. Create visualizations of your favorite variable
+6. Create visualizations of your favorite variable
   1. Histogram
   2. Box Plot
   3. Violin
