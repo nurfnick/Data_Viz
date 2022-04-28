@@ -1,0 +1,1595 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Some SQL with BigQuery &#8212; Data Pre-Processing and Visualization OER</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SQL Essentials" href="04_SQL_Essentials.html" />
+    <link rel="prev" title="Pandas for Data Analysis" href="02_Pandas.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/JuliaSetECUColors.jpg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Data Pre-Processing and Visualization OER</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction.html">
+   Data Pre-Processing and Visualization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Python.html">
+   Jupyter Notebooks and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_Pandas.html">
+   Pandas for Data Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Gathering Data
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Learning Some SQL with BigQuery
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="08_html.html">
+   Reading Data From the Web
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_html_tables.html">
+     HTML Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_html_selenium.html">
+     Webpage Loading and Scrapping
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_Twitter.html">
+   Twitter a Social Media Scrape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_GatheringConclusion.html">
+   Gathering Data Conclusion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Cleaning Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">
+   Data Types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Cleaning/14_Strings.html">
+   Strings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">
+   Strings And Cleaning a DataFrame
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Cleaning/16_Dates.html">
+   Dates
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">
+   Integers and Floats
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">
+   Factors and One Hot Encoding
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">
+   Missing and Incomplete
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">
+   Exam 2 Review
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Great Visualizations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">
+   Graphical Excellence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">
+   Graphical Integrity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">
+   Graphical Sophistication
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Creating Visulaizations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/24_Amounts.html">
+   Visualize Amounts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/25_Histograms.html">
+   Histograms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">
+   Many Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/27_Proportions.html">
+   Proportions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/28_Associations.html">
+   Visualizing Association
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">
+   Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">
+   Visualization Conclusion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Project Examples
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Project_Examples/RecentVisualizations.html">
+   Inverted Yield Curve
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Project_Examples/RecreatingMasters.html">
+   NHL Data Visualization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Selected Solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/mySolutions.html">
+   My Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam1Solutions.html">
+   Exam 1 Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam2Solutions.html">
+   Exam 2 Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam3Solutions.html">
+   Exam 3 Solutions Data Visualization and Preprocessing
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Content/Data_Collecting/03_SQL.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nurfnick/Data_Viz"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Collecting/03_SQL.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nurfnick/Data_Viz/master?urlpath=tree/Content/Data_Collecting/03_SQL.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Collecting/03_SQL.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Learning Some SQL with BigQuery
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#before-you-begin">
+   Before you begin
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-do-we-use-sql">
+   Why do we use SQL
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-on-liquors-not-needed-today">
+   More on Liquors not Needed today
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/main/03_SQL.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<div class="section" id="learning-some-sql-with-bigquery">
+<h1>Learning Some SQL with BigQuery<a class="headerlink" href="#learning-some-sql-with-bigquery" title="Permalink to this headline">¶</a></h1>
+<p>The first bit below comes directly from Google, you’ll need to do each of those to be successful in getting this document to work.</p>
+</div>
+<div class="section" id="before-you-begin">
+<h1>Before you begin<a class="headerlink" href="#before-you-begin" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Use the <a class="reference external" href="https://console.cloud.google.com/cloud-resource-manager">Cloud Resource Manager</a> to Create a Cloud Platform project if you do not already have one.</p></li>
+<li><p><a class="reference external" href="https://support.google.com/cloud/answer/6293499#enable-billing">Enable billing</a> for the project.</p></li>
+<li><p><a class="reference external" href="https://console.cloud.google.com/flows/enableapi?apiid=bigquery">Enable BigQuery</a> APIs for the project.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Authenticated&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that I am authenticated, I can start to play around in the dataset.  I am going to look at the liquor sales data from Iowa and try to find the most and least sales by city.  I do have a project called <code class="docutils literal notranslate"><span class="pre">pic-math</span></code> in my BigQuery interface.  So you’ll need to make one but keep the name simple but identifiable!</p>
+</div>
+<div class="section" id="why-do-we-use-sql">
+<h1>Why do we use SQL<a class="headerlink" href="#why-do-we-use-sql" title="Permalink to this headline">¶</a></h1>
+<p>Below you’ll see a basic SQL call.  This illustrates why excel is not useful, 22 million rows is about 21.5 million more than excel can handle!  Essentially SQL will do the data manipulations on the database server side instead of on you machine (or in the cloud with colab)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+SELECT 
+  COUNT(*) as total_rows
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_rows</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>22494544</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>We see that is a lot of rows.  We really don’t want to try to store that into memory!  Let’s have a peak at the data.</p>
+<p>The only two required features of an SQL call are <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> and <code class="docutils literal notranslate"><span class="pre">FROM</span></code>.  <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> picks the columns you want by name in the data table.  <code class="docutils literal notranslate"><span class="pre">FROM</span></code> picks the table you want to look at.  Both can be shorted in the call and sometimes it is nesseccary to all the table name with the column.  Below I do the same thing in two different ways.  Do you see a difference in the output?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+SELECT 
+  AVG(sale_dollars)
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-f1de074a-e115-4ec6-ae0c-16b6de3d1d05">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>f0_</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>138.881749</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-f1de074a-e115-4ec6-ae0c-16b6de3d1d05')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-f1de074a-e115-4ec6-ae0c-16b6de3d1d05 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-f1de074a-e115-4ec6-ae0c-16b6de3d1d05');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+SELECT AVG(table.sale_dollars) as average_sale_dollars
+FROM `bigquery-public-data.iowa_liquor_sales.sales` as table
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-697f7464-594c-4404-978b-1d198b1fc456">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>average_sale_dollars</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>138.881749</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-697f7464-594c-4404-978b-1d198b1fc456')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-697f7464-594c-4404-978b-1d198b1fc456 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-697f7464-594c-4404-978b-1d198b1fc456');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>See any difference?  You should be asking yourself why it would be adventageous to name your tables.  Well, we will see shortly that joining the tables (remember relational database?) is going to be an important task!  Sometimes some info we want will be in one table and some of it in another.</p>
+<p>Here is a command that will allow you to peak at the whole table (like head!)  The <code class="docutils literal notranslate"><span class="pre">*</span></code> gives you all the columns and the <code class="docutils literal notranslate"><span class="pre">LIMIT</span></code> gives only how many you specify.  There is not preferred order in SQL.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+SELECT *
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+LIMIT 5
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>invoice_and_item_number</th>
+      <th>date</th>
+      <th>store_number</th>
+      <th>store_name</th>
+      <th>address</th>
+      <th>city</th>
+      <th>zip_code</th>
+      <th>store_location</th>
+      <th>county_number</th>
+      <th>county</th>
+      <th>category</th>
+      <th>category_name</th>
+      <th>vendor_number</th>
+      <th>vendor_name</th>
+      <th>item_number</th>
+      <th>item_description</th>
+      <th>pack</th>
+      <th>bottle_volume_ml</th>
+      <th>state_bottle_cost</th>
+      <th>state_bottle_retail</th>
+      <th>bottles_sold</th>
+      <th>sale_dollars</th>
+      <th>volume_sold_liters</th>
+      <th>volume_sold_gallons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>INV-20825400070</td>
+      <td>2019-07-24</td>
+      <td>2555</td>
+      <td>Hy-Vee Food Store / Keokuk</td>
+      <td>3111 Main</td>
+      <td>Keokuk</td>
+      <td>52632.0</td>
+      <td>POINT (-91.403752 40.41538)</td>
+      <td>56</td>
+      <td>LEE</td>
+      <td>None</td>
+      <td>None</td>
+      <td>55</td>
+      <td>SAZERAC NORTH AMERICA</td>
+      <td>84197</td>
+      <td>99 Pineapple Mini</td>
+      <td>10</td>
+      <td>600</td>
+      <td>6.00</td>
+      <td>9.00</td>
+      <td>10</td>
+      <td>90.00</td>
+      <td>6.00</td>
+      <td>1.58</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>INV-33554300013</td>
+      <td>2021-01-18</td>
+      <td>4493</td>
+      <td>Casey's General Store #2850 / Cedar Rapids</td>
+      <td>5655 C St SW</td>
+      <td>Cedar Rapids</td>
+      <td>52404.0</td>
+      <td>POINT (-91.637306 41.922505)</td>
+      <td>57</td>
+      <td>LINN</td>
+      <td>1081100.0</td>
+      <td>Coffee Liqueurs</td>
+      <td>370.0</td>
+      <td>PERNOD RICARD USA</td>
+      <td>67524</td>
+      <td>Kahlua Coffee</td>
+      <td>24</td>
+      <td>375</td>
+      <td>6.49</td>
+      <td>9.74</td>
+      <td>5</td>
+      <td>48.70</td>
+      <td>1.87</td>
+      <td>0.49</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>INV-17816400003</td>
+      <td>2019-02-27</td>
+      <td>4069</td>
+      <td>Fareway Stores #648 / Ottumwa</td>
+      <td>1325 Albia Rd</td>
+      <td>Ottumwa</td>
+      <td>52501</td>
+      <td>POINT (-92.440213 41.00934)</td>
+      <td>90</td>
+      <td>WAPELLO</td>
+      <td>1901200.0</td>
+      <td>Special Order Items</td>
+      <td>259.0</td>
+      <td>Heaven Hill Brands</td>
+      <td>917914</td>
+      <td>HA Elijah Craig Cask Barrel Proof</td>
+      <td>3</td>
+      <td>750</td>
+      <td>29.92</td>
+      <td>44.88</td>
+      <td>9</td>
+      <td>403.92</td>
+      <td>6.75</td>
+      <td>1.78</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>INV-23344500010</td>
+      <td>2019-11-20</td>
+      <td>4324</td>
+      <td>Dayton Community Grocery</td>
+      <td>22 North Main</td>
+      <td>Dayton</td>
+      <td>50530.0</td>
+      <td>POINT (-94.068439 42.26168)</td>
+      <td>94</td>
+      <td>WEBSTER</td>
+      <td>1081100.0</td>
+      <td>Coffee Liqueurs</td>
+      <td>370.0</td>
+      <td>PERNOD RICARD USA</td>
+      <td>67527</td>
+      <td>Kahlua Coffee</td>
+      <td>12</td>
+      <td>1000</td>
+      <td>15.15</td>
+      <td>22.73</td>
+      <td>5</td>
+      <td>113.65</td>
+      <td>5.00</td>
+      <td>1.32</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>S09220000195</td>
+      <td>2012-11-29</td>
+      <td>2560</td>
+      <td>Hy-Vee Food Store / Marion</td>
+      <td>3600 BUSINESS HWY 151 EAST</td>
+      <td>MARION</td>
+      <td>52302</td>
+      <td>None</td>
+      <td>57</td>
+      <td>Linn</td>
+      <td>1081350.0</td>
+      <td>SPEARMINT SCHNAPPS</td>
+      <td>434</td>
+      <td>Luxco-St Louis</td>
+      <td>82187</td>
+      <td>Arrow Spearmint Schnapps</td>
+      <td>12</td>
+      <td>1000</td>
+      <td>4.75</td>
+      <td>7.13</td>
+      <td>4</td>
+      <td>28.52</td>
+      <td>4.00</td>
+      <td>1.06</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Not sure how much we might use this but if I wanted the data into a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe, I just add a name for it after the bigquery project name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math df
+SELECT 
+  city, 
+  store_name,
+  SUM(sale_dollars) as total_sales
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE city is not null
+GROUP BY city, store_name
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city</th>
+      <th>store_name</th>
+      <th>total_sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Keokuk</td>
+      <td>Hy-Vee Food Store / Keokuk</td>
+      <td>4226546.86</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Cedar Rapids</td>
+      <td>Casey's General Store #2850 / Cedar Rapids</td>
+      <td>277130.53</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ottumwa</td>
+      <td>Fareway Stores #648 / Ottumwa</td>
+      <td>1853189.35</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Dayton</td>
+      <td>Dayton Community Grocery</td>
+      <td>312445.18</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>MARION</td>
+      <td>Hy-Vee Food Store / Marion</td>
+      <td>4305523.82</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4144</th>
+      <td>Cedar Falls</td>
+      <td>Happy's Wine &amp; Spirits Wholesale</td>
+      <td>1550.99</td>
+    </tr>
+    <tr>
+      <th>4145</th>
+      <td>Bettendorf</td>
+      <td>Cats Eye Distillery, LLC</td>
+      <td>693.12</td>
+    </tr>
+    <tr>
+      <th>4146</th>
+      <td>Colorado Springs</td>
+      <td>Dash Events LLC</td>
+      <td>31.14</td>
+    </tr>
+    <tr>
+      <th>4147</th>
+      <td>Keosauqua</td>
+      <td>Honey Creek Distillery</td>
+      <td>235.68</td>
+    </tr>
+    <tr>
+      <th>4148</th>
+      <td>Dubuque</td>
+      <td>3-Oaks Distillery, LLC</td>
+      <td>388.80</td>
+    </tr>
+  </tbody>
+</table>
+<p>4149 rows × 3 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">groupeddf</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">maxdf</span> <span class="o">=</span> <span class="n">groupeddf</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">maxdf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>store_name</th>
+      <th>total_sales</th>
+    </tr>
+    <tr>
+      <th>city</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ACKLEY</th>
+      <td>KUM &amp; GO #513 / ACKLEY</td>
+      <td>132551.63</td>
+    </tr>
+    <tr>
+      <th>ADAIR</th>
+      <td>KUM &amp; GO #76 / ADAIR</td>
+      <td>148812.43</td>
+    </tr>
+    <tr>
+      <th>ADEL</th>
+      <td>Shugar's Super Valu / Adel</td>
+      <td>982611.78</td>
+    </tr>
+    <tr>
+      <th>AFTON</th>
+      <td>Casey's General Store #2626 / Afton</td>
+      <td>137832.15</td>
+    </tr>
+    <tr>
+      <th>AKRON</th>
+      <td>Casey's General Store #2425 / Akron</td>
+      <td>134999.66</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>Woodbine</th>
+      <td>Foodland Super Markets / Woodbine</td>
+      <td>385599.54</td>
+    </tr>
+    <tr>
+      <th>Woodward</th>
+      <td>Casey's General Store #2551 / Woodward</td>
+      <td>186083.15</td>
+    </tr>
+    <tr>
+      <th>Wyoming</th>
+      <td>Casey's General Store #1126 / Wyoming</td>
+      <td>35499.38</td>
+    </tr>
+    <tr>
+      <th>ZWINGLE</th>
+      <td>SNK Gas &amp; Food LLC</td>
+      <td>101817.91</td>
+    </tr>
+    <tr>
+      <th>Zwingle</th>
+      <td>SNK Gas &amp; Food LLC</td>
+      <td>177418.27</td>
+    </tr>
+  </tbody>
+</table>
+<p>846 rows × 2 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mindf</span> <span class="o">=</span> <span class="n">groupeddf</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+
+<span class="n">mindf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>store_name</th>
+      <th>total_sales</th>
+    </tr>
+    <tr>
+      <th>city</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ACKLEY</th>
+      <td>Ackley Super Foods</td>
+      <td>108359.95</td>
+    </tr>
+    <tr>
+      <th>ADAIR</th>
+      <td>Casey's General Store #2521 / Adair</td>
+      <td>40784.57</td>
+    </tr>
+    <tr>
+      <th>ADEL</th>
+      <td>Casey's General Store #1680 / Adel</td>
+      <td>19733.51</td>
+    </tr>
+    <tr>
+      <th>AFTON</th>
+      <td>Casey's General Store #2626 / Afton</td>
+      <td>137832.15</td>
+    </tr>
+    <tr>
+      <th>AKRON</th>
+      <td>Casey's General Store #2425 / Akron</td>
+      <td>134999.66</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>Woodbine</th>
+      <td>Casey's General Store #2665 / Woodbine</td>
+      <td>6439.33</td>
+    </tr>
+    <tr>
+      <th>Woodward</th>
+      <td>Casey's General Store #2551 / Woodwa</td>
+      <td>9095.21</td>
+    </tr>
+    <tr>
+      <th>Wyoming</th>
+      <td>Casey's General Store #1126 / Wyoming</td>
+      <td>35499.38</td>
+    </tr>
+    <tr>
+      <th>ZWINGLE</th>
+      <td>SNK Gas &amp; Food LLC</td>
+      <td>101817.91</td>
+    </tr>
+    <tr>
+      <th>Zwingle</th>
+      <td>SNK Gas &amp; Food LLC</td>
+      <td>177418.27</td>
+    </tr>
+  </tbody>
+</table>
+<p>846 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>I am clearly just showing off now.  I have left more along this line at the bottom but let’s get your assignment up!</p>
+<p>Assignement for today</p>
+<ol class="simple">
+<li><p>Start a notebook getting BigQuery to work.  Feel free to use the authentication atop.</p></li>
+<li><p>Navigate to the dataset ‘austin_bikeshare.bikeshare_trips’</p></li>
+<li><p>Compute how many entries are in the dataset</p></li>
+<li><p>Compute the longest trip from ‘duration_minutes’</p></li>
+<li><p>Compute the average time for a trip</p></li>
+</ol>
+</div>
+<div class="section" id="more-on-liquors-not-needed-today">
+<h1>More on Liquors not Needed today<a class="headerlink" href="#more-on-liquors-not-needed-today" title="Permalink to this headline">¶</a></h1>
+<p>I notice a few things attempting this.  While I think I have a solution, it is clearly not the best.  Zwingle and ZWINGLE are probably the same town and SNK may just be the only store but the fact that it appears four times in my lists is disappointing!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">maxdf</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;total_sales&#39;</span><span class="p">,</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>store_name</th>
+      <th>total_sales</th>
+    </tr>
+    <tr>
+      <th>city</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Des Moines</th>
+      <td>Walgreens #07968 / Des Moines</td>
+      <td>5.785247e+07</td>
+    </tr>
+    <tr>
+      <th>DES MOINES</th>
+      <td>Walgreens #07968 / Des Moines</td>
+      <td>4.014780e+07</td>
+    </tr>
+    <tr>
+      <th>Iowa City</th>
+      <td>goPuff / Iowa City</td>
+      <td>2.576451e+07</td>
+    </tr>
+    <tr>
+      <th>Cedar Rapids</th>
+      <td>Williams Boulevard Service, Inc.</td>
+      <td>1.883548e+07</td>
+    </tr>
+    <tr>
+      <th>Mount Vernon</th>
+      <td>Wilkie Liquors</td>
+      <td>1.794630e+07</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>RUNNELLS</th>
+      <td>Casey's General Store #2683  /  Runn</td>
+      <td>5.495630e+03</td>
+    </tr>
+    <tr>
+      <th>GILBERTVILLE</th>
+      <td>Casey's General Store #2900 / Gilber</td>
+      <td>4.947320e+03</td>
+    </tr>
+    <tr>
+      <th>Malcom</th>
+      <td>Malcom Gas &amp; Food / Malcom</td>
+      <td>4.493810e+03</td>
+    </tr>
+    <tr>
+      <th>ALVORD</th>
+      <td>Direct Liquor / Alvord</td>
+      <td>7.659100e+02</td>
+    </tr>
+    <tr>
+      <th>Colorado Springs</th>
+      <td>Dash Events LLC</td>
+      <td>3.114000e+01</td>
+    </tr>
+  </tbody>
+</table>
+<p>846 rows × 2 columns</p>
+</div></div></div>
+</div>
+<p>I want to try the extra challenge <strong>and</strong> do it all in SQL.  I’ll try to find which store had the most sales by date!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+
+WITH bestday as (
+SELECT 
+  date, 
+  store_name,
+  city,
+  SUM(sale_dollars) as total_sales,
+  RANK() over (PARTITION BY date ORDER BY SUM(sale_dollars) desc) as top_sales_rank
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE city is not null
+GROUP BY date, store_name, city
+)
+
+SELECT
+  date,
+  store_name,
+  city,
+  total_sales
+FROM bestday
+WHERE top_sales_rank = 1
+ORDER BY date
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>store_name</th>
+      <th>city</th>
+      <th>total_sales</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2012-01-03</td>
+      <td>Sam's Club 8238 / Davenport</td>
+      <td>DAVENPORT</td>
+      <td>51350.70</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2012-01-04</td>
+      <td>Hy-Vee Food Store / Sheldon</td>
+      <td>SHELDON</td>
+      <td>73296.69</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2012-01-05</td>
+      <td>Hy-Vee #3 / BDI / Des Moines</td>
+      <td>DES MOINES</td>
+      <td>74085.23</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2012-01-09</td>
+      <td>Central City Liquor, Inc.</td>
+      <td>DES MOINES</td>
+      <td>60435.09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2012-01-10</td>
+      <td>Sam's Club 8238 / Davenport</td>
+      <td>DAVENPORT</td>
+      <td>33423.60</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2443</th>
+      <td>2021-10-26</td>
+      <td>Costco Wholesale #788 / WDM</td>
+      <td>West Des Moines</td>
+      <td>158640.30</td>
+    </tr>
+    <tr>
+      <th>2444</th>
+      <td>2021-10-27</td>
+      <td>I-80 Liquor / Council Bluffs</td>
+      <td>Council Bluffs</td>
+      <td>89184.13</td>
+    </tr>
+    <tr>
+      <th>2445</th>
+      <td>2021-10-28</td>
+      <td>Central City 2</td>
+      <td>Des Moines</td>
+      <td>106029.76</td>
+    </tr>
+    <tr>
+      <th>2446</th>
+      <td>2021-10-29</td>
+      <td>Foundry Distilling Company</td>
+      <td>West Des Moines</td>
+      <td>55950.00</td>
+    </tr>
+    <tr>
+      <th>2447</th>
+      <td>2021-10-31</td>
+      <td>Best Food Mart 3  LLC</td>
+      <td>Des Moines</td>
+      <td>2140.08</td>
+    </tr>
+  </tbody>
+</table>
+<p>2448 rows × 4 columns</p>
+</div></div></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Content\Data_Collecting"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="02_Pandas.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Pandas for Data Analysis</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_SQL_Essentials.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">SQL Essentials</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,6 +1,6 @@
 # in _config.yml
 title: "Data Pre-Processing and Visualization OER"
-description: "An OER for Data Pre-processing and visualization developed Spring 2022 at East Central University"
+description: "An OER for Data Pre-processing and Visualization developed Spring 2022 at East Central University"
 logo: JuliaSetECUColors.jpg
 execute:
   execute_notebooks: "off"
