@@ -23,14 +23,13 @@ parts:
   - caption: Cleaning Data
     chapters:
       - file: Content/Data_Cleaning/13_Data_Types.ipynb
-        sections:
-        - file: Content/Data_Cleaning/14_Strings.ipynb
-        - file: Content/Data_Cleaning/15_String_Cleaning.ipynb
-        - file: Content/Data_Cleaning/16_Dates.ipynb
-        - file: Content/Data_Cleaning/17_Ints_and_Floats.ipynb
-        - file: Content/Data_Cleaning/18_One_Hot_Encoding.ipynb
-        - file: Content/Data_Cleaning/19_Missing_and_Incomplete.ipynb
-        - file: Content/Data_Cleaning/20_Cleaning_Conclusion.ipynb
+      - file: Content/Data_Cleaning/14_Strings.ipynb
+      - file: Content/Data_Cleaning/15_String_Cleaning.ipynb
+      - file: Content/Data_Cleaning/16_Dates.ipynb
+      - file: Content/Data_Cleaning/17_Ints_and_Floats.ipynb
+      - file: Content/Data_Cleaning/18_One_Hot_Encoding.ipynb
+      - file: Content/Data_Cleaning/19_Missing_and_Incomplete.ipynb
+      - file: Content/Data_Cleaning/20_Cleaning_Conclusion.ipynb
   - caption: Great Visualizations
     chapters:
       - file: Content/Data_Visualization/21_Graphical_Excellence.ipynb
