@@ -1,0 +1,79 @@
+import pandas as pa
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/Activity_Dataset_V1.csv')
+
+df.head()
+
+df.groupby('workout_type').workout_type.agg('count')
+
+plt.pie(x=df.groupby('workout_type').workout_type.agg('count'),labels = df.groupby('workout_type').workout_type.agg('count').index, autopct='%.0f%%' )
+plt.show()
+
+ax = sns.barplot( x= df.groupby('workout_type').workout_type.agg('count').index,
+                 y = df.groupby('workout_type').workout_type.agg('count'))
+ax.set_xticklabels(ax.get_xticklabels(),rotation = 30)
+ax.set_title('Colorful Bar Chart')
+
+plt.show()
+
+df1 = df.groupby('workout_type').workout_type.agg(count = 'count')
+df1 = df1.reset_index()
+
+df1
+
+
+ax = sns.barplot(data = df1,x = 'workout_type', y = 'count')
+ax.set_xticklabels(ax.get_xticklabels(),rotation = 30)
+ax.set_title('Coolest Graph')
+
+plt.show()
+
+from statsmodels.graphics.mosaicplot import mosaic
+df2 = df[(df.activity_day == '2022-01-01')|(df.activity_day == '2022-01-02')|(df.activity_day == '2022-01-03')]
+ax = mosaic(df2, [ 'workout_type','activity_day'])
+
+plt.show()
+
+df2.groupby(['workout_type','activity_day']).workout_type.agg('count')
+
+sns.color_palette('bright')
+
+sns.color_palette('deep')
+
+sns.color_palette('colorblind')
+
+sns.color_palette('coolwarm')
+
+
+ax = sns.barplot(data = df1,x = 'workout_type', y = 'count', color = 'blue')
+ax.set_xticklabels(ax.get_xticklabels(),rotation = 30)
+ax.set_title('One Color Graph')
+
+plt.show()
+
+sns.set_palette('bright')
+
+ax = sns.barplot(data = df1,
+                 x = 'workout_type', 
+                 y = 'count',
+                 palette=sns.color_palette('coolwarm', n_colors= 6))
+ax.set_xticklabels(ax.get_xticklabels(),rotation = 30)
+ax.set_title('Warm Colored Graph')
+
+plt.show()
+
+ax = sns.barplot( x= df.groupby('workout_type').workout_type.agg('count').index, y = df.groupby('workout_type').workout_type.agg('count'))
+ax.set_xticklabels(ax.get_xticklabels(),rotation = 30)
+ax.annotate("Crazy Runners",
+            xy = [8,100],
+            xytext = [9,110],
+            arrowprops = dict(facecolor = 'red', width = 3, headwidth = 12, headlength = 6))
+ax.set_title('Annotated Graph')
+ax.set_ylabel('Frequency')
+
+plt.show()
+
+
+

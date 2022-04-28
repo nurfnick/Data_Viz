@@ -1,0 +1,121 @@
+from google.colab import auth
+auth.authenticate_user()
+print('Authenticated')
+
+%%bigquery --project pic-math
+
+SELECT *
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = 'Imported Whiskies'
+
+%%bigquery --project pic-math
+WITH t as(
+SELECT *
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = 'Imported Whiskies')
+
+SELECT *
+FROM t as table1 JOIN t as table2 ON table1.category_name = table2.category_name
+
+%%bigquery --project pic-math
+WITH t as(
+SELECT *
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = 'Imported Whiskies')
+
+SELECT table1.item_description, SUM(CASE WHEN table1.state_bottle_retail < table2.state_bottle_retail THEN 1 ELSE 0 END) as number_more_expensive
+FROM t as table1 JOIN t as table2 ON table1.category_name = table2.category_name
+GROUP BY table1.item_description
+
+%%bigquery --project pic-math
+
+SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = 'Imported Whiskies'
+GROUP BY item_description, category_name
+
+%%bigquery --project pic-math
+WITH t as(
+SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = 'Imported Whiskies'
+GROUP BY item_description, category_name)
+
+SELECT table1.item_description, SUM(CASE WHEN table1.state_bottle_retail < table2.state_bottle_retail THEN 1 ELSE 0 END) as number_more_expensive, table1.state_bottle_retail as price
+FROM t as table1 JOIN t as table2 ON table1.category_name = table2.category_name
+GROUP BY table1.item_description, table1.state_bottle_retail
+
+%%bigquery --project pic-math
+
+WITH iw as(
+SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = 'Imported Whiskies'
+GROUP BY item_description, category_name)
+
+
+SELECT *
+FROM iw JOIN 
+      (SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`
+      WHERE category_name = 'Coffee Liqueurs'
+      GROUP BY item_description, category_name) as cl
+      ON iw.category_name = cl.category_name
+
+%%bigquery --project pic-math
+
+WITH iw as(
+SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = 'Imported Whiskies'
+GROUP BY item_description, category_name)
+
+
+SELECT *
+FROM iw LEFT OUTER JOIN 
+      (SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`
+      WHERE category_name = 'Coffee Liqueurs'
+      GROUP BY item_description, category_name) as cl
+      ON iw.category_name = cl.category_name
+
+%%bigquery --project pic-math
+
+WITH iw as(
+SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = 'Imported Whiskies'
+GROUP BY item_description, category_name)
+
+
+SELECT *
+FROM iw RIGHT OUTER JOIN
+      (SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`
+      WHERE category_name = 'Coffee Liqueurs'
+      GROUP BY item_description, category_name) as cl
+      ON iw.category_name = cl.category_name
+
+%%bigquery --project pic-math
+
+SELECT *
+FROM `bigquery-public-data.census_bureau_usa.population_by_zip_2010`
+LIMIT 10
+
+%%bigquery --project pic-math
+
+SELECT liquor.city,liquor.zip_code,liquor.category_name,liquor.bottles_sold,zip.population
+FROM `bigquery-public-data.iowa_liquor_sales.sales` as liquor LEFT OUTER JOIN `bigquery-public-data.census_bureau_usa.population_by_zip_2010` as zip 
+      ON liquor.zip_code = zip.zipcode
+WHERE zip.gender IS NULL AND zip.minimum_age IS NULL AND zip.maximum_age IS NULL
+LIMIT 10
+
+%%bigquery --project pic-math
+
+SELECT name, property_type
+FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations`
+LIMIT 50
+
+
+
+

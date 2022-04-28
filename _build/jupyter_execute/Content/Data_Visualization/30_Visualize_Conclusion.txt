@@ -1,0 +1,62 @@
+import pandas as pa
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/bank.csv')
+
+df.head()
+
+df.loc[:100].duration.plot.bar()
+
+ax = df.groupby('education').duration.agg('mean').plot.barh()
+ax.set(title = "Average Duration by education Level")
+ax.set(xlabel = 'Average Duration')
+plt.show()
+
+ax = df.duration.hist(bins = 25)
+ax.set(title = "Histogram of Duration")
+plt.show()
+
+ax = sns.violinplot(data = df, x = 'duration', y = 'education')
+ax.set(title = 'Violin of Duration and Education')
+
+plt.show()
+
+df.balance.plot.box()
+
+sns.boxplot(data = df, x = 'balance', y = 'housing')
+
+ax = sns.scatterplot(data = df, x = 'balance', y = 'duration', hue = 'housing', style= 'education')
+ax.set(title = "Scatter")
+
+plt.show()
+
+ax = sns.heatmap(df.corr(),vmin = -1)
+ax.set(title = 'Heatmap of Banking')
+
+plt.show()
+
+df.groupby('education').duration.agg(['mean', 'std', 'count'])
+
+import numpy as np
+
+df1 = df.groupby('education').duration.agg(['mean', 'std', 'count'])
+def SE(std,n):
+  return 2*std/np.sqrt(n)
+
+
+df1['SE'] = df1.apply(lambda x: SE(x['std'],x['count']), axis = 1)
+
+
+
+
+
+
+
+
+df1.plot.bar(y = 'mean', yerr = 'SE')
+ax.set(title = "Average Duration by education Level")
+ax.set(xlabel = 'Average Duration')
+plt.show()
+
+

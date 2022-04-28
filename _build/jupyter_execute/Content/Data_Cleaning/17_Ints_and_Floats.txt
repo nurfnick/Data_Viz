@@ -1,0 +1,40 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/H1.csv')
+
+df.head().T
+
+df.ADR.astype('int')
+
+df.BookingChanges.astype('float')
+
+df.BookingChanges = df.BookingChanges.astype('float')
+
+df.head().T
+
+df.groupby('DistributionChannel').ADR.agg(['mean','median','count', 'std'])
+
+df.ADR.transform(lambda x: x+1)
+
+df.ADR.apply(lambda x: x+1)
+
+df.Meal.transform(len)
+
+df.Meal[0]
+
+df.ADR.rolling(2).sum()
+
+totaldailies = df.groupby('ReservationStatusDate').ADR.agg('sum')
+
+totaldailies
+
+totaldailies.rolling(5).mean()
+
+totaldailies.index = pa.to_datetime(totaldailies.index)
+
+totaldailies = totaldailies.sort_index()
+totaldailies
+
+totaldailies.rolling('5d').mean()
+
+

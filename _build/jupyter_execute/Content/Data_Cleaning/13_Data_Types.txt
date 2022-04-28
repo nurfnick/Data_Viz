@@ -1,0 +1,76 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/iris.csv')
+
+df.head()
+
+import numpy as np
+
+df1 = pa.get_dummies(data = df)
+
+X = np.array(df1)
+
+X
+
+df1.dtypes
+
+df.Class.iloc[0]
+
+a_string = 'My really cool string'
+
+print(a_string)
+
+df.Class.dtype
+
+a = True
+b = False
+
+print(a and b) #or a & b
+
+print(a or b) # or a | b
+
+print( not a ) # or ~a
+
+print(3 == 4)
+
+print(5>-2)
+
+bool(0)
+
+df.Class == 'Iris-setosa'
+
+(df.Class == 'Iris-setosa').dtype
+
+df[df.Class == 'Iris-setosa'].head(10) #I've added head to limit the output to 10 entries
+
+df[(df.Class == 'Iris-setosa') & (df.SepalLength > 5.2)]
+
+int(-3.0000)
+
+df.dtypes
+
+df2 = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Sets_For_Stats/master/CuratedDataSets/Landslides_From_NASA.csv')
+ds = df2.event_date.astype('datetime64')
+
+ds
+
+ds[1]-ds[0]
+
+(ds[1]-ds[0]).total_seconds()
+
+df.Class = df.Class.astype('category')
+
+df.dtypes
+
+df.Class.unique()
+
+from pandas.api.types import CategoricalDtype
+
+
+cat_type = CategoricalDtype(categories=['Iris-setosa', 'Iris-versicolor', "Iris-virginica"], ordered=True)
+
+dfClass = df.Class.astype(cat_type)
+
+dfClass.dtype
+
+

@@ -1,0 +1,109 @@
+import numpy as np
+
+
+truths = np.random.binomial(1,.25,25)
+
+truths
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
+fig, axs = plt.subplots(5, 5, constrained_layout=True, figsize=(2, 2))
+
+
+def hatches_plot(ax,h):
+    ax.add_patch(Rectangle((0, 0), 1, 1, fill=h))
+    ax.axis('equal')
+    ax.axis('off')
+
+for ax, h in zip(axs.flat,truths):
+    hatches_plot(ax,h)
+
+fig.suptitle('25% Chance')
+
+plt.show()
+
+!pip install pywaffle
+
+from pywaffle import Waffle
+
+fig = plt.figure(
+    FigureClass=Waffle, 
+    rows=5, 
+    columns=10, 
+    values=[48, 46, 6],
+    figsize=(5, 3)
+)
+plt.show()
+
+plt.figure(FigureClass = Waffle,
+           rows= 5,
+           columns = 5,
+           values = [5,20],
+           colors = ['blue','white'],
+           vertical = True,
+           facecolor='#DDDDDD' )
+plt.show()
+
+plt.figure(FigureClass=Waffle,
+           rows = 5,
+           values = [2,3],
+           icons = ['bicycle','car'])
+
+plt.show()
+
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/iris.csv')
+
+dfgrouped = df.groupby('Class').agg(['mean','std', 'count'])
+
+dfgrouped.SepalLength.plot.bar(y = 'mean',yerr = 'std', legend = False, color = ['purple','red', 'blue'], title = "Error of Standard Deviation")
+
+import numpy as np
+from scipy.stats import t
+
+def SE(std,n):
+  return std/np.sqrt(n)
+
+
+
+dfgroupedSepalLength = dfgrouped.SepalLength
+
+dfgroupedSepalLength['SE'] = dfgroupedSepalLength.apply(lambda x: SE(x['std'],x['count']), axis = 1)
+
+
+dfgroupedSepalLength.loc[:,'95%'] = dfgroupedSepalLength.loc[:,'SE']*t.ppf(.975,49)
+
+dfgroupedSepalLength
+
+
+dfgroupedSepalLength.plot.bar(y = 'mean',yerr = 'SE', title = 'Graphed with Standard Error' )
+
+dfgroupedSepalLength.plot.bar(y = 'mean',yerr = '95%', title = 'Graphed with 95% Confidence Interval' )
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+sns.lmplot(data = df, 
+            x = 'SepalLength', 
+            y = 'SepalWidth',
+            hue = 'Class')
+
+plt.show()
+
+from scipy import stats
+
+x = [x for x in np.arange(-4,4,.1)]
+x_trunk = [i for i in x if i<2]
+
+plt.plot(x, stats.norm.pdf(x, 0, 1))
+plt.fill_between(x_trunk, 0, stats.norm.pdf(x_trunk,0,1))
+plt.annotate(r'$p$ value', xy = [2.5,.01],
+            xytext = [3,.15],
+            arrowprops = dict(facecolor = 'black', width = 3, headwidth = 12, headlength = 6))
+plt.show()
+
+
+

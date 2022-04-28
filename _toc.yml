@@ -2,56 +2,56 @@
 format: jb-book
 root: Content/Introduction.ipynb
 parts:
-  -caption: Getting Started
+  - caption: Getting Started
     chapters:
-	-file: Content/Data_Collecting/01_Python.ipynb
-	-file: Content/Data_Collecting/02_Pandas.ipynb 
-  -caption:  Gathering Data
+      - file: Content/Data_Collecting/01_Python.ipynb
+      - file: Content/Data_Collecting/02_Pandas.ipynb 
+  - caption:  Gathering Data
     chapters:
-	-file: Content/Data_Collecting/03_SQL.ipynb
-	  sections:
-		-file: Content/Data_Collecting/04_SQL_Essentials.ipynb
-		-file: Content/Data_Collecting/05_SQL_SubQuery.ipynb
-		-file: Content/Data_Collecting/06_SQL_Joins.ipynb
-		-file: Content/Data_Collecting/07_SQL_Wrap.ipynb
-	-file: Content/Data_Collecting/08_html.ipynb
-	  sections:
-		-file: Content/Data_Collecting/09_html_tables.ipynb
-		-file: Content/Data_Collecting/10_html_selenium.ipynb
-	-file: Content/Data_Collecting/11_Twitter.ipynb
-	-file: Content/Data_Collecting/12_GatheringConclusion.ipynb
-  -caption: Cleaning Data
+      - file: Content/Data_Collecting/03_SQL.ipynb
+        sections:
+        - file: Content/Data_Collecting/04_SQL_Essentials.ipynb
+        - file: Content/Data_Collecting/05_SQL_SubQuery.ipynb
+        - file: Content/Data_Collecting/06_SQL_Joins.ipynb
+        - file: Content/Data_Collecting/07_SQL_Wrap.ipynb
+      - file: Content/Data_Collecting/08_html.ipynb
+        sections:
+        - file: Content/Data_Collecting/09_html_tables.ipynb
+        - file: Content/Data_Collecting/10_html_selenium.ipynb
+      - file: Content/Data_Collecting/11_Twitter.ipynb
+      - file: Content/Data_Collecting/12_GatheringConclusion.ipynb
+  - caption: Cleaning Data
     chapters:
-	-file: Content/Data_Cleaning/13_Data_Types.ipynb
-	  sections:
-		-file: Content/Data_Cleaning/14_Strings.ipynb
-		-file: Content/Data_Cleaning/15_String_Cleaning.ipynb
-		-file: Content/Data_Cleaning/16_Dates.ipynb
-		-file: Content/Data_Cleaning/17_Ints_and_Floats.ipynb
-		-file: Content/Data_Cleaning/18_One_Hot_Encoding.ipynb
-		-file: Content/Data_Cleaning/19_Missing_and_Incomplete.ipynb
-		-file: Content/Data_Cleaning/20_Cleaning_Conclusion.ipynb
-  -caption: Great Visualizations
+      - file: Content/Data_Cleaning/13_Data_Types.ipynb
+        sections:
+        - file: Content/Data_Cleaning/14_Strings.ipynb
+        - file: Content/Data_Cleaning/15_String_Cleaning.ipynb
+        - file: Content/Data_Cleaning/16_Dates.ipynb
+        - file: Content/Data_Cleaning/17_Ints_and_Floats.ipynb
+        - file: Content/Data_Cleaning/18_One_Hot_Encoding.ipynb
+        - file: Content/Data_Cleaning/19_Missing_and_Incomplete.ipynb
+        - file: Content/Data_Cleaning/20_Cleaning_Conclusion.ipynb
+  - caption: Great Visualizations
     chapters:
-	-file: Content/Data_Visualization/21_Graphical_Excellence.ipynb
-	-file: Content/Data_Visualization/22_Graphical_Integrity.ipynb
-	-file: Content/Data_Visualization/23_Graphical_Sophistication.ipynb
-  -caption: Creating Visulaizations
+      - file: Content/Data_Visualization/21_Graphical_Excellence.ipynb
+      - file: Content/Data_Visualization/22_Graphical_Integrity.ipynb
+      - file: Content/Data_Visualization/23_Graphical_Sophistication.ipynb
+  - caption: Creating Visulaizations
     chapters:
-	-file: Content/Data_Visualization/24_Amounts.ipynb
-	-file: Content/Data_Visualization/25_Histograms.ipynb
-	-file: Content/Data_Visualization/26_Many_Distributions.ipynb
-	-file: Content/Data_Visualization/27_Proportions.ipynb
-	-file: Content/Data_Visualization/28_Associations.ipynb
-	-file: Content/Data_Visualization/29_Uncertainty.ipynb
-	-file: Content/Data_Visualization/30_Visualize_Conclusion.ipynb
-  -caption: Project Examples
+      - file: Content/Data_Visualization/24_Amounts.ipynb
+      - file: Content/Data_Visualization/25_Histograms.ipynb
+      - file: Content/Data_Visualization/26_Many_Distributions.ipynb
+      - file: Content/Data_Visualization/27_Proportions.ipynb
+      - file: Content/Data_Visualization/28_Associations.ipynb
+      - file: Content/Data_Visualization/29_Uncertainty.ipynb
+      - file: Content/Data_Visualization/30_Visualize_Conclusion.ipynb
+  - caption: Project Examples
     chapters:
-	-file: Content/Project_Examples/RecentVisualizations.ipynb
-	-file: Content/Project_Examples/RecreatingMasters.ipynb
-  -caption: Selected Solutions
+      - file: Content/Project_Examples/RecentVisualizations.ipynb
+      - file: Content/Project_Examples/RecreatingMasters.ipynb
+  - caption: Selected Solutions
     chapters:
-	-file: Content/Solutions/mySolutions.ipynb
-	-file: Content/Solutions/Exam1Solutions.ipynb
-	-file: Content/Solutions/Exam2Solutions.ipynb
-	-file: Content/Solutions/Exam3Solutions.ipynb
+      - file: Content/Solutions/mySolutions.ipynb
+      - file: Content/Solutions/Exam1Solutions.ipynb
+      - file: Content/Solutions/Exam2Solutions.ipynb
+      - file: Content/Solutions/Exam3Solutions.ipynb

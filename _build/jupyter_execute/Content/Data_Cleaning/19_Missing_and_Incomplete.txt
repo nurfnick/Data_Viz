@@ -1,0 +1,56 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/lotr_characters.csv')
+
+df.head()
+
+df.isnull().sum(axis = 0)
+
+df.isnull().sum(axis = 1).value_counts().sort_index()
+
+df[~df.isnull().any(axis = 1)]
+
+df[df.isnull().sum(axis = 1) == 8].name
+
+df[df.isnull().sum(axis = 1) <= 4]
+
+df[~df.realm.isnull()]
+
+df.fillna(value = 0)
+
+df.height.fillna(value = 0)
+
+df.height[~df.height.isnull()]
+
+df.height.fillna(method= 'pad')
+
+df.height.fillna(method= 'bfill')
+
+
+df.height.transform(lambda x: x.fillna(value = x.mode()[0]))
+
+df.groupby(['race']).height.agg(pa.Series.mode)
+
+dfrh = df[(~df.race.isna())&(~df.height.isna())]
+
+dfrh.groupby(['race']).height.agg(pa.Series.mode)
+
+df.height.fillna(df.groupby('race').height.transform(lambda s: s.mode()))
+
+df.groupby('race', sort=False).height.apply(lambda x: x.fillna(value = x.mode()))
+
+
+
+import numpy as np
+
+df.height = df.height.fillna(df.groupby('race').height.transform(lambda x: next(iter(x.mode()), np.nan)))
+
+df
+
+df.fillna(df.groupby('race').transform(lambda x: next(iter(x.mode()), np.nan)))
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/AB_NYC_2019.csv')
+
+df.head()
+
+

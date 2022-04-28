@@ -1,0 +1,75 @@
+lambda x: x^2
+
+list(map(lambda x: x**2,[1,2,3,4,5]))
+
+def square(x):
+  return x**2
+
+newlist = []
+for i in [1,2,3,4,5]:
+  newlist.append(square(i))
+
+newlist
+
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/iris.csv')
+
+df.head()
+
+
+df.Class.apply(lambda s: s.lower())
+
+df.Class.apply(lambda s: s[5:].capitalize())
+
+import requests
+import pandas as pa
+from bs4 import BeautifulSoup
+
+
+r = requests.get('https://en.wikipedia.org/wiki/List_of_highest_mountains_on_Earth')
+html_contents = r.text
+html_soup = BeautifulSoup(html_contents,"lxml")
+tables = html_soup.find_all('table',class_="wikitable")
+
+df1 = pa.read_html(str(tables))[0]
+df1.columns = df1.columns.droplevel(0).droplevel(0)
+df1.head()
+
+df1.iloc[0,3]
+
+
+
+import re
+
+re.sub(r"\D","",df1.iloc[0,3])
+
+re.sub(r"\[\w*\]","",df1.iloc[0,3])
+
+re.sub(r"\[(.+)\]","",df1.iloc[0,3])
+
+
+
+list1 = re.sub(r"-", " ",df.Class[0]).split()
+
+list1[0] + " " + list1[1].capitalize()
+
+
+split_the_string = lambda s: re.sub(r"-", " ",s).split()
+reform_the_string = lambda list1: list1[0] + " " + list1[1].capitalize()
+
+df.Class.apply(lambda s: reform_the_string(split_the_string(s)) )
+
+def clean_name(dirty_name):
+  list1 = re.sub(r"-", " ",dirty_name).split()
+  return list1[0] + " " + list1[1].capitalize()
+
+df.Class.apply(lambda s: clean_name(s))
+
+dictionary = {'Iris-setosa':'Iris1', 'Iris-versicolor':'Iris2','Iris-virginica':'Iris3'}
+
+df.Class.map(dictionary)
+
+df1.columns
+
+df1.iloc[:,-1]

@@ -1,0 +1,61 @@
+import pandas as pa
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/iris.csv')
+
+ax = sns.scatterplot(data = df, x = 'SepalLength', y = 'SepalWidth')
+ax.set(title = "Length vs Width",
+       xticks = [x for x in range(4,9,1)])
+plt.show()
+
+sns.scatterplot(data = df, x = 'SepalLength', y = 'SepalWidth', hue = "Class")
+
+colors = ['blue', 'green','orange']
+colordict = {}
+for i,name in enumerate(df.Class.unique()):
+  colordict[name] = colors[i]
+
+
+sns.scatterplot(data = df, 
+                x = 'SepalLength', 
+                y = 'SepalWidth', 
+                hue = "Class", 
+                palette = colordict )
+
+sns.scatterplot(data = df, 
+                x = 'SepalLength', 
+                y = 'SepalWidth',
+                hue = 'Class',
+                style= 'Class' )
+
+ax = sns.scatterplot(data = df, 
+                x = 'SepalLength', 
+                y = 'SepalWidth',
+                hue = 'Class',
+                size = 'PedalWidth')
+
+sns.move_legend(ax, "upper right", bbox_to_anchor=(-.2, 1))
+
+sns.regplot(data = df, 
+            x = 'SepalLength', 
+            y = 'SepalWidth',
+            ci = False, #I removed the confidence interval!
+            order = 1)
+
+sns.lmplot(data = df, 
+                x = 'SepalLength', 
+                y = 'SepalWidth',
+                hue = 'Class',
+                ci = False )
+
+g = sns.PairGrid(df, hue="Class")
+g.map_diag(sns.histplot)
+g.map_offdiag(sns.scatterplot)
+g.add_legend()
+plt.show()
+
+sns.heatmap(df.corr(), annot=True, linewidths=0.5,vmin = -1)
+
+

@@ -1,0 +1,81 @@
+from google.colab import auth
+auth.authenticate_user()
+print('Authenticated')
+
+%%bigquery --project pic-math
+SELECT *
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+LIMIT 5
+
+%%bigquery --project pic-math
+SELECT SUM(volume_sold_gallons) as Total_Gallons_of_Liquor
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+
+(5.560763*10**7)/660000
+
+%%bigquery --project pic-math
+SELECT SUM(sale_dollars)/SUM(volume_sold_gallons) as Total_Dollars_Per_Gallon
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+
+%%bigquery --project pic-math
+SELECT sale_dollars/volume_sold_gallons as Dollars_Per_Gallon
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE volume_sold_gallons != 0
+LIMIT 5
+
+%%bigquery --project pic-math
+SELECT sale_dollars/volume_sold_gallons as Dollars_Per_Gallon, item_description
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE volume_sold_gallons != 0 and category_name = 'Coffee Liqueurs'
+
+%%bigquery --project pic-math
+SELECT AVG(sale_dollars/volume_sold_gallons) as Average_Dollars_Per_Gallon, item_description
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE volume_sold_gallons != 0 and category_name = 'Coffee Liqueurs'
+GROUP BY item_description
+
+%%bigquery --project pic-math
+SELECT AVG(sale_dollars/volume_sold_gallons) as Average_Dollars_Per_Gallon, item_description
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE volume_sold_gallons != 0 and category_name = 'Coffee Liqueurs'
+GROUP BY item_description
+ORDER BY Average_Dollars_Per_Gallon DESC
+
+%%bigquery --project pic-math
+SELECT 
+  AVG(sale_dollars/volume_sold_gallons) as Average_Dollars_Per_Gallon, 
+  item_description, 
+  ROW_NUMBER() OVER(
+    PARTITION BY category_name
+    ORDER BY item_description) row_num
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE volume_sold_gallons != 0 and (category_name = 'Coffee Liqueurs')
+GROUP BY item_description, category_name
+ORDER BY Average_Dollars_Per_Gallon DESC
+
+%%bigquery --project pic-math
+WITH t as(
+SELECT 
+  AVG(sale_dollars/volume_sold_gallons) as Average_Dollars_Per_Gallon, 
+  item_description, category_name
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE volume_sold_gallons != 0 and (category_name = 'Coffee Liqueurs' or category_name = 'Imported Vodkas')
+GROUP BY item_description, category_name
+ORDER BY Average_Dollars_Per_Gallon DESC
+)
+
+SELECT *, 
+    RANK() OVER(
+    PARTITION BY category_name
+    ORDER BY Average_Dollars_Per_Gallon) rk_num
+FROM t
+ORDER BY rk_num
+
+
+
+%%bigquery --project pic-math
+SELECT category_name
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name LIKE '%Vodka%'
+GROUP BY category_name
+

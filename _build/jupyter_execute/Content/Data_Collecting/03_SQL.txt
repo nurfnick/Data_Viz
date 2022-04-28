@@ -1,0 +1,72 @@
+from google.colab import auth
+auth.authenticate_user()
+print('Authenticated')
+
+%%bigquery --project pic-math
+SELECT 
+  COUNT(*) as total_rows
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+
+%%bigquery --project pic-math
+SELECT 
+  AVG(sale_dollars)
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+
+%%bigquery --project pic-math
+SELECT AVG(table.sale_dollars) as average_sale_dollars
+FROM `bigquery-public-data.iowa_liquor_sales.sales` as table
+
+%%bigquery --project pic-math
+SELECT *
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+LIMIT 5
+
+%%bigquery --project pic-math df
+SELECT 
+  city, 
+  store_name,
+  SUM(sale_dollars) as total_sales
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE city is not null
+GROUP BY city, store_name
+
+df
+
+import pandas as pd
+
+groupeddf = df.groupby('city')
+
+maxdf = groupeddf.max()
+
+maxdf
+
+mindf = groupeddf.min()
+
+mindf
+
+maxdf.sort_values('total_sales',ascending=False)
+
+%%bigquery --project pic-math
+
+WITH bestday as (
+SELECT 
+  date, 
+  store_name,
+  city,
+  SUM(sale_dollars) as total_sales,
+  RANK() over (PARTITION BY date ORDER BY SUM(sale_dollars) desc) as top_sales_rank
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE city is not null
+GROUP BY date, store_name, city
+)
+
+SELECT
+  date,
+  store_name,
+  city,
+  total_sales
+FROM bestday
+WHERE top_sales_rank = 1
+ORDER BY date
+
+

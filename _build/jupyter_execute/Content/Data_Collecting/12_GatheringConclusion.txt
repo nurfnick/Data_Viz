@@ -1,0 +1,63 @@
+from google.colab import auth
+auth.authenticate_user()
+print('Authenticated')
+
+
+
+%%bigquery --project pic-math
+SELECT 
+  COUNT(*) as total_rows
+FROM `bigquery-public-data.london_fire_brigade.fire_brigade_service_calls`
+
+%%bigquery --project pic-math
+SELECT *
+FROM `bigquery-public-data.london_fire_brigade.fire_brigade_service_calls`
+LIMIT 10
+
+%%bigquery --project pic-math
+SELECT COUNT(*) as number_of_late_night_false_alarms
+FROM `bigquery-public-data.london_fire_brigade.fire_brigade_service_calls`
+WHERE incident_group = "False Alarm" AND (hour_of_call >= 22 OR hour_of_call <= 4)
+
+%%bigquery --project pic-math
+SELECT incident_group, AVG(num_pumps_attending) as avg_pumps_attending
+FROM `bigquery-public-data.london_fire_brigade.fire_brigade_service_calls`
+GROUP BY incident_group
+
+
+
+import requests
+import pandas as pa
+from bs4 import BeautifulSoup
+
+
+r = requests.get('https://en.wikipedia.org/wiki/Oklahoma')
+html_contents = r.text
+html_soup = BeautifulSoup(html_contents,"lxml")
+tables = html_soup.find_all('table',class_="wikitable")
+
+df = pa.read_html(str(tables))[0]
+
+
+df = df.melt(id_vars = ['City','Unnamed: 1'],
+                  value_vars = df.columns[2:],
+                  var_name = 'month'
+)
+
+df.value = df.value.apply(lambda s: int(s[:2]))
+
+df.columns = ['City','Low_High', 'Month','Temp_F']
+
+df
+
+df.describe()
+
+df.query('City == "Oklahoma City" and Low_High == "Avg. high"').Temp_F.mean()
+
+df.query('City == "Tulsa" and Low_High == "Avg. low"').Temp_F.hist()
+
+df.groupby('City')['Temp_F'].plot(kind ='bar')
+
+df.query('Low_High == "Avg. high"').groupby('Month').agg(['mean','max'])
+
+df[df.Temp_F == df.groupby('Month').Temp_F.transform(max)]

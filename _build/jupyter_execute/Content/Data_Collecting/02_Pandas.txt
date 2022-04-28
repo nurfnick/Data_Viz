@@ -1,0 +1,53 @@
+import pandas as pd 
+
+df = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data',header = None)
+head = ['Class','Alcohol','MalicAcid','Ash','AlcalinityAsh','Magnesium','Phenols','Flavanoids','NonflavanoidPhenols','Proanthocyanins','ColorIntensity','Hue','OD280/OD315','Proline'] 
+#https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.names more info on the data file than you could ever use!
+df.columns = head
+df.head() 
+
+df.columns
+
+print('Size:' ,df.size)
+print('Shape', df.shape)
+
+178*14
+
+df.info()
+
+df.nunique()
+
+df.describe()
+
+df.Alcohol
+
+df['Alcohol']
+
+df[['Alcohol']]
+
+df[['Alcohol','Ash']]
+
+df.loc[:,'Ash']#all
+df.loc[1:3,'Ash']#1,2,3
+df.loc[[1,5,7],'Ash']#1,5,7
+
+df.iloc[:-10,3]#last 10 entries still 'Ash'
+
+df.loc[df.Class==1].head()
+
+df.query('Class ==1').head()#head is just here to limit the output
+
+df.query('Class ==1 and Ash >2.8')
+
+df_melt = df.melt(id_vars = 'Class',
+                  value_vars = ['Flavanoids','Hue'],
+                  var_name = 'colmuns')
+df_melt.tail()
+
+df_melt.pivot(columns = 'colmuns', values = 'value')
+
+df.groupby(by = 'Class').mean()
+
+df.groupby(by = 'Class').agg(['mean','median'])
+
+

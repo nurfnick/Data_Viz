@@ -1,0 +1,75 @@
+from google.colab import auth
+auth.authenticate_user()
+print('Authenticated')
+
+%%bigquery --project pic-math
+
+SELECT category_name, AVG(state_bottle_retail) as average, STDDEV(state_bottle_retail) as standarddeviation 
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name
+LIMIT 5
+
+%%bigquery --project pic-math
+
+WITH statsTable as(
+SELECT category_name, AVG(state_bottle_retail) as average, STDDEV(state_bottle_retail) as standarddeviation 
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name
+)
+
+SELECT t.category_name, COUNT(*) as bottles_over_two_sd
+FROM `bigquery-public-data.iowa_liquor_sales.sales` t JOIN statsTable 
+      ON t.category_name = statsTable.category_name
+WHERE t.state_bottle_retail > statsTable.average + 2*statsTable.standarddeviation
+GROUP BY category_name
+
+%%bigquery --project pic-math
+
+SELECT category_name, item_description, AVG(state_bottle_retail) as average, STDDEV(state_bottle_retail) as standarddeviation 
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name, item_description
+
+%%bigquery --project pic-math
+
+SELECT category_name, item_description, bottle_volume_ml, MAX(state_bottle_retail) as retail_max
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name, item_description, bottle_volume_ml
+
+%%bigquery --project pic-math
+
+WITH statsTable as(
+SELECT category_name, AVG(retail_max) as average, STDDEV(retail_max) as standarddeviation 
+FROM (SELECT category_name, item_description, bottle_volume_ml, MAX(state_bottle_retail) as retail_max
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`
+      GROUP BY category_name, item_description, bottle_volume_ml) 
+GROUP BY category_name
+)
+
+SELECT t.category_name, COUNT(*) as bottles_over_two_sd
+FROM `bigquery-public-data.iowa_liquor_sales.sales` t JOIN statsTable 
+      ON t.category_name = statsTable.category_name
+WHERE t.state_bottle_retail > statsTable.average + 2*statsTable.standarddeviation
+GROUP BY category_name
+ORDER BY bottles_over_two_sd
+
+%%bigquery --project pic-math
+
+WITH statsTable as(
+SELECT category_name, AVG(retail_max) as average, STDDEV(retail_max) as standarddeviation 
+FROM (SELECT category_name, item_description, bottle_volume_ml, MAX(state_bottle_retail) as retail_max
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`
+      GROUP BY category_name, item_description, bottle_volume_ml)
+GROUP BY category_name
+)
+
+SELECT t.category_name, 
+        COUNTIF(t.state_bottle_retail > statsTable.average + 2*statsTable.standarddeviation) as bottles_over_two_sd, 
+        COUNT(*) as total_bottles, 
+        AVG(statsTable.average)as average_price, 
+        AVG(statsTable.standarddeviation) as standard_deviation_price
+FROM `bigquery-public-data.iowa_liquor_sales.sales` t JOIN statsTable 
+      ON t.category_name = statsTable.category_name
+GROUP BY category_name
+ORDER BY bottles_over_two_sd
+
+

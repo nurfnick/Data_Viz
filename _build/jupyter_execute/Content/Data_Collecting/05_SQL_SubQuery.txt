@@ -1,0 +1,96 @@
+from google.colab import auth
+auth.authenticate_user()
+print('Authenticated')
+
+%%bigquery --project pic-math
+SELECT *
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+LIMIT 5
+
+%%bigquery --project pic-math
+SELECT category_name, MAX(state_bottle_retail) as max_state_bottle_retail
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name
+
+%%bigquery --project pic-math
+
+SELECT MAX(state_bottle_retail) as max_state_bottle_retail
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = "DISTILLED SPIRITS SPECIALTY"
+
+
+
+%%bigquery --project pic-math
+SELECT MAX(state_bottle_retail) as second_most_expensive
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE state_bottle_retail != (SELECT MAX(state_bottle_retail) as max_state_bottle_retail FROM `bigquery-public-data.iowa_liquor_sales.sales` WHERE category_name = "DISTILLED SPIRITS SPECIALTY")
+      AND category_name = "DISTILLED SPIRITS SPECIALTY"
+
+%%bigquery --project pic-math
+WITH table as (
+SELECT state_bottle_retail, RANK() OVER(ORDER BY state_bottle_retail DESC) as rank_by_price
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+WHERE category_name = "DISTILLED SPIRITS SPECIALTY"
+GROUP BY state_bottle_retail
+)
+
+SELECT state_bottle_retail as second_highest_price
+FROM table
+WHERE rank_by_price = 2
+ORDER BY rank_by_price DESC
+
+
+
+%%bigquery --project pic-math
+
+SELECT category_name, COUNTIF(state_bottle_retail>100) as number_bottles_over_benjamin
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name, item_description
+Order BY number_bottles_over_benjamin DESC
+
+%%bigquery --project pic-math
+
+SELECT *, (CASE WHEN state_bottle_retail >100 THEN 1 ELSE 0 END) as over_benjamin
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+LIMIT 10
+
+%%bigquery --project pic-math
+
+SELECT category_name, SUM(over_benjamin) as number_bottles_over_benjamin
+FROM (SELECT *, (CASE WHEN state_bottle_retail >100 THEN 1 ELSE 0 END) as over_benjamin
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`)
+GROUP BY category_name, item_description
+ORDER BY number_bottles_over_benjamin DESC
+
+%%bigquery --project pic-math
+
+SELECT category_name, COUNTIF(state_bottle_retail>100) as number_bottles_over_benjamin, COUNT(*) as number_of_bottles
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name, item_description
+Order BY number_bottles_over_benjamin DESC
+
+%%bigquery --project pic-math
+
+SELECT category_name, number_bottles_over_benjamin, number_of_bottles, number_bottles_over_benjamin/number_of_bottles as percent_over_benjamin
+FROM (SELECT category_name, COUNTIF(state_bottle_retail>100) as number_bottles_over_benjamin, COUNT(*) as number_of_bottles
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`
+      GROUP BY category_name, item_description)
+GROUP BY category_name, number_bottles_over_benjamin, number_of_bottles
+ORDER BY percent_over_benjamin DESC
+
+%%bigquery --project pic-math
+
+SELECT COUNT(*) as number_trips, start_station_name
+FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips`
+GROUP BY start_station_name
+ORDER BY number_trips DESC
+
+%%bigquery --project pic-math
+
+SELECT start_station_name, duration_minutes
+FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips`
+WHERE start_station_name = end_station_name
+LIMIT 100
+
+
+

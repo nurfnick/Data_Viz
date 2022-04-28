@@ -1,0 +1,118 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pa
+
+url = "https://fbref.com/en/squads/361ca564/Tottenham-Hotspur-Stats"
+
+r = requests.get(url)
+soup = BeautifulSoup(r.text)
+
+tables = soup.find_all('table')
+
+pa.read_html(str(tables[0]))[0]
+
+url = "https://apps.npr.org/dailygraphics/graphics/capitol-riot-table-20210204/table.html"
+
+r = requests.get(url)
+soup = BeautifulSoup(r.text)
+
+soup.find_all('table')
+
+# RUN THIS CELL WHEN USING THE NOTEBOOK ON COLAB - NO PREVIOUS INSTALLATION OF SELENIUM IS NEEDED
+# install chromium, its driver, and selenium
+!apt update
+!apt install chromium-chromedriver
+!pip install selenium
+# set options to be headless
+from selenium import webdriver
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+# open it, go to a website, and get results
+driver = webdriver.Chrome('chromedriver',options=options)
+
+
+driver.get(url)
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+tables = soup.find_all('table')
+#tables
+pa.read_html(str(tables[0]))[0]
+
+
+
+url2 = "https://www.ecok.edu/directory"
+
+driver.get(url2)
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+tables = soup.find_all('table')
+pa.read_html(str(tables[0]))[0]
+
+from selenium.webdriver.common.by import By
+
+elem = driver.find_element(By.LINK_TEXT, 'A')
+
+elem.click()
+soup = BeautifulSoup(driver.page_source)
+table = soup.find_all('table')
+
+df = pa.read_html(str(table[0]))[0]
+df['Table'] = 'A'
+
+df
+
+import string
+alpha = list(string.ascii_uppercase)[1:]
+
+
+
+for i in alpha:
+  elem = driver.find_element(By.LINK_TEXT, i)
+  elem.click()
+  soup = BeautifulSoup(driver.page_source)
+  table = soup.find_all('table')
+  df1 =[]
+  try:
+    df1 = pa.read_html(str(table[0]))[0]
+    df1['Table'] = i
+    df = df.append(df1, ignore_index=True)
+  except:
+    driver.back()
+
+df
+
+url2 = "https://duckduckgo.com"
+
+driver.get(url2)
+
+elem = driver.find_element(By.XPATH,'//input[@id="search_form_input_homepage"]' )
+
+from selenium.webdriver.common.keys import Keys #this did take another part of selenium not yet loaded!
+
+elem.send_keys('Nicholas Jacob')
+elem.send_keys(Keys.ENTER)
+
+driver.current_url
+
+soup = BeautifulSoup(driver.page_source)
+
+for i in soup.find_all('a', class_="result__check"):
+  print(i['href'])
+
+driver.implicitly_wait(10)
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+WebDriverWait(driver,1).until(
+        EC.presence_of_element_located((By.ID, "myDynamicElement"))
+
+from selenium.webdriver.support.expected_conditions import staleness_of
+
+old_page = driver.find_element(By.XPATH,'//html')
+driver.find_element(By.PARTIAL_LINK_TEXT,'some_text').click()
+
+WebDriverWait(driver, 10).until(staleness_of(old_page))
+
+

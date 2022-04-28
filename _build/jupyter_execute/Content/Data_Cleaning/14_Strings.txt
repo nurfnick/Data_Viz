@@ -1,0 +1,58 @@
+hello = 'Hello World'
+
+hello[0]
+
+for letter in hello:
+  print(letter)
+
+hello[-1]
+
+hello[:-1]
+
+hello[::2]
+
+hello[::]
+
+hello[::-1]
+
+goodbye = 'Goodbye Cruel World'
+
+hello + " " + goodbye
+
+hello * 2
+
+x = 3
+
+hello + str(x)
+
+if 'Hello' in hello:
+  print('Hello is in the string "{0}"'.format(hello))
+
+if 'hello' not in hello:
+  print('hello is not in the string "{}"'.format(hello))
+
+str.capitalize('hello')
+
+str.upper('hello')
+
+str.lower('Hello')
+
+str.lower('HELLO')
+
+
+
+hello_with_space = ' Hello World'
+
+hello == hello_with_space
+
+hello_with_space.lstrip()
+
+hello_with_space.lstrip() == hello
+
+" ".isspace()
+
+hello.find('Wor')
+
+hello.replace('Wor', 'worrrrrr')
+
+hello.split(' ')

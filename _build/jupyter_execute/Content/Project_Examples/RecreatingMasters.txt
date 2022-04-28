@@ -1,0 +1,712 @@
+import requests
+import pandas as pa
+from bs4 import BeautifulSoup
+import numpy as np
+import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
+
+
+r = requests.get('https://www.hockey-reference.com/leagues/NHL_2022_games.html')
+html_contents = r.text
+html_soup = BeautifulSoup(html_contents,"lxml")
+
+
+len(html_soup.find_all('table'))
+
+tables = html_soup.find_all('table')
+
+df = pa.read_html(str(tables))[0]
+df.head(10)
+
+teams = [x.replace(" ","").replace(".","").lower() for x in df.Home.unique()]
+
+games = ['game{}'.format(x) for x in range(1,83)]
+
+pointsbygame = pa.DataFrame(np.nan, index = games,columns = teams)
+pointsbygame.head()
+
+def findwinner(game):
+  if game['G']>game['G.1']:
+    print('Visitor {}'.format(game['Visitor']) + ' Won')
+  else:
+    print('Home {}'.format(game['Home']) + ' Won')
+
+findwinner(df.loc[0])
+
+for team in teams:
+  globals()[team] = []
+
+def cleanteamname(teamname): #returns the list about the team.
+  return globals()[teamname.replace(" ","").replace(".","").lower()]   
+
+def winner(game):
+  if (game["G"] > game["G.1"]) & (not(pa.isnull(game['G']))):
+    cleanteamname(game.Visitor).append(2)
+  elif not(pa.isnull(game['G'])):
+    cleanteamname(game.Home).append(2)
+  else:
+    cleanteamname(game.Home).append(np.nan)
+    cleanteamname(game.Visitor).append(np.nan)
+
+def loser(game):
+  if pa.isnull(game['Unnamed: 5']): #No overtime
+    val = 0
+  else:
+    val = 1 #gives a point for OT/SO loss
+  if (game['G'] > game['G.1']) & (not(pa.isnull(game['G']))): #home team lost
+    cleanteamname(game.Home).append(val)
+  elif not(pa.isnull(game['G'])):
+    cleanteamname(game.Visitor).append(val)
+
+
+df.loc[1300]
+
+winner(df.loc[1300])
+
+vancouvercanucks
+
+loser(df.loc[1300])
+
+edmontonoilers
+
+for team in teams:
+  globals()[team] = []
+
+for i in df.index:
+  winner(df.loc[i])
+  loser(df.loc[i])
+
+stlouisblues
+
+len(stlouisblues)
+
+pointsbygame['anaheimducks'] = anaheimducks
+
+for team in teams:
+  pointsbygame[team] = globals()[team]
+
+pointsbygame
+
+totalpointsbygame = pa.DataFrame(np.nan, index = range(0,83),columns = teams)
+
+for team in teams:
+  globals()[team + 'total'] = [0]
+
+for team in teams:
+  points = 0
+  for game in globals()[team]:
+    points = points + game
+    globals()[team + 'total'].append(points)
+
+stlouisbluestotal
+
+for team in teams:
+  totalpointsbygame[team] = globals()[team + 'total']
+
+totalpointsbygame
+
+totalpointsbygame.plot(kind = 'line', legend = False, xlim = [0,8], ylim = [0,16])
+
+np.mean(totalpointsbygame, axis = 1)
+
+def comparetoaverage(score,average):
+  return score - average
+
+totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1)))
+
+totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).plot(kind = 'line', legend = False, xlim = [0,8], ylim = [-8,8])
+
+totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).iloc[0:10,:].plot(kind = 'line', legend = False, xlim = [0,15], ylim = [-10,10], yticks = range(-10,10,2))
+
+colors = {
+    'anaheimducks':'#F47A38',
+    'arizonacoyotes':'#8C2633'
+}
+
+totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:10,['anaheimducks','arizonacoyotes']].plot(kind = 'line', legend = False, xlim = [0,15], ylim = [-10,10], yticks = range(-10,10,2), color = colors)
+
+colors['bostonbruins'] = '#FFB81C'
+colors['buffalosabres'] = '#002654'
+colors['calgaryflames'] = '#c8102E'
+colors['carolinahurricanes'] = '#cc0000'
+colors['chicagoblackhawks'] = '#CF0A2C'
+colors['coloradoavalanche'] = '#6F263D'
+colors['columbusbluejackets'] = '#002654'
+colors['dallasstars'] = '#006847'
+colors['detroitredwings'] = '#ce1126'
+colors['edmontonoilers'] = '#041E42'
+colors['floridapanthers'] = '#041E42'
+colors['losangeleskings'] = '#111111'
+colors['minnesotawild'] = '#A6192E'
+colors['montrealcanadiens'] = '#AF1E2D'
+colors['nashvillepredators'] = '#FFB81C'
+colors['newjerseydevils'] = '#CE1126'
+colors['newyorkislanders'] = '#00539b'
+colors['newyorkrangers'] = '#0038A8'
+colors['ottawasenators'] = '#c52032'
+colors['pittsburghpenguins'] = '#000000'
+colors['philadelphiaflyers'] = '#F74902'
+colors['stlouisblues'] = '#002F87'
+colors['sanjosesharks'] = '#006D75'
+colors['seattlekraken'] = '#001628'
+colors['tampabaylightning'] = '#002868'
+colors['torontomapleleafs'] = '#00205b'
+colors['vancouvercanucks'] = '#00205B'
+colors['vegasgoldenknights'] = '#B4975A'
+colors['washingtoncapitals'] = '#041E42'
+colors['winnipegjets'] = '#041E42'
+
+len(colors)
+
+totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).iloc[0:10,:].plot(kind = 'line', legend = False, xlim = [0,15], ylim = [-10,10], yticks = range(-10,10,2), color = colors)
+
+atlantic = [
+            'floridapanthers',
+            'torontomapleleafs',
+            'tampabaylightning',
+            'bostonbruins',
+            'detroitredwings',
+            'buffalosabres',
+            'ottawasenators',
+            'montrealcanadiens'
+]
+
+metropolotian = [
+                 'carolinahurricanes',
+                 'newyorkrangers',
+                 'newyorkislanders',
+                 'pittsburghpenguins',
+                 'washingtoncapitals',
+                 'columbusbluejackets',
+                 'newjerseydevils',
+                 'philadelphiaflyers'
+]
+
+central = [
+           'coloradoavalanche',
+           'minnesotawild',
+           'stlouisblues',
+           'dallasstars',
+           'nashvillepredators',
+           'winnipegjets',
+           'chicagoblackhawks',
+           'arizonacoyotes'
+]
+
+pacific = [
+           'calgaryflames',
+           'edmontonoilers',
+           'losangeleskings',
+           'vegasgoldenknights',
+           'vancouvercanucks',
+           'sanjosesharks',
+           'anaheimducks',
+           'seattlekraken'
+]
+
+division = [atlantic, metropolotian, central, pacific]
+Divisions = ['Atlantic', 'Metropolotian', 'Central', 'Pacific']
+
+from matplotlib.offsetbox import TextArea, DrawingArea, OffsetImage, AnnotationBbox
+fig, ax = plt.subplots()
+
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+
+arr_lena = plt.imread('bostonbruins.png')
+
+#ax.imshow(arr_lena)
+newax = fig.add_axes([0.8, 0.8, 0.2, 0.2], anchor='NE', zorder=1)
+newax.imshow(arr_lena)
+newax.axis('off')
+#imagebox = OffsetImage(arr_lena, zoom=0.2)
+
+#ab = AnnotationBbox(imagebox, (0.4, 0.6))
+
+#ax.add_artist(ab)
+plt.draw()
+plt.show()
+
+
+
+fig = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).iloc[0:10,:].plot(kind = 'line', legend = False, xlim = [0,15], ylim = [-10,10], yticks = range(-10,10,2), color = colors)
+
+
+arr_lena = plt.imread('bostonbruins.png')
+
+
+axin = fig.inset_axes([0.8,0.8,0.2,0.2], anchor='NE', zorder=1)    # create new inset axes in data coordinates
+axin.imshow(arr_lena)
+axin.axis('off')
+
+
+
+
+plt.show()
+
+
+fig, ax = plt.subplots()
+
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+
+arr_lena = plt.imread('bostonbruins.png')
+
+
+imagebox = OffsetImage(arr_lena, zoom=0.2)
+
+ab = AnnotationBbox(imagebox, (0.4, 0.6), frameon = False)
+
+ax.add_artist(ab)
+plt.draw()
+plt.show()
+
+fig = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).iloc[0:10,:].plot(kind = 'line', legend = False, xlim = [0,15], ylim = [-10,10], yticks = range(-10,10,2), color = colors)
+
+
+
+
+arr_lena = plt.imread('bostonbruins.png')
+
+
+imagebox = OffsetImage(arr_lena, zoom=0.1)
+
+ab = AnnotationBbox(imagebox, (9.5, 0), frameon = False)
+
+fig.add_artist(ab)
+
+
+
+
+plt.show()
+
+fig = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:9,central].plot(kind = 'line', legend = False, xlim = [0,15], ylim = [-10,10], yticks = range(-10,10,2), color = colors)
+dontoverlay = []
+for team in central:
+  y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[9,team]
+  if y in dontoverlay:
+    move = .6
+  else:
+    move = 0
+  dontoverlay.append(y)
+  arr_lena = plt.imread(team + '.png') #needs to be team name +".png"
+  imagebox = OffsetImage(arr_lena, zoom=0.1)
+  ab = AnnotationBbox(imagebox, (9.5+move,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[9,team] ), frameon = False)
+  fig.add_artist(ab)
+
+plt.show()
+
+
+fig = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,central].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        #xlim = [0,15], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors)
+dontoverlay = []
+for team in central:
+  y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[9,team]
+  if y in dontoverlay:
+    move = .6
+  else:
+    move = 0
+  dontoverlay.append(y)
+  arr_lena = plt.imread(team + '.png') #needs to be team name +".png"
+  imagebox = OffsetImage(arr_lena, zoom=0.1)
+  ab = AnnotationBbox(imagebox, (75+move,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[72,team] ), frameon = False)
+  fig.add_artist(ab)
+
+plt.show()
+
+fig, ax = plt.subplots(4,linewidth=10, edgecolor="#04253a")
+fig.set_figheight(50)
+fig.set_figwidth(20)
+
+for i, div in enumerate(division):
+  totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,div].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        #xlim = [0,15], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[i])
+  dontoverlay = []
+  for team in div:
+    y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[9,team]
+    if y in dontoverlay:
+      move = .6
+    else:
+      move = 0
+    dontoverlay.append(y)
+    arr_lena = plt.imread(team + '.png') #needs to be team name +".png"
+    imagebox = OffsetImage(arr_lena, zoom=0.3)
+    ab = AnnotationBbox(imagebox, (78+move,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[76,team] ), frameon = False)
+    ax[i].add_artist(ab)
+  ax[i].set_title("NHL {} Division 2022".format(Divisions[i]))
+  ax[i].set(xlabel = 'Games')
+
+plt.show()
+
+fig, ax = plt.subplots(4,linewidth=10, edgecolor="#04253a")
+fig.set_figheight(50)
+fig.set_figwidth(20)
+
+for i, div in enumerate(division):
+  totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,div].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        #xlim = [0,15], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[i])
+  rect = plt.Rectangle(
+    # (lower-left corner), width, height
+    (0.0, 0.72), 0.97, 0.1, fill=False, color="k", lw=2, 
+    zorder=1000, transform=fig.transFigure, figure=fig
+  )
+  fig.patches.extend([rect])
+  dontoverlay = []
+  for team in div:
+    y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[9,team]
+    if y in dontoverlay:
+      move = .6
+    else:
+      move = 0
+    dontoverlay.append(y)
+    arr_lena = plt.imread(team + '.png') #needs to be team name +".png"
+    imagebox = OffsetImage(arr_lena, zoom=0.3)
+    ab = AnnotationBbox(imagebox, (78+move,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[77,team] ), frameon = False)
+    ax[i].add_artist(ab)
+  ax[i].set_title("NHL {} Division 2022".format(Divisions[i]))
+  ax[i].set(xlabel = 'Games')
+
+plt.show()
+
+
+
+plt.tight_layout()
+
+gamesplayed = (~pa.isnull(totalpointsbygame).loc[1:,]).cumsum(0).max()
+
+fig, ax = plt.subplots(4)
+fig.set_figheight(50)
+fig.set_figwidth(20)
+
+for i, div in enumerate(division):
+  totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,div].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        xlim = [0,85], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[i],
+                                                                                                                        grid = True)
+  for line in ax[i].get_lines():
+    line.set_linewidth(7)
+  dontoverlay = []
+  for team in div:
+    y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]
+    testagainstploted = [100]
+    for x in dontoverlay:
+      testagainstploted.append(x-y)
+    if min(np.abs(testagainstploted))<4:
+      move = move - 3
+    else:
+      move = 0
+    dontoverlay.append(y)
+    arr = plt.imread(team + '.png') #needs to be team name +".png"
+    imagebox = OffsetImage(arr, zoom=0.25)
+    ab = AnnotationBbox(imagebox, (gamesplayed[team] + 1,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]+move-1 ), frameon = False)
+    ax[i].add_artist(ab)
+  ax[i].set_title("NHL {} Division 2022".format(Divisions[i]))
+  ax[i].set(xlabel = 'Games')
+  ax[i].axhline(color = 'black')
+
+plt.show()
+
+
+
+#plt.tight_layout()
+
+(~pa.isnull(totalpointsbygame).loc[1:,]).cumsum(0).max()
+
+gamesplayed = (~pa.isnull(totalpointsbygame).loc[1:,]).cumsum(0).max()
+
+fig, ax = plt.subplots(4)
+fig.set_figheight(50)
+fig.set_figwidth(20)
+
+for i, div in enumerate(division):
+  totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,div].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        xlim = [0,85], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[i],
+                                                                                                                        grid = True)
+  for line in ax[i].get_lines():
+    line.set_linewidth(7)
+  dontoverlay = []
+  for team in div:
+    y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]
+    testagainstploted = [100]#needed this to be non-empty so put a huge value that will not be achieved by any team.
+    for x in dontoverlay:
+      testagainstploted.append(x-y)
+    if min(np.abs(testagainstploted))<4:
+      if min(np.abs(testagainstploted)) in testagainstploted:
+        move = move - 2
+      else:
+        move = move + 2
+    else:
+      move = 0
+    dontoverlay.append(y)
+    arr = plt.imread(team + '.png') #needs to be team name +".png"
+    imagebox = OffsetImage(arr, zoom=0.25)
+    ab = AnnotationBbox(imagebox, (gamesplayed[team] + 1,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]+move ), frameon = False)
+    ax[i].add_artist(ab)
+  ax[i].set_title("NHL {} Division 2022".format(Divisions[i]), fontsize = 30)
+  ax[i].set_xlabel('Games', fontsize = 20)
+  ax[i].axhline(color = 'black')
+
+plt.show()
+
+
+
+fig, ax = plt.subplots(5)
+fig.set_figheight(50)
+fig.set_figwidth(20)
+
+for i, div in enumerate(division):
+  totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,div].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        xlim = [0,85], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[i],
+                                                                                                                        grid = True)
+  for line in ax[i].get_lines():
+    line.set_linewidth(7)
+  dontoverlay = []
+  for team in div:
+    y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]
+    testagainstploted = [100]#needed this to be non-empty so put a huge value that will not be achieved by any team.
+    for x in dontoverlay:
+      testagainstploted.append(x-y)
+    if min(np.abs(testagainstploted))<4:
+      if min(np.abs(testagainstploted)) in testagainstploted:
+        move = move - 2
+      else:
+        move = move + 2
+    else:
+      move = 0
+    dontoverlay.append(y)
+    arr = plt.imread(team + '.png') #needs to be team name +".png"
+    imagebox = OffsetImage(arr, zoom=0.25)
+    ab = AnnotationBbox(imagebox, (gamesplayed[team] + 1,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]+move ), frameon = False)
+    ax[i].add_artist(ab)
+  ax[i].set_title("NHL {} Division 2022".format(Divisions[i]), fontsize = 30)
+  ax[i].set_xlabel('Games', fontsize = 20)
+  ax[i].axhline(color = 'black')
+### Adding all teams together
+totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,:].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        xlim = [0,85], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[4],
+                                                                                                                        grid = True)
+for div in division:
+  for team in div:
+      y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]
+      testagainstploted = [100]#needed this to be non-empty so put a huge value that will not be achieved by any team.
+      for x in dontoverlay:
+        testagainstploted.append(x-y)
+      if min(np.abs(testagainstploted))<4:
+        if min(np.abs(testagainstploted)) in testagainstploted:
+          move = move - 2
+        else:
+          move = move + 2
+      else:
+        move = 0
+      dontoverlay.append(y)
+      arr = plt.imread(team + '.png') #needs to be team name +".png"
+      imagebox = OffsetImage(arr, zoom=0.1)
+      ab = AnnotationBbox(imagebox, (gamesplayed[team] + 1,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]+move ), frameon = False)
+      ax[4].add_artist(ab)
+ax[4].set_title("NHL 2022", fontsize = 30)
+ax[4].set_xlabel('Games', fontsize = 20)
+ax[4].axhline(color = 'black')
+for line in ax[4].get_lines():
+  line.set_linewidth(2)
+plt.show()
+
+fig, ax = plt.subplots(5, sharey = True)
+fig.set_figheight(50)
+fig.set_figwidth(20)
+
+
+for i, div in enumerate(division):
+  totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,div].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        xlim = [0,85], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[i],
+                                                                                                                        grid = True)
+  for line in ax[i].get_lines():
+    line.set_linewidth(7)
+  dontoverlay = []
+  for team in div:
+    y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]
+    testagainstploted = [100]#needed this to be non-empty so put a huge value that will not be achieved by any team.
+    for x in dontoverlay:
+      testagainstploted.append(x-y)
+    if min(np.abs(testagainstploted))<4:
+      if min(np.abs(testagainstploted)) in testagainstploted:
+        move = move - 2
+      else:
+        move = move + 2
+    else:
+      move = 0
+    dontoverlay.append(y)
+    arr = plt.imread(team + '.png') #needs to be team name +".png"
+    imagebox = OffsetImage(arr, zoom=0.25)
+    ab = AnnotationBbox(imagebox, (gamesplayed[team] + 1,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]+move ), frameon = False)
+    ax[i].add_artist(ab)
+  ax[i].set_title("NHL {} Division 2022".format(Divisions[i]), fontsize = 30)
+  ax[i].set_xlabel('Games', fontsize = 20)
+  ax[i].axhline(color = 'black')
+### Adding all teams together
+totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,:].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        xlim = [0,85], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[4],
+                                                                                                                        grid = True)
+for div in division:
+  for team in div:
+      y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]
+      testagainstploted = [100]#needed this to be non-empty so put a huge value that will not be achieved by any team.
+      for x in dontoverlay:
+        testagainstploted.append(x-y)
+      if min(np.abs(testagainstploted))<4:
+        if min(np.abs(testagainstploted)) in testagainstploted:
+          move = move - 2
+        else:
+          move = move + 2
+      else:
+        move = 0
+      dontoverlay.append(y)
+      arr = plt.imread(team + '.png') #needs to be team name +".png"
+      imagebox = OffsetImage(arr, zoom=0.13)
+      ab = AnnotationBbox(imagebox, (gamesplayed[team] + 1,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]+move ), frameon = False)
+      ax[4].add_artist(ab)
+ax[4].set_title("NHL 2022", fontsize = 30)
+ax[4].set_xlabel('Games', fontsize = 20)
+ax[4].axhline(color = 'black')
+for line in ax[4].get_lines():
+  line.set_linewidth(2)
+plt.show()
+
+expected = [i for i in range(1,83)] #one point per game is the expected.
+centralstand = []
+
+
+actual = [totalpointsbygame.loc[78,team] for team in central]
+expected = [78 for team in central]
+
+(sum(actual) - sum(expected))/(78*4)
+
+np.mean([i>0 for i in stlouisblues])
+
+
+divavg = []
+for team in central:
+  divavg.append(np.mean([i>0 for i in globals()[team]]))
+
+np.mean(divavg)
+
+fig, ax = plt.subplots(5, sharey = True)
+fig.set_figheight(50)
+fig.set_figwidth(20)
+lgavg = []
+
+for i, div in enumerate(division):
+  divavg = []
+  totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,div].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        xlim = [0,85], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[i],
+                                                                                                                        grid = True)
+  for line in ax[i].get_lines():
+    line.set_linewidth(7)
+  dontoverlay = []
+  for team in div:
+    divavg.append(np.mean([i>0 for i in globals()[team]]))
+    y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]
+    testagainstploted = [100]#needed this to be non-empty so put a huge value that will not be achieved by any team.
+    for x in dontoverlay:
+      testagainstploted.append(x-y)
+    if min(np.abs(testagainstploted))<4:
+      if min(np.abs(testagainstploted)) in testagainstploted:
+        move = move - 2
+      else:
+        move = move + 2
+    else:
+      move = 0
+    dontoverlay.append(y)
+    arr = plt.imread(team + '.png') #needs to be team name +".png"
+    imagebox = OffsetImage(arr, zoom=0.25)
+    ab = AnnotationBbox(imagebox, (gamesplayed[team] + 1,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]+move ), frameon = False)
+    ax[i].add_artist(ab)
+  P = np.mean(divavg)
+  lgavg.append(P)
+  ax[i].set_title("NHL {} Division 2022 \n Wins Above Division Average P% ({})".format(Divisions[i],round(P,3)), fontsize = 25)
+  ax[i].set_xlabel('Games', fontsize = 15)
+  ax[i].axhline(color = 'black')
+
+
+### Adding all teams together
+totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[0:,:].plot(kind = 'line', 
+                                                                                                                        legend = False, 
+                                                                                                                        xlim = [0,85], 
+                                                                                                                        #ylim = [-10,10], 
+                                                                                                                        #yticks = range(-10,10,2), 
+                                                                                                                        color = colors,
+                                                                                                                        ax = ax[4],
+                                                                                                                        grid = True)
+for div in division:
+  for team in div:
+      y = totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]
+      testagainstploted = [100]#needed this to be non-empty so put a huge value that will not be achieved by any team.
+      for x in dontoverlay:
+        testagainstploted.append(x-y)
+      if min(np.abs(testagainstploted))<4:
+        if min(np.abs(testagainstploted)) in testagainstploted:
+          move = move - 2
+        else:
+          move = move + 2
+      else:
+        move = 0
+      dontoverlay.append(y)
+      arr = plt.imread(team + '.png') #needs to be team name +".png"
+      imagebox = OffsetImage(arr, zoom=0.13)
+      ab = AnnotationBbox(imagebox, (gamesplayed[team] + 1,totalpointsbygame.apply(lambda x: comparetoaverage(x,np.mean(totalpointsbygame, axis = 1))).loc[gamesplayed[team],team]+move ), frameon = False)
+      ax[4].add_artist(ab)
+ax[4].set_title("NHL 2022 \n Wins Above League Average P% ({})".format(round(np.mean(lgavg),3)), fontsize = 25)
+ax[4].set_xlabel('Games', fontsize = 20)
+ax[4].axhline(color = 'black')
+for line in ax[4].get_lines():
+  line.set_linewidth(2)
+plt.show()
+
+

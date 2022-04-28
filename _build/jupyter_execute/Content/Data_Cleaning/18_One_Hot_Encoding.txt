@@ -1,0 +1,72 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/iris.csv')
+
+df.head()
+
+pa.get_dummies(df.Class).head()
+
+df1 = pa.concat([df,pa.get_dummies(df.Class)],axis = 1)
+
+df1 = df1.drop('Class', axis = 1)
+
+df1
+
+pa.get_dummies(df)
+
+from bs4 import BeautifulSoup
+import requests
+import re
+
+r = requests.get('https://en.wikipedia.org/wiki/List_of_highest_mountains_on_Earth')
+html_contents = r.text
+html_soup = BeautifulSoup(html_contents,"lxml")
+tables = html_soup.find_all('table',class_="wikitable")
+
+df1 = pa.read_html(str(tables))[0]
+df1.columns = df1.columns.droplevel(0).droplevel(0)
+
+newcol = df1.iloc[:,-1]
+newcol = newcol.apply(lambda x: re.sub(r"\[(.+?)\]","",x))
+newcol = newcol.apply(lambda x: re.sub(r"[^A-z]","",x))
+newcol = newcol.apply(lambda x: re.findall(r"[A-Z][a-z]*",x))
+
+newcol
+
+newcol.apply(pa.Series)
+
+newcol.apply(pa.Series).stack()
+
+pa.get_dummies(newcol.apply(pa.Series).stack())
+
+pa.get_dummies(newcol.apply(pa.Series).stack()).groupby(level = 0).sum()
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/bank.csv')
+
+df.head()
+
+edlevels = sorted(df.education.unique())
+
+edlevels
+
+eddict = {}
+
+for i in range(4):
+  eddict[edlevels[i]] = i
+
+eddict
+
+eddict['unknown'] = 0
+
+eddict
+
+df.groupby('education').age.agg('count')
+
+df.education.map(eddict)
+
+df.education = df.education.map(eddict)
+
+df.head()
+
+df = pa.read_csv("https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/AB_NYC_2019.csv")
+df.head()

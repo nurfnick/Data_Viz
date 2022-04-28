@@ -1,0 +1,73 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/bank.csv')
+
+df.head(20)
+
+df.dtypes
+
+df.y = df.y=='yes'
+
+df.dtypes
+
+import re
+
+re.sub(r"-"," ",df.job[6])
+
+df.job.apply(lambda x: re.sub(r"-"," ",x))
+
+df.job = df.job.apply(lambda x: re.sub(r"-"," ",x))
+
+import numpy as np
+
+df.pdays.replace(-1,np.nan)
+
+df.pdays = df.pdays.replace(-1,np.nan)
+
+df.pdays = df.pdays.fillna(0)
+
+df.groupby('job').balance.agg(['mean','median','count','std'])
+
+monthConvert = {
+    'jan':1,
+    'feb':2,
+    'mar':3,
+    'apr':4,
+    'may':5,
+    'jun':6,
+    'jul':7,
+    'aug':8,
+    'sep':9,
+    'oct':10,
+    'nov':11,
+    'dec':12
+}
+
+date = pa.to_datetime(dict(year = 2020, day = df.day, month = df.month.map(monthConvert)))
+
+df = pa.concat([df,pa.DataFrame( {'date':date})],axis = 1)
+
+df.head()
+
+pa.crosstab(df.date.dt.day_name(),df.y)
+
+df.groupby([date.dt.day_name(),df.y]).age.agg('count')
+
+df[df.y == True].groupby(df.date.dt.day_name()).y.agg('count')
+
+bal = df.balance > 500
+pa.concat([df,pa.DataFrame({'FiveHundo':bal})], axis = 1)
+
+df[(df.job == 'admin.')&(df.marital == 'divorced')]
+
+df[(df.job == 'admin.')&(df.marital == 'divorced')].groupby('y').age.agg('count')
+
+df.groupby(['job','default']).age.agg('count')
+
+df.groupby(['education','contact']).age.agg('count')
+
+pa.crosstab(df.education,df.contact)
+
+df[df.balance == max(df.balance)].marital
+
+

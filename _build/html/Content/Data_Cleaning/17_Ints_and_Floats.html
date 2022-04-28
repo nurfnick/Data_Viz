@@ -1,0 +1,1705 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Integers and Floats &#8212; Data Pre-Processing and Visualization OER</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Factors and One Hot Encoding" href="18_One_Hot_Encoding.html" />
+    <link rel="prev" title="Dates" href="16_Dates.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Data Pre-Processing and Visualization OER</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction.html">
+   Data Pre-Processing and Visualization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/01_Python.html">
+   Jupyter Notebooks and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/02_Pandas.html">
+   Pandas for Data Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Gathering Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/03_SQL.html">
+   Learning Some SQL with BigQuery
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Data_Collecting/08_html.html">
+   Reading Data From the Web
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Collecting/09_html_tables.html">
+     HTML Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Collecting/10_html_selenium.html">
+     Webpage Loading and Scrapping
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/11_Twitter.html">
+   Twitter a Social Media Scrape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/12_GatheringConclusion.html">
+   Gathering Data Conclusion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Cleaning Data
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="13_Data_Types.html">
+   Data Types
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="14_Strings.html">
+     Strings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="15_String_Cleaning.html">
+     Strings And Cleaning a DataFrame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="16_Dates.html">
+     Dates
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Integers and Floats
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="18_One_Hot_Encoding.html">
+     Factors and One Hot Encoding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="19_Missing_and_Incomplete.html">
+     Missing and Incomplete
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="20_Cleaning_Conclusion.html">
+     Exam 2 Review
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Great Visualizations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">
+   Graphical Excellence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">
+   Graphical Integrity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">
+   Graphical Sophistication
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Creating Visulaizations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/24_Amounts.html">
+   Visualize Amounts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/25_Histograms.html">
+   Histograms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">
+   Many Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/27_Proportions.html">
+   Proportions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/28_Associations.html">
+   Visualizing Association
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">
+   Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">
+   Visualization Conclusion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Project Examples
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Project_Examples/RecentVisualizations.html">
+   Inverted Yield Curve
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Project_Examples/RecreatingMasters.html">
+   NHL Data Visualization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Selected Solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/mySolutions.html">
+   My Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam1Solutions.html">
+   Exam 1 Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam2Solutions.html">
+   Exam 2 Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam3Solutions.html">
+   Exam 3 Solutions Data Visualization and Preprocessing
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Content/Data_Cleaning/17_Ints_and_Floats.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nurfnick/Data_Viz"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Cleaning/17_Ints_and_Floats.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nurfnick/Data_Viz/master?urlpath=tree/Content/Data_Cleaning/17_Ints_and_Floats.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Cleaning/17_Ints_and_Floats.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#conversions-between-the-two">
+   Conversions Between the Two
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#grouping-and-stats">
+   Grouping and Stats
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transform">
+   Transform
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rolling-window">
+   Rolling Window
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-turn">
+   Your Turn
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/main/Content/Data_Cleaning/17_Ints_and_Floats.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<div class="tex2jax_ignore mathjax_ignore section" id="integers-and-floats">
+<h1>Integers and Floats<a class="headerlink" href="#integers-and-floats" title="Permalink to this headline">¶</a></h1>
+<p>There is not a ton to say about integers and floats except that they are numbers and in data problems, numbers are what we want to deal with if we can.</p>
+<p>Integers take less memory so it is best to use them when appropriate but often you cannot avoid floats.</p>
+<div class="section" id="conversions-between-the-two">
+<h2>Conversions Between the Two<a class="headerlink" href="#conversions-between-the-two" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pa</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/H1.csv&#39;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-179e1095-2028-4634-b448-33c840cd8215">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>IsCanceled</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>LeadTime</th>
+      <td>342</td>
+      <td>737</td>
+      <td>7</td>
+      <td>13</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>ArrivalDateYear</th>
+      <td>2015</td>
+      <td>2015</td>
+      <td>2015</td>
+      <td>2015</td>
+      <td>2015</td>
+    </tr>
+    <tr>
+      <th>ArrivalDateMonth</th>
+      <td>July</td>
+      <td>July</td>
+      <td>July</td>
+      <td>July</td>
+      <td>July</td>
+    </tr>
+    <tr>
+      <th>ArrivalDateWeekNumber</th>
+      <td>27</td>
+      <td>27</td>
+      <td>27</td>
+      <td>27</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>ArrivalDateDayOfMonth</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>StaysInWeekendNights</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>StaysInWeekNights</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Adults</th>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Children</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Babies</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Meal</th>
+      <td>BB</td>
+      <td>BB</td>
+      <td>BB</td>
+      <td>BB</td>
+      <td>BB</td>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <td>PRT</td>
+      <td>PRT</td>
+      <td>GBR</td>
+      <td>GBR</td>
+      <td>GBR</td>
+    </tr>
+    <tr>
+      <th>MarketSegment</th>
+      <td>Direct</td>
+      <td>Direct</td>
+      <td>Direct</td>
+      <td>Corporate</td>
+      <td>Online TA</td>
+    </tr>
+    <tr>
+      <th>DistributionChannel</th>
+      <td>Direct</td>
+      <td>Direct</td>
+      <td>Direct</td>
+      <td>Corporate</td>
+      <td>TA/TO</td>
+    </tr>
+    <tr>
+      <th>IsRepeatedGuest</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>PreviousCancellations</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>PreviousBookingsNotCanceled</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ReservedRoomType</th>
+      <td>C</td>
+      <td>C</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>AssignedRoomType</th>
+      <td>C</td>
+      <td>C</td>
+      <td>C</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>BookingChanges</th>
+      <td>3</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>DepositType</th>
+      <td>No Deposit</td>
+      <td>No Deposit</td>
+      <td>No Deposit</td>
+      <td>No Deposit</td>
+      <td>No Deposit</td>
+    </tr>
+    <tr>
+      <th>Agent</th>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>304</td>
+      <td>240</td>
+    </tr>
+    <tr>
+      <th>Company</th>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+    </tr>
+    <tr>
+      <th>DaysInWaitingList</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>CustomerType</th>
+      <td>Transient</td>
+      <td>Transient</td>
+      <td>Transient</td>
+      <td>Transient</td>
+      <td>Transient</td>
+    </tr>
+    <tr>
+      <th>ADR</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>75.0</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>RequiredCarParkingSpaces</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>TotalOfSpecialRequests</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>ReservationStatus</th>
+      <td>Check-Out</td>
+      <td>Check-Out</td>
+      <td>Check-Out</td>
+      <td>Check-Out</td>
+      <td>Check-Out</td>
+    </tr>
+    <tr>
+      <th>ReservationStatusDate</th>
+      <td>7/1/2015</td>
+      <td>7/1/2015</td>
+      <td>7/2/2015</td>
+      <td>7/2/2015</td>
+      <td>7/3/2015</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-179e1095-2028-4634-b448-33c840cd8215')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-179e1095-2028-4634-b448-33c840cd8215 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-179e1095-2028-4634-b448-33c840cd8215');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ADR</span></code> column is a float, let’s check it out and see how to convert it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">ADR</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0          0
+1          0
+2         75
+3         75
+4         98
+        ... 
+40055     89
+40056    202
+40057    153
+40058    112
+40059     99
+Name: ADR, Length: 40060, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Similarly I can change <code class="docutils literal notranslate"><span class="pre">BookingChanges</span></code> into a float.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">BookingChanges</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0        3.0
+1        4.0
+2        0.0
+3        0.0
+4        0.0
+        ... 
+40055    1.0
+40056    0.0
+40057    0.0
+40058    0.0
+40059    0.0
+Name: BookingChanges, Length: 40060, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>If I want to pass that back into my dataframe with the same name, I do the following.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">BookingChanges</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">BookingChanges</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-977c8559-ed8e-4398-b38a-ffd2aa6eab22">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>IsCanceled</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>LeadTime</th>
+      <td>342</td>
+      <td>737</td>
+      <td>7</td>
+      <td>13</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>ArrivalDateYear</th>
+      <td>2015</td>
+      <td>2015</td>
+      <td>2015</td>
+      <td>2015</td>
+      <td>2015</td>
+    </tr>
+    <tr>
+      <th>ArrivalDateMonth</th>
+      <td>July</td>
+      <td>July</td>
+      <td>July</td>
+      <td>July</td>
+      <td>July</td>
+    </tr>
+    <tr>
+      <th>ArrivalDateWeekNumber</th>
+      <td>27</td>
+      <td>27</td>
+      <td>27</td>
+      <td>27</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>ArrivalDateDayOfMonth</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>StaysInWeekendNights</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>StaysInWeekNights</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Adults</th>
+      <td>2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Children</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Babies</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Meal</th>
+      <td>BB</td>
+      <td>BB</td>
+      <td>BB</td>
+      <td>BB</td>
+      <td>BB</td>
+    </tr>
+    <tr>
+      <th>Country</th>
+      <td>PRT</td>
+      <td>PRT</td>
+      <td>GBR</td>
+      <td>GBR</td>
+      <td>GBR</td>
+    </tr>
+    <tr>
+      <th>MarketSegment</th>
+      <td>Direct</td>
+      <td>Direct</td>
+      <td>Direct</td>
+      <td>Corporate</td>
+      <td>Online TA</td>
+    </tr>
+    <tr>
+      <th>DistributionChannel</th>
+      <td>Direct</td>
+      <td>Direct</td>
+      <td>Direct</td>
+      <td>Corporate</td>
+      <td>TA/TO</td>
+    </tr>
+    <tr>
+      <th>IsRepeatedGuest</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>PreviousCancellations</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>PreviousBookingsNotCanceled</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ReservedRoomType</th>
+      <td>C</td>
+      <td>C</td>
+      <td>A</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>AssignedRoomType</th>
+      <td>C</td>
+      <td>C</td>
+      <td>C</td>
+      <td>A</td>
+      <td>A</td>
+    </tr>
+    <tr>
+      <th>BookingChanges</th>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>DepositType</th>
+      <td>No Deposit</td>
+      <td>No Deposit</td>
+      <td>No Deposit</td>
+      <td>No Deposit</td>
+      <td>No Deposit</td>
+    </tr>
+    <tr>
+      <th>Agent</th>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>304</td>
+      <td>240</td>
+    </tr>
+    <tr>
+      <th>Company</th>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+      <td>NULL</td>
+    </tr>
+    <tr>
+      <th>DaysInWaitingList</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>CustomerType</th>
+      <td>Transient</td>
+      <td>Transient</td>
+      <td>Transient</td>
+      <td>Transient</td>
+      <td>Transient</td>
+    </tr>
+    <tr>
+      <th>ADR</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>75.0</td>
+      <td>75.0</td>
+      <td>98.0</td>
+    </tr>
+    <tr>
+      <th>RequiredCarParkingSpaces</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>TotalOfSpecialRequests</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>ReservationStatus</th>
+      <td>Check-Out</td>
+      <td>Check-Out</td>
+      <td>Check-Out</td>
+      <td>Check-Out</td>
+      <td>Check-Out</td>
+    </tr>
+    <tr>
+      <th>ReservationStatusDate</th>
+      <td>7/1/2015</td>
+      <td>7/1/2015</td>
+      <td>7/2/2015</td>
+      <td>7/2/2015</td>
+      <td>7/3/2015</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-977c8559-ed8e-4398-b38a-ffd2aa6eab22')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-977c8559-ed8e-4398-b38a-ffd2aa6eab22 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-977c8559-ed8e-4398-b38a-ffd2aa6eab22');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>Note that <em>ADR</em> has not been changed in the dataframe!</p>
+</div>
+<div class="section" id="grouping-and-stats">
+<h2>Grouping and Stats<a class="headerlink" href="#grouping-and-stats" title="Permalink to this headline">¶</a></h2>
+<p>Much like in SQL, we can do lots of operations to our dataframe.  We have used lots of this already but this is as good as place as any to review.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;DistributionChannel&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ADR</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;median&#39;</span><span class="p">,</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-71dff7de-70b6-4d94-9bd0-4940ee0a043c">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>median</th>
+      <th>count</th>
+      <th>std</th>
+    </tr>
+    <tr>
+      <th>DistributionChannel</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Corporate</th>
+      <td>53.277788</td>
+      <td>45.0</td>
+      <td>3269</td>
+      <td>30.156894</td>
+    </tr>
+    <tr>
+      <th>Direct</th>
+      <td>103.074526</td>
+      <td>80.0</td>
+      <td>7865</td>
+      <td>67.650012</td>
+    </tr>
+    <tr>
+      <th>TA/TO</th>
+      <td>97.453947</td>
+      <td>80.0</td>
+      <td>28925</td>
+      <td>60.505996</td>
+    </tr>
+    <tr>
+      <th>Undefined</th>
+      <td>112.700000</td>
+      <td>112.7</td>
+      <td>1</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-71dff7de-70b6-4d94-9bd0-4940ee0a043c')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-71dff7de-70b6-4d94-9bd0-4940ee0a043c button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-71dff7de-70b6-4d94-9bd0-4940ee0a043c');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>Let’s review what the code above does!  First I group based on the <em>DistributionChannel</em> this is where the booking to the hotel came from.  Next I get the <em>ADR</em>, I think this is the proce of the room.  Finally I aggregate the data collecting the mean, median, count and standard deviation.  Why does undefined not have a std?</p>
+</div>
+<div class="section" id="transform">
+<h2>Transform<a class="headerlink" href="#transform" title="Permalink to this headline">¶</a></h2>
+<p>We saw <code class="docutils literal notranslate"><span class="pre">apply</span></code> in action with strings.  There is also a transform command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">ADR</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0          1.00
+1          1.00
+2         76.00
+3         76.00
+4         99.00
+          ...  
+40055     90.75
+40056    203.27
+40057    154.57
+40058    113.80
+40059    100.06
+Name: ADR, Length: 40060, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">ADR</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0          1.00
+1          1.00
+2         76.00
+3         76.00
+4         99.00
+          ...  
+40055     90.75
+40056    203.27
+40057    154.57
+40058    113.80
+40059    100.06
+Name: ADR, Length: 40060, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>While these seem similar you can send <code class="docutils literal notranslate"><span class="pre">transform</span></code> built in functions without the <code class="docutils literal notranslate"><span class="pre">lambda</span></code> function which might be more readable for your code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">Meal</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0        9
+1        9
+2        9
+3        9
+4        9
+        ..
+40055    9
+40056    9
+40057    9
+40058    9
+40059    9
+Name: Meal, Length: 40060, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This is the length of the strings.  You should be suprised by this result except when you see the following output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">Meal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;BB       &#39;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="rolling-window">
+<h2>Rolling Window<a class="headerlink" href="#rolling-window" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it is nice to know what is happening over several entries.  A rolling (or moving) average is common place in finance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">ADR</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0           NaN
+1          0.00
+2         75.00
+3        150.00
+4        173.00
+          ...  
+40055    294.02
+40056    292.02
+40057    355.84
+40058    266.37
+40059    211.86
+Name: ADR, Length: 40060, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This adds the previous entry to the current.  To do average, pass it that command.  If we wanted to look at total daily take in we would have to gather dailies first by grouping</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">totaldailies</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;ReservationStatusDate&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ADR</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+
+<span class="n">totaldailies</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ReservationStatusDate
+1/1/2015       185.90
+1/1/2016      2202.59
+1/1/2017     14069.98
+1/10/2016     1283.39
+1/10/2017     2324.99
+               ...   
+9/8/2016      3531.79
+9/8/2017       404.05
+9/9/2015      3587.90
+9/9/2016      4162.33
+9/9/2017       886.67
+Name: ADR, Length: 913, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">totaldailies</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ReservationStatusDate
+1/1/2015          NaN
+1/1/2016          NaN
+1/1/2017          NaN
+1/10/2016         NaN
+1/10/2017    4013.370
+               ...   
+9/8/2016     3165.520
+9/8/2017     2353.238
+9/9/2015     2424.142
+9/9/2016     2860.156
+9/9/2017     2514.548
+Name: ADR, Length: 913, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>This did not work as I intended due to the days not bing in order.  Let’s convert the indexes into datetime format and try again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">totaldailies</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">totaldailies</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>I’ll need to sort them by the index too.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">totaldailies</span> <span class="o">=</span> <span class="n">totaldailies</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="n">totaldailies</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ReservationStatusDate
+2014-11-18       0.00
+2015-01-01     185.90
+2015-01-02     154.14
+2015-01-18       0.00
+2015-01-21    3394.41
+               ...   
+2017-09-08     404.05
+2017-09-09     886.67
+2017-09-10     581.09
+2017-09-12     153.57
+2017-09-14     211.86
+Name: ADR, Length: 913, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now I think I am ready?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">totaldailies</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="s1">&#39;5d&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ReservationStatusDate
+2014-11-18       0.000000
+2015-01-01     185.900000
+2015-01-02     170.020000
+2015-01-18       0.000000
+2015-01-21    1697.205000
+                 ...     
+2017-09-08    1851.234000
+2017-09-09    1614.150000
+2017-09-10    1191.084000
+2017-09-12     506.345000
+2017-09-14     315.506667
+Name: ADR, Length: 913, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">¶</a></h2>
+<p>Grab the <code class="docutils literal notranslate"><span class="pre">iris</span></code> dataset.  Answer the following questions:</p>
+<ol class="simple">
+<li><p>Does converting <em>SepalLength</em> to integer increase or decrease the mean?</p></li>
+<li><p>Does the direction of the shift remain the same if you <code class="docutils literal notranslate"><span class="pre">groupby</span></code> Class?</p></li>
+<li><p>Gather the mean, median, count and standard deviation of all columns when grouped by Class.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Content\Data_Cleaning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="16_Dates.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Dates</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="18_One_Hot_Encoding.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Factors and One Hot Encoding</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

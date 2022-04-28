@@ -1,0 +1,46 @@
+import requests
+import pandas as pa
+from bs4 import BeautifulSoup
+
+
+r = requests.get('https://en.wikipedia.org/wiki/List of mountains by elevation')
+html_contents = r.text
+html_soup = BeautifulSoup(html_contents,"lxml")
+tables = html_soup.find_all('table',class_="wikitable")
+
+df = pa.read_html(str(tables))[0]
+
+df.head()
+
+df.query('Range == "Himalayas"')
+
+df.groupby('Range')['Range'].count().plot(kind= 'bar')
+
+df.Feet.plot(kind='box')
+
+df.Feet.describe()
+
+df.groupby('Range').agg(['mean','max','std'])
+
+from google.colab import auth
+auth.authenticate_user()
+print('Authenticated')
+
+%%bigquery --project pic-math
+SELECT 
+  COUNT(*) as total_rows
+FROM `bigquery-public-data.chicago_taxi_trips.taxi_trips`
+
+%%bigquery --project pic-math
+SELECT payment_type, AVG(trip_total) as avg_trip_total, COUNT(*) as total_num_of_trips
+FROM `bigquery-public-data.chicago_taxi_trips.taxi_trips`
+GROUP BY payment_type
+ORDER BY avg_trip_total DESC
+
+%%bigquery --project pic-math
+
+SELECT COUNT(*) as num_trips_over_average_time
+FROM `bigquery-public-data.chicago_taxi_trips.taxi_trips` as s
+WHERE s.trip_seconds > (SELECT AVG(trip_seconds) as avg_trip_seconds
+                        FROM `bigquery-public-data.chicago_taxi_trips.taxi_trips`
+                        WHERE trip_seconds >0)

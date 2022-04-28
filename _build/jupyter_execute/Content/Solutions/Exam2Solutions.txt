@@ -1,0 +1,34 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Activity_Dataset_V1.csv')
+
+df.dtypes
+
+df = df.drop('Unnamed: 0', axis = 1)
+
+df.head()
+
+import re
+newcol = []
+for col in df.columns:
+  newcol.append(re.sub(r'\(%\)',"",col))
+
+df.columns = newcol
+
+df.columns
+
+df.activity_day = pa.to_datetime(df.activity_day)
+
+df.total_steps = df.total_steps.fillna(0)
+
+df.avg_pace = df.avg_pace.fillna('00:00').apply(lambda s: int(s[0:2])+int(s[3:6])/60 )
+
+df.groupby('workout_type').calories.agg(['mean', 'median','std','count'])
+
+df['high_aerobic'] = df.aerobic >0.3
+
+where = df[df.max_cadence == max(df.max_cadence)].workout_type.item()
+
+when = df[df.max_cadence == max(df.max_cadence)].activity_day.dt.day_name().item()
+
+print('The max cadence happened on {} in the {}'.format(when,where))

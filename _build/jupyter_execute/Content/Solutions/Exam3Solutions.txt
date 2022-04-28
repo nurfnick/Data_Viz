@@ -1,0 +1,46 @@
+import numpy as np
+import pandas as pa
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/worldCupPlayer.csv')
+
+df.head()
+
+df.query('club == "Tottenham"')
+
+ax = df.Goals.plot.hist(title = 'Histogram of Goals', bins = 25)
+ax.set(xlabel = 'Goals')
+plt.show()
+
+ax = sns.histplot(data = df, x = 'Goals')
+ax.set(title = 'Histogram of Goals')
+
+ax = df[['Goals','Assists']].plot.hist(alpha = .7, bins = 25)
+ax.set(title = 'Goals and Assists Histogram')
+plt.show()
+
+ax = df.groupby('nationality').Goals.agg('max').reset_index().plot(kind = 'bar', x = 'nationality', legend = False)
+ax.set(title = 'Most Goals Scored by Nationality')
+ax.set(ylabel = 'Max Goals')
+plt.show()
+
+df.boxplot(by = 'nationality', column = 'Yel', rot = 45)
+
+df.club == 'Tottenham'
+
+df['Tottenham'] = df.club == 'Tottenham'
+
+sns.scatterplot(data = df, x = 'Goals', y = 'Assists', hue = 'Tottenham', alpha = .7)
+
+plt.rcParams["figure.figsize"] = (5,15)
+ax = df[df.nationality == 'France'].plot.barh(x = 'player', y = ['Goals','Assists'], stacked = True, color = ['blue','red'])
+ax.set(title = 'Goals and Assists of the French National Team')
+plt.show()
+
+plt.rcParams["figure.figsize"] = (15,15)
+ax = sns.heatmap(df.corr(),vmin = -1)
+ax.set(title = 'Heatmap of the World Cup Players')
+plt.show()
+
+

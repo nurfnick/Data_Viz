@@ -1,0 +1,68 @@
+import requests
+import pandas as pa
+from bs4 import BeautifulSoup
+
+
+r = requests.get('https://en.wikipedia.org/wiki/The_Simpsons')
+html_contents = r.text
+html_soup = BeautifulSoup(html_contents,"lxml")
+
+len(html_soup.find_all('table'))
+
+tables = html_soup.find_all('table',class_="wikitable")
+tables[0].find_all('a')
+
+
+df = pa.read_html(str(tables))[0]
+df
+
+df.columns = df.columns.droplevel(0).droplevel(0)
+df
+
+df2 = pa.read_html(str(html_soup.find('table')))[0]
+
+df2
+
+data =[]
+for table in tables:
+    headers = []
+    rows = table.find_all('tr')
+    for header in table.find('tr').find_all('th'):
+        headers.append(header.text.replace('\n', ''))
+    for row in table.find_all('tr')[1:]:
+        values =[]
+        for col in row.find_all(['th','td']):
+            values.append(col.text.replace('\n', ''))
+        data.append(values)
+data[:4]
+
+#pa.DataFrame(data[1:], columns  = data[0])
+
+titles = []
+titles.append('Season')
+titles.append('Years')
+titles.append('Episodes')
+for name in data[0]:
+  titles.append(name)
+titles.append('Most watched episode title')
+
+df = pa.DataFrame(data[2:], columns = titles)
+df
+
+newdata =[]
+for i in range(2,35):
+  row = []
+  if len(data[i])!= 9:
+    for j in range(5):
+      row.append(data[i][j])
+    row.append(newdata[i-3][5])
+    for j in range(5,8):
+      row.append(data[i][j])
+  else:
+    row = data[i]
+  newdata.append(row)
+
+
+df = pa.DataFrame(newdata, columns = titles)
+
+df

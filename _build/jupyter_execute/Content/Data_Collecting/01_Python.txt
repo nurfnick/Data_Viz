@@ -1,0 +1,82 @@
+#this is a coding box
+
+print('Hello World')
+
+import numpy as np #a matrix like package for handling data
+import pandas as pd #a R like package for handling data
+from scipy import stats #a way to just get a piece of a large package
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+def f(x):
+  return x**2
+
+f(-2)
+
+-2^2
+
+x = np.arange(-4,4,.1)
+y = f(x)
+
+plt.plot(x,y)
+
+x = np.arange(-4,4,.1)
+
+plt.plot(x,stats.norm.pdf(x),'c', lw=5, alpha=0.6, label='norm pdf',) #matplotlib has tons of options!
+plt.legend(loc='best', frameon=False)
+plt.show()
+
+df = pd.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data',header = None)
+
+df
+
+head = ['Class','Alcohol','MalicAcid','Ash','AlcalinityAsh','Magnesium','Phenols','Flavanoids','NonflavanoidPhenols','Proanthocyanins','ColorIntensity','Hue','OD280/OD315','Proline'] 
+#https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.names more info on the data file than you could ever use!
+df.columns = head
+df.head() # only prints the first 5
+
+dfg = df.groupby(['Class'])['Class'].count()
+
+dfg.plot(kind='bar', title='Classes of Wine', ylabel='Number of Classes',
+         xlabel='Class', figsize=(6, 5))
+
+dfg.plot(kind= 'pie')
+
+df.Alcohol.plot(kind = 'hist')
+
+df.Alcohol.plot(kind = 'box')
+
+df.Alcohol.plot(kind = 'kde')
+
+df.Alcohol.mean()
+
+df.Alcohol.std()
+
+df.Alcohol.describe()[3:]#I'm cheating here, this also did the mean and standard deviation...
+
+df.Alcohol.quantile(q = .75)
+
+df.Alcohol.min()
+
+dfg = df.groupby('Class')[['Flavanoids','Hue','Class']]
+dfg.plot(kind = 'box')
+plt.show()
+
+sns.boxplot(y='Hue', x = 'Class', data = df)
+#sns.boxplot(y='Flavanoids', x = 'Class', data = df)
+
+sns.boxplot(data = df[['Flavanoids','Hue','Class']])
+
+df_melt = df.melt(id_vars = 'Class',
+                  value_vars = ['Flavanoids','Hue'],
+                  var_name = 'colmuns')
+
+sns.boxplot(x = 'colmuns',y='value',hue = 'Class',data = df_melt)
+
+df_melt
+
+sns.violinplot(data = df.drop(['Proline','Magnesium'],1))
+
+sns.violinplot(data = df.Alcohol)
+
+

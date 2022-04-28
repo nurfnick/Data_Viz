@@ -1,0 +1,34 @@
+import requests
+import pandas as pa
+from bs4 import BeautifulSoup
+
+r = requests.get('https://en.wikipedia.org/wiki/The_Simpsons')
+html_contents = r.text
+html_soup = BeautifulSoup(html_contents,"lxml")
+#html_soup
+
+html_soup.title
+
+html_soup.a
+
+html_soup.p
+
+html_soup.img
+
+html_soup.h2
+
+html_soup.table
+
+html_soup.table.a['href']
+
+html_soup.table.find_all('a')
+
+html_soup.table.find_all('a')[1]['href']
+
+links = html_soup.table.find_all('a')
+listOfURLS = []
+
+for link in links:
+  listOfURLS.append('https://en.wikipedia.org' + link['href'])
+
+listOfURLS

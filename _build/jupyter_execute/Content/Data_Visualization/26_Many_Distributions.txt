@@ -1,0 +1,57 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/Activity_Dataset_V1.csv')
+
+df.calories.plot.box()
+
+df.boxplot(column = 'calories',by = 'workout_type')
+
+import matplotlib.pyplot as plt
+
+
+ax = df.boxplot(column = 'calories',by = 'workout_type',rot = 45)
+ax.set_ylabel('Calories')
+plt.show()
+
+df.boxplot(column = 'calories',by = 'workout_type',vert = False)
+
+import matplotlib.pyplot as plt
+
+plt.violinplot(df.calories)
+
+import seaborn as sns
+
+ax = sns.violinplot(data = df, x = 'workout_type', y = 'calories')
+ax.set_xticklabels(ax.get_xticklabels(),rotation = 45)
+ax.set_title('Violin Plot of Calories Burned')
+plt.show()
+
+df.query("workout_type == 'Trekking'").calories.plot.box()
+
+ax = sns.violinplot(data = df.query("workout_type == 'Trekking'"), x = 'workout_type', y = 'calories')
+ax.set_xticklabels(ax.get_xticklabels(),rotation = 45)
+ax.set_title('Violin Plot of Calories Burned')
+plt.show()
+
+sns.violinplot(data = df, y = 'workout_type', x = 'calories')
+
+sns.violinplot(data = df, y = 'workout_type', x = 'calories', color = 'orange')
+sns.stripplot(data = df, y = 'workout_type', x = 'calories' , color = 'black')
+
+rgb= [255,78,0]
+rgbscaled = []
+for color in rgb:
+  rgbscaled.append(color/255)
+rgbscaled
+
+sns.violinplot(data = df, y = 'workout_type', x = 'calories', color = rgbscaled)
+
+hexcolor = "#FF4E00"
+
+ax = sns.violinplot(data = df, y = 'workout_type', x = 'calories', color = hexcolor)
+sns.stripplot(data = df, y = 'workout_type', x = 'calories' , color = '#000000')
+
+ax.set_title('Go Tigers!')
+plt.show()
+
+

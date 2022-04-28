@@ -1,0 +1,85 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/H1.csv')
+
+df.head(15).T
+
+df.dtypes
+
+pa.to_datetime(df.ReservationStatusDate, format='%m/%d/%Y')
+
+df.ReservationStatusDate = pa.to_datetime(df.ReservationStatusDate, format='%m/%d/%Y')
+
+df.ArrivalDateMonth.unique()
+
+monthConvert = {
+    'January':1,
+    'February':2,
+    'March':3,
+    'April':4,
+    'May':5,
+    'June':6,
+    'July':7,
+    'August':8,
+    'September':9,
+    'October':10,
+    'November':11,
+    'December':12
+}
+
+df.ArrivalDateMonth.apply(lambda s: monthConvert[s])
+
+df['ArrivalDate'] = pa.to_datetime(dict(year = df.ArrivalDateYear, month = df.ArrivalDateMonth.apply(lambda s: monthConvert[s]), day = df.ArrivalDateDayOfMonth))
+
+df.dtypes
+
+differenceInDates =  df.ArrivalDate -df.ReservationStatusDate
+
+differenceInDates.describe()
+
+differenceInDates.astype('timedelta64[D]').plot(kind = 'hist')
+
+differenceInDates.astype('timedelta64[D]').plot.box()
+
+df.ArrivalDate.dt.day
+
+df.ArrivalDate.dt.week
+
+df.ArrivalDate.dt.year
+
+df.ArrivalDate.dt.month
+
+df.ArrivalDate.dt.dayofweek
+
+df.ArrivalDate.dt.day_name()
+
+df.ArrivalDate.dt.weekday
+
+df.ArrivalDate.dt.weekday[df.ArrivalDate.dt.weekday>4].count()
+
+12009/40060
+
+2/7
+
+import numpy as np
+
+np.arange('2018-01-01','2018-01-08', dtype='datetime64[D]')
+
+pa.date_range(start='1/1/2018', end='1/08/2018')
+
+pa.bdate_range(start='1/1/2018', end='1/08/2018')
+
+df.StaysInWeekendNights.shift()
+
+df.StaysInWeekendNights.shift(fill_value=0)-df.StaysInWeekendNights
+
+cols = df.StaysInWeekendNights
+
+for i in range(1,5):
+  cols += df.StaysInWeekendNights.shift(periods = i)
+
+cols/5
+
+df.ArrivalDate.between('01-07-15','07-07-15')
+
+df[df.ArrivalDate.between('01-07-15','07-07-15')].tail(100)

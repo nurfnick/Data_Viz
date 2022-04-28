@@ -1,0 +1,17 @@
+(32-6)/6
+
+import pandas as pa
+
+x = [35,39.6]
+
+df = pa.DataFrame({'rate':x})
+
+df.plot.bar()
+
+percentchange = (39.5-35)/35
+
+percentchange*100
+
+433/12.8
+
+

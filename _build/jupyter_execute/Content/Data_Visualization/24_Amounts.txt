@@ -1,0 +1,54 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/iris.csv')
+
+df.groupby('Class').SepalLength.agg('mean')
+
+df.groupby('Class').SepalLength.agg('mean').plot(kind = 'bar')
+
+df.groupby('Class').SepalLength.agg('mean').plot.bar()
+
+df.groupby('Class').SepalLength.agg('mean').plot(kind = 'bar', title = 'Mean by Class')
+
+df.groupby('Class').SepalLength.agg('mean').plot(kind = 'bar',
+                                                 title = 'Mean by Class', 
+                                                 ylabel= 'Mean of Sepal Length')
+
+
+df.groupby('Class').SepalLength.agg('mean').plot(kind = 'barh',
+                                                 title = 'Mean by Class', 
+                                                 ylabel= 'Mean of Sepal Length')
+
+df2 = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Activity_Dataset_V1.csv')
+
+df2.groupby('workout_type').calories.agg('mean').sort_values(ascending = True).plot(kind = 'barh')
+
+df2.groupby('workout_type').calories.agg(['mean']).sort_values(by = 'mean',ascending = True).reset_index().plot.scatter(x = 'mean', y = 'workout_type')
+
+df2.groupby('workout_type').calories.agg(['mean']).sort_values(by = 'mean',ascending = True).reset_index().plot.scatter(x = 'mean', y = 'workout_type', xlim = [0,310])
+
+ax = df2.groupby('workout_type').calories.agg(['mean']).sort_values(by = 'mean',ascending = True).reset_index().plot.scatter(x = 'mean', y = 'workout_type')#this made the same graph as above.
+
+for i,k in enumerate(df2.groupby('workout_type').calories.agg(['mean']).sort_values(by = 'mean',ascending = True).reset_index()['mean']): #here I loop through the values, k, and indicies ,i.
+  ax.annotate(str(int(k)),[k+.2,i+.2])
+
+
+
+df.groupby('Class').agg('mean').plot(kind = 'bar')
+
+df.groupby('Class').agg('mean').plot(kind = 'bar', stacked = True)
+
+!pip install --upgrade matplotlib
+
+import matplotlib
+matplotlib.__version__
+
+ax = df.groupby('Class').agg('mean').plot(kind = 'bar', ylim =[0,8])
+
+for container in ax.containers:
+    ax.bar_label(container)
+
+ax = df.groupby('Class').agg('mean').plot(kind = 'bar', stacked = True)
+
+for container in ax.containers:
+    ax.bar_label(container)

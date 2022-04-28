@@ -1,0 +1,1008 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uncertainty &#8212; Data Pre-Processing and Visualization OER</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Visualization Conclusion" href="30_Visualize_Conclusion.html" />
+    <link rel="prev" title="Visualizing Association" href="28_Associations.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Data Pre-Processing and Visualization OER</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction.html">
+   Data Pre-Processing and Visualization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/01_Python.html">
+   Jupyter Notebooks and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/02_Pandas.html">
+   Pandas for Data Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Gathering Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/03_SQL.html">
+   Learning Some SQL with BigQuery
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Data_Collecting/08_html.html">
+   Reading Data From the Web
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Collecting/09_html_tables.html">
+     HTML Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Collecting/10_html_selenium.html">
+     Webpage Loading and Scrapping
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/11_Twitter.html">
+   Twitter a Social Media Scrape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Collecting/12_GatheringConclusion.html">
+   Gathering Data Conclusion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Cleaning Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">
+   Data Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/14_Strings.html">
+     Strings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">
+     Strings And Cleaning a DataFrame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/16_Dates.html">
+     Dates
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">
+     Integers and Floats
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">
+     Factors and One Hot Encoding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">
+     Missing and Incomplete
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">
+     Exam 2 Review
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Great Visualizations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="21_Graphical_Excellence.html">
+   Graphical Excellence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="22_Graphical_Integrity.html">
+   Graphical Integrity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="23_Graphical_Sophistication.html">
+   Graphical Sophistication
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Creating Visulaizations
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="24_Amounts.html">
+   Visualize Amounts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="25_Histograms.html">
+   Histograms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="26_Many_Distributions.html">
+   Many Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="27_Proportions.html">
+   Proportions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="28_Associations.html">
+   Visualizing Association
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="30_Visualize_Conclusion.html">
+   Visualization Conclusion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Project Examples
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Project_Examples/RecentVisualizations.html">
+   Inverted Yield Curve
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Project_Examples/RecreatingMasters.html">
+   NHL Data Visualization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Selected Solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/mySolutions.html">
+   My Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam1Solutions.html">
+   Exam 1 Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam2Solutions.html">
+   Exam 2 Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam3Solutions.html">
+   Exam 3 Solutions Data Visualization and Preprocessing
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Content/Data_Visualization/29_Uncertainty.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nurfnick/Data_Viz"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Visualization/29_Uncertainty.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nurfnick/Data_Viz/master?urlpath=tree/Content/Data_Visualization/29_Uncertainty.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Visualization/29_Uncertainty.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#waffle-charts">
+   Waffle Charts
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#with-random-chance">
+     With Random Chance
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#with-package">
+     With Package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#error-bars-for-mean">
+   Error Bars for Mean
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#confidence-interval-for-regression">
+   Confidence Interval for Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypothesis-testing">
+   Hypothesis Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-turn">
+   Your Turn
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/main/Content/Data_Visualization/29_Uncertainty.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<div class="tex2jax_ignore mathjax_ignore section" id="uncertainty">
+<h1>Uncertainty<a class="headerlink" href="#uncertainty" title="Permalink to this headline">¶</a></h1>
+<p>Uncertainty is one of the most important topics in statistics.  Visualizing that uncertainty is very critical to expressing these statistical ideas.  We’ll explore several ways to display this crutical concept.</p>
+<div class="section" id="waffle-charts">
+<h2>Waffle Charts<a class="headerlink" href="#waffle-charts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="with-random-chance">
+<h3>With Random Chance<a class="headerlink" href="#with-random-chance" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">truths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="n">truths</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+       0, 0, 1])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">hatches_plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">Rectangle</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="n">h</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axs</span><span class="o">.</span><span class="n">flat</span><span class="p">,</span><span class="n">truths</span><span class="p">):</span>
+    <span class="n">hatches_plot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;25% Chance&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/29_Uncertainty_6_0.png" src="../../_images/29_Uncertainty_6_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="with-package">
+<h3>With Package<a class="headerlink" href="#with-package" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install pywaffle
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pywaffle
+  Downloading pywaffle-0.6.4-py2.py3-none-any.whl (565 kB)
+?25l
+     |▋                               | 10 kB 21.6 MB/s eta 0:00:01
+     |█▏                              | 20 kB 11.3 MB/s eta 0:00:01
+     |█▊                              | 30 kB 8.8 MB/s eta 0:00:01
+     |██▎                             | 40 kB 7.9 MB/s eta 0:00:01
+     |███                             | 51 kB 6.0 MB/s eta 0:00:01
+     |███▌                            | 61 kB 7.1 MB/s eta 0:00:01
+     |████                            | 71 kB 6.6 MB/s eta 0:00:01
+     |████▋                           | 81 kB 6.5 MB/s eta 0:00:01
+     |█████▏                          | 92 kB 7.3 MB/s eta 0:00:01
+     |█████▉                          | 102 kB 7.0 MB/s eta 0:00:01
+     |██████▍                         | 112 kB 7.0 MB/s eta 0:00:01
+     |███████                         | 122 kB 7.0 MB/s eta 0:00:01
+     |███████▌                        | 133 kB 7.0 MB/s eta 0:00:01
+     |████████                        | 143 kB 7.0 MB/s eta 0:00:01
+     |████████▊                       | 153 kB 7.0 MB/s eta 0:00:01
+     |█████████▎                      | 163 kB 7.0 MB/s eta 0:00:01
+     |█████████▉                      | 174 kB 7.0 MB/s eta 0:00:01
+     |██████████▍                     | 184 kB 7.0 MB/s eta 0:00:01
+     |███████████                     | 194 kB 7.0 MB/s eta 0:00:01
+     |███████████▋                    | 204 kB 7.0 MB/s eta 0:00:01
+     |████████████▏                   | 215 kB 7.0 MB/s eta 0:00:01
+     |████████████▊                   | 225 kB 7.0 MB/s eta 0:00:01
+     |█████████████▎                  | 235 kB 7.0 MB/s eta 0:00:01
+     |██████████████                  | 245 kB 7.0 MB/s eta 0:00:01
+     |██████████████▌                 | 256 kB 7.0 MB/s eta 0:00:01
+     |███████████████                 | 266 kB 7.0 MB/s eta 0:00:01
+     |███████████████▋                | 276 kB 7.0 MB/s eta 0:00:01
+     |████████████████▏               | 286 kB 7.0 MB/s eta 0:00:01
+     |████████████████▉               | 296 kB 7.0 MB/s eta 0:00:01
+     |█████████████████▍              | 307 kB 7.0 MB/s eta 0:00:01
+     |██████████████████              | 317 kB 7.0 MB/s eta 0:00:01
+     |██████████████████▌             | 327 kB 7.0 MB/s eta 0:00:01
+     |███████████████████             | 337 kB 7.0 MB/s eta 0:00:01
+     |███████████████████▊            | 348 kB 7.0 MB/s eta 0:00:01
+     |████████████████████▎           | 358 kB 7.0 MB/s eta 0:00:01
+     |████████████████████▉           | 368 kB 7.0 MB/s eta 0:00:01
+     |█████████████████████▍          | 378 kB 7.0 MB/s eta 0:00:01
+     |██████████████████████          | 389 kB 7.0 MB/s eta 0:00:01
+     |██████████████████████▋         | 399 kB 7.0 MB/s eta 0:00:01
+     |███████████████████████▏        | 409 kB 7.0 MB/s eta 0:00:01
+     |███████████████████████▊        | 419 kB 7.0 MB/s eta 0:00:01
+     |████████████████████████▎       | 430 kB 7.0 MB/s eta 0:00:01
+     |█████████████████████████       | 440 kB 7.0 MB/s eta 0:00:01
+     |█████████████████████████▌      | 450 kB 7.0 MB/s eta 0:00:01
+     |██████████████████████████      | 460 kB 7.0 MB/s eta 0:00:01
+     |██████████████████████████▋     | 471 kB 7.0 MB/s eta 0:00:01
+     |███████████████████████████▏    | 481 kB 7.0 MB/s eta 0:00:01
+     |███████████████████████████▉    | 491 kB 7.0 MB/s eta 0:00:01
+     |████████████████████████████▍   | 501 kB 7.0 MB/s eta 0:00:01
+     |█████████████████████████████   | 512 kB 7.0 MB/s eta 0:00:01
+     |█████████████████████████████▌  | 522 kB 7.0 MB/s eta 0:00:01
+     |██████████████████████████████▏ | 532 kB 7.0 MB/s eta 0:00:01
+     |██████████████████████████████▊ | 542 kB 7.0 MB/s eta 0:00:01
+     |███████████████████████████████▎| 552 kB 7.0 MB/s eta 0:00:01
+     |███████████████████████████████▉| 563 kB 7.0 MB/s eta 0:00:01
+     |████████████████████████████████| 565 kB 7.0 MB/s 
+?25hRequirement already satisfied: matplotlib in /usr/local/lib/python3.7/dist-packages (from pywaffle) (3.2.2)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib-&gt;pywaffle) (1.4.2)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib-&gt;pywaffle) (3.0.8)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.7/dist-packages (from matplotlib-&gt;pywaffle) (0.11.0)
+Requirement already satisfied: python-dateutil&gt;=2.1 in /usr/local/lib/python3.7/dist-packages (from matplotlib-&gt;pywaffle) (2.8.2)
+Requirement already satisfied: numpy&gt;=1.11 in /usr/local/lib/python3.7/dist-packages (from matplotlib-&gt;pywaffle) (1.21.6)
+Requirement already satisfied: typing-extensions in /usr/local/lib/python3.7/dist-packages (from kiwisolver&gt;=1.0.1-&gt;matplotlib-&gt;pywaffle) (4.2.0)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil&gt;=2.1-&gt;matplotlib-&gt;pywaffle) (1.15.0)
+Installing collected packages: pywaffle
+Successfully installed pywaffle-0.6.4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pywaffle</span> <span class="kn">import</span> <span class="n">Waffle</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span>
+    <span class="n">FigureClass</span><span class="o">=</span><span class="n">Waffle</span><span class="p">,</span> 
+    <span class="n">rows</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+    <span class="n">columns</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+    <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mi">48</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/29_Uncertainty_9_0.png" src="../../_images/29_Uncertainty_9_0.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pywaffle</span></code> is actually a pretty cool package for doing this sort of graphic!  For my 25% chance above, I’d do something like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">FigureClass</span> <span class="o">=</span> <span class="n">Waffle</span><span class="p">,</span>
+           <span class="n">rows</span><span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+           <span class="n">columns</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+           <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span>
+           <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;white&#39;</span><span class="p">],</span>
+           <span class="n">vertical</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+           <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;#DDDDDD&#39;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/29_Uncertainty_11_0.png" src="../../_images/29_Uncertainty_11_0.png" />
+</div>
+</div>
+<p>The package has lots of options to include some really cool graphics.  Here is how many times I biked versus driving this week.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">FigureClass</span><span class="o">=</span><span class="n">Waffle</span><span class="p">,</span>
+           <span class="n">rows</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+           <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+           <span class="n">icons</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bicycle&#39;</span><span class="p">,</span><span class="s1">&#39;car&#39;</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/29_Uncertainty_13_0.png" src="../../_images/29_Uncertainty_13_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="error-bars-for-mean">
+<h2>Error Bars for Mean<a class="headerlink" href="#error-bars-for-mean" title="Permalink to this headline">¶</a></h2>
+<p>Perhaps the most fundamental concept in error is the mean.  We know that the mean will be approximately distributed as normal for a large enough sample size with standard deviation <span class="math notranslate nohighlight">\(\frac s{\sqrt n}\)</span> where <span class="math notranslate nohighlight">\(s\)</span> is the sample standard deviation and <span class="math notranslate nohighlight">\(n\)</span> the sample size.  Let’s see that visualized in a bar graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pa</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/iris.csv&#39;</span><span class="p">)</span>
+
+<span class="n">dfgrouped</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">])</span>
+
+<span class="n">dfgrouped</span><span class="o">.</span><span class="n">SepalLength</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="n">yerr</span> <span class="o">=</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;purple&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">],</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Error of Standard Deviation&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f2a5c169fd0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/29_Uncertainty_16_1.png" src="../../_images/29_Uncertainty_16_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span>
+
+<span class="k">def</span> <span class="nf">SE</span><span class="p">(</span><span class="n">std</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+
+
+<span class="n">dfgroupedSepalLength</span> <span class="o">=</span> <span class="n">dfgrouped</span><span class="o">.</span><span class="n">SepalLength</span>
+
+<span class="n">dfgroupedSepalLength</span><span class="p">[</span><span class="s1">&#39;SE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfgroupedSepalLength</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">SE</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;std&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;count&#39;</span><span class="p">]),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+
+<span class="n">dfgroupedSepalLength</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;95%&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dfgroupedSepalLength</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;SE&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="o">.</span><span class="mi">975</span><span class="p">,</span><span class="mi">49</span><span class="p">)</span>
+
+<span class="n">dfgroupedSepalLength</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.7/dist-packages/ipykernel_launcher.py:11: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  # This is added back by InteractiveShellApp.init_path()
+/usr/local/lib/python3.7/dist-packages/pandas/core/indexing.py:1667: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  self.obj[key] = value
+</pre></div>
+</div>
+<div class="output text_html">
+  <div id="df-3eb798e8-b185-49b6-b12b-8af6174a0a16">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>count</th>
+      <th>SE</th>
+      <th>95%</th>
+    </tr>
+    <tr>
+      <th>Class</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Iris-setosa</th>
+      <td>5.006</td>
+      <td>0.352490</td>
+      <td>50</td>
+      <td>0.049850</td>
+      <td>0.100176</td>
+    </tr>
+    <tr>
+      <th>Iris-versicolor</th>
+      <td>5.936</td>
+      <td>0.516171</td>
+      <td>50</td>
+      <td>0.072998</td>
+      <td>0.146694</td>
+    </tr>
+    <tr>
+      <th>Iris-virginica</th>
+      <td>6.588</td>
+      <td>0.635880</td>
+      <td>50</td>
+      <td>0.089927</td>
+      <td>0.180715</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-3eb798e8-b185-49b6-b12b-8af6174a0a16')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-3eb798e8-b185-49b6-b12b-8af6174a0a16 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-3eb798e8-b185-49b6-b12b-8af6174a0a16');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dfgroupedSepalLength</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="n">yerr</span> <span class="o">=</span> <span class="s1">&#39;SE&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Graphed with Standard Error&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f2a5bb85d10&gt;
+</pre></div>
+</div>
+<img alt="../../_images/29_Uncertainty_18_1.png" src="../../_images/29_Uncertainty_18_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dfgroupedSepalLength</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="n">yerr</span> <span class="o">=</span> <span class="s1">&#39;95%&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;Graphed with 95% Confidence Interval&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f2a5bb0ce90&gt;
+</pre></div>
+</div>
+<img alt="../../_images/29_Uncertainty_19_1.png" src="../../_images/29_Uncertainty_19_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="confidence-interval-for-regression">
+<h2>Confidence Interval for Regression<a class="headerlink" href="#confidence-interval-for-regression" title="Permalink to this headline">¶</a></h2>
+<p>It is automatically generated with <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>.  It is computed with a bootstrap(!).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> 
+            <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;SepalLength&#39;</span><span class="p">,</span> 
+            <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;SepalWidth&#39;</span><span class="p">,</span>
+            <span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;Class&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/29_Uncertainty_22_0.png" src="../../_images/29_Uncertainty_22_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="hypothesis-testing">
+<h2>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">)]</span>
+<span class="n">x_trunk</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_trunk</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_trunk</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p$ value&#39;</span><span class="p">,</span> <span class="n">xy</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span><span class="o">.</span><span class="mi">01</span><span class="p">],</span>
+            <span class="n">xytext</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="o">.</span><span class="mi">15</span><span class="p">],</span>
+            <span class="n">arrowprops</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">headwidth</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">headlength</span> <span class="o">=</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/29_Uncertainty_24_0.png" src="../../_images/29_Uncertainty_24_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Explain the difference between standard error and confidence intervals.</p></li>
+<li><p>Use the workout data and graph the average calories by workout type and include the 95% confidence interval.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Content\Data_Visualization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="28_Associations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Visualizing Association</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="30_Visualize_Conclusion.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Visualization Conclusion</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

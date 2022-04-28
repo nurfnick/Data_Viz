@@ -1,0 +1,27 @@
+import pandas as pa
+
+df = pa.read_csv('https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/iris.csv')
+
+df.SepalLength.plot.hist()
+
+df.hist()
+
+df.SepalLength.plot.hist(bins = 100)
+
+df.SepalLength.plot.hist(bins = 5)
+
+df.SepalLength.plot.hist(bins = 25)
+
+df.SepalLength.plot(kind = 'density')
+
+df.SepalLength.plot(kind = 'density',bw_method = 0.3)
+
+df['SepalLength'].hist(by = df['Class'])
+
+df.groupby('Class').SepalLength.plot.hist(alpha = .7)
+
+df.groupby('Class').plot.hist(alpha = .7, title = "Bad Graphs!")
+
+df.plot.hist(title = "Bad Graph!")
+
+

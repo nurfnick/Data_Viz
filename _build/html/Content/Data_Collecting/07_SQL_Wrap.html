@@ -1,0 +1,1812 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL Wrap Up &#8212; Data Pre-Processing and Visualization OER</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reading Data From the Web" href="08_html.html" />
+    <link rel="prev" title="SQL Joins" href="06_SQL_Joins.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Data Pre-Processing and Visualization OER</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction.html">
+   Data Pre-Processing and Visualization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Getting Started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_Python.html">
+   Jupyter Notebooks and Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_Pandas.html">
+   Pandas for Data Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Gathering Data
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_SQL.html">
+   Learning Some SQL with BigQuery
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="08_html.html">
+   Reading Data From the Web
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="09_html_tables.html">
+     HTML Tables
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="10_html_selenium.html">
+     Webpage Loading and Scrapping
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_Twitter.html">
+   Twitter a Social Media Scrape
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_GatheringConclusion.html">
+   Gathering Data Conclusion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Cleaning Data
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">
+   Data Types
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/14_Strings.html">
+     Strings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">
+     Strings And Cleaning a DataFrame
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/16_Dates.html">
+     Dates
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">
+     Integers and Floats
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">
+     Factors and One Hot Encoding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">
+     Missing and Incomplete
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">
+     Exam 2 Review
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Great Visualizations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">
+   Graphical Excellence
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">
+   Graphical Integrity
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">
+   Graphical Sophistication
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Creating Visulaizations
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/24_Amounts.html">
+   Visualize Amounts
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/25_Histograms.html">
+   Histograms
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">
+   Many Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/27_Proportions.html">
+   Proportions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/28_Associations.html">
+   Visualizing Association
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">
+   Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">
+   Visualization Conclusion
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Project Examples
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Project_Examples/RecentVisualizations.html">
+   Inverted Yield Curve
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Project_Examples/RecreatingMasters.html">
+   NHL Data Visualization
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Selected Solutions
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/mySolutions.html">
+   My Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam1Solutions.html">
+   Exam 1 Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam2Solutions.html">
+   Exam 2 Solutions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Solutions/Exam3Solutions.html">
+   Exam 3 Solutions Data Visualization and Preprocessing
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/Content/Data_Collecting/07_SQL_Wrap.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/nurfnick/Data_Viz"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Collecting/07_SQL_Wrap.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/nurfnick/Data_Viz/master?urlpath=tree/Content/Data_Collecting/07_SQL_Wrap.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Collecting/07_SQL_Wrap.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#your-turn">
+   Your Turn
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples">
+     Examples
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/main/Content/Data_Collecting/07_SQL_Wrap.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<div class="tex2jax_ignore mathjax_ignore section" id="sql-wrap-up">
+<h1>SQL Wrap Up<a class="headerlink" href="#sql-wrap-up" title="Permalink to this headline">¶</a></h1>
+<p>To be honest, I am not sure what else to show you.  Not that there isn’t more to cover but that I have exhausted my knowledge.</p>
+<p>What I think we should do today is to challenge one another.  We are familiar with some of the datasets, can we challenge one another with questions about the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
+<span class="n">auth</span><span class="o">.</span><span class="n">authenticate_user</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Authenticated&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Authenticated
+</pre></div>
+</div>
+</div>
+</div>
+<p>I’ll start with an example.</p>
+<p>How many bottles in each category cost more than two standard deviations above the mean?</p>
+<p>First I’ll gather the stats of mean and standard deviation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+
+SELECT category_name, AVG(state_bottle_retail) as average, STDDEV(state_bottle_retail) as standarddeviation 
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name
+LIMIT 5
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-96ecc8d3-2362-443a-bf6d-22b2493e7e21">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>invoice_and_item_number</th>
+      <th>date</th>
+      <th>store_number</th>
+      <th>store_name</th>
+      <th>address</th>
+      <th>city</th>
+      <th>zip_code</th>
+      <th>store_location</th>
+      <th>county_number</th>
+      <th>county</th>
+      <th>category</th>
+      <th>category_name</th>
+      <th>vendor_number</th>
+      <th>vendor_name</th>
+      <th>item_number</th>
+      <th>item_description</th>
+      <th>pack</th>
+      <th>bottle_volume_ml</th>
+      <th>state_bottle_cost</th>
+      <th>state_bottle_retail</th>
+      <th>bottles_sold</th>
+      <th>sale_dollars</th>
+      <th>volume_sold_liters</th>
+      <th>volume_sold_gallons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>INV-37645300014</td>
+      <td>2021-06-18</td>
+      <td>3849</td>
+      <td>Hartig Drug Co #6 / Dyersville</td>
+      <td>711  16th Ave SE</td>
+      <td>Dyersville</td>
+      <td>52040.0</td>
+      <td>POINT (-91.116087 42.470285)</td>
+      <td>31</td>
+      <td>DUBUQUE</td>
+      <td>1081100.0</td>
+      <td>Coffee Liqueurs</td>
+      <td>370</td>
+      <td>PERNOD RICARD USA</td>
+      <td>67527</td>
+      <td>Kahlua Coffee</td>
+      <td>12</td>
+      <td>1000</td>
+      <td>15.99</td>
+      <td>23.99</td>
+      <td>2</td>
+      <td>47.98</td>
+      <td>2.0</td>
+      <td>0.52</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>INV-37770500048</td>
+      <td>2021-06-24</td>
+      <td>5293</td>
+      <td>The Boonedocks</td>
+      <td>228, N Hwy 71</td>
+      <td>Arnolds Park</td>
+      <td>51331.0</td>
+      <td>POINT (-95.125928 43.370941)</td>
+      <td>30</td>
+      <td>DICKINSON</td>
+      <td>1081100.0</td>
+      <td>Coffee Liqueurs</td>
+      <td>370</td>
+      <td>PERNOD RICARD USA</td>
+      <td>67527</td>
+      <td>Kahlua Coffee</td>
+      <td>12</td>
+      <td>1000</td>
+      <td>15.99</td>
+      <td>23.99</td>
+      <td>4</td>
+      <td>95.96</td>
+      <td>4.0</td>
+      <td>1.05</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>S04111300054</td>
+      <td>2012-02-15</td>
+      <td>2565</td>
+      <td>Hy-Vee Food Store / Spencer</td>
+      <td>819 N GRAND AVE</td>
+      <td>SPENCER</td>
+      <td>51301</td>
+      <td>POINT (-95.14506 43.145897)</td>
+      <td>21</td>
+      <td>Clay</td>
+      <td>1081330.0</td>
+      <td>PEACH SCHNAPPS</td>
+      <td>65</td>
+      <td>Jim Beam Brands</td>
+      <td>82847</td>
+      <td>Dekuyper Peachtree</td>
+      <td>12</td>
+      <td>1000</td>
+      <td>7.35</td>
+      <td>11.02</td>
+      <td>5</td>
+      <td>55.10</td>
+      <td>5.0</td>
+      <td>1.32</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>INV-06891500007</td>
+      <td>2017-08-25</td>
+      <td>2835</td>
+      <td>CVS Pharmacy #8538 / Cedar Falls</td>
+      <td>2302 West First St</td>
+      <td>Cedar Falls</td>
+      <td>50613.0</td>
+      <td>POINT (-92.472778 42.539874)</td>
+      <td>7</td>
+      <td>BLACK HAWK</td>
+      <td>1011600.0</td>
+      <td>Straight Rye Whiskies</td>
+      <td>255</td>
+      <td>Infinium Spirits</td>
+      <td>27102</td>
+      <td>Templeton 4YR Rye</td>
+      <td>6</td>
+      <td>750</td>
+      <td>18.09</td>
+      <td>27.14</td>
+      <td>18</td>
+      <td>488.52</td>
+      <td>13.5</td>
+      <td>3.57</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>INV-37843000106</td>
+      <td>2021-06-25</td>
+      <td>2644</td>
+      <td>Hy-Vee Fort Dodge Wine and Spirits</td>
+      <td>1511 2nd Ave North</td>
+      <td>Fort Dodge</td>
+      <td>50501.0</td>
+      <td>POINT (-94.177165 42.508344)</td>
+      <td>94</td>
+      <td>WEBSTER</td>
+      <td>1081500.0</td>
+      <td>Triple Sec</td>
+      <td>434</td>
+      <td>LUXCO INC</td>
+      <td>86251</td>
+      <td>Juarez Triple Sec</td>
+      <td>12</td>
+      <td>1000</td>
+      <td>2.42</td>
+      <td>3.63</td>
+      <td>48</td>
+      <td>174.24</td>
+      <td>48.0</td>
+      <td>12.68</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-96ecc8d3-2362-443a-bf6d-22b2493e7e21')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-96ecc8d3-2362-443a-bf6d-22b2493e7e21 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-96ecc8d3-2362-443a-bf6d-22b2493e7e21');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>I am going to use the above table to join with the full table and make the comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+
+WITH statsTable as(
+SELECT category_name, AVG(state_bottle_retail) as average, STDDEV(state_bottle_retail) as standarddeviation 
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name
+)
+
+SELECT t.category_name, COUNT(*) as bottles_over_two_sd
+FROM `bigquery-public-data.iowa_liquor_sales.sales` t JOIN statsTable 
+      ON t.category_name = statsTable.category_name
+WHERE t.state_bottle_retail &gt; statsTable.average + 2*statsTable.standarddeviation
+GROUP BY category_name
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-d1feeb75-5a5b-4eca-b010-d2ba0105f0ba">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>category_name</th>
+      <th>bottles_over_two_sd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Neutral Grain Spirits Flavored</td>
+      <td>1182</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>IMPORTED DRY GINS</td>
+      <td>10258</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Triple Sec</td>
+      <td>5063</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AMERICAN AMARETTO</td>
+      <td>5398</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>COFFEE LIQUEURS</td>
+      <td>2771</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>109</th>
+      <td>WHITE CREME DE MENTHE</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>110</th>
+      <td>WHITE CREME DE CACAO</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>SCHNAPPS - IMPORTED</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>DARK CREME DE CACAO</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>113</th>
+      <td>CHERRY BRANDIES</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>114 rows × 2 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-d1feeb75-5a5b-4eca-b010-d2ba0105f0ba')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-d1feeb75-5a5b-4eca-b010-d2ba0105f0ba button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-d1feeb75-5a5b-4eca-b010-d2ba0105f0ba');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>I have a result but I see several issues here.  One I am counting the same bottles over and over again.  I think I need to group by the <em>item_description</em> before I take an average over the category.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+
+SELECT category_name, item_description, AVG(state_bottle_retail) as average, STDDEV(state_bottle_retail) as standarddeviation 
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name, item_description
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-a21711e6-0272-4456-ae98-e78e58084264">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>category_name</th>
+      <th>item_description</th>
+      <th>average</th>
+      <th>standarddeviation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Triple Sec</td>
+      <td>Tortilla Triple Sec</td>
+      <td>4.520000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>BUTTERSCOTCH SCHNAPPS</td>
+      <td>Dekuyper Buttershots</td>
+      <td>11.354986</td>
+      <td>0.239511</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>IMPORTED DRY GINS</td>
+      <td>Tanqueray Gin</td>
+      <td>21.887818</td>
+      <td>7.089758</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Coffee Liqueurs</td>
+      <td>Kahlua Coffee Liqueur</td>
+      <td>20.277870</td>
+      <td>6.306792</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Coffee Liqueurs</td>
+      <td>Kahlua Coffee</td>
+      <td>20.795766</td>
+      <td>6.624718</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>13825</th>
+      <td>Imported Distilled Spirit Specialty</td>
+      <td>Plantation Trinidad Rum 2005</td>
+      <td>49.500000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>13826</th>
+      <td>Imported Distilled Spirit Specialty</td>
+      <td>Tequila Anejo 750ml Fenice</td>
+      <td>69.240000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>13827</th>
+      <td>Imported Distilled Spirit Specialty</td>
+      <td>Vikre Øvrevann Aquavit</td>
+      <td>29.010000</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>13828</th>
+      <td>Imported Distilled Spirit Specialty</td>
+      <td>Amrita Indian Whiskey 375ml Pilar</td>
+      <td>56.450000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>13829</th>
+      <td>Imported Distilled Spirit Specialty</td>
+      <td>Stoli Crushed Pineapple Mini</td>
+      <td>8.820000</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>13830 rows × 4 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-a21711e6-0272-4456-ae98-e78e58084264')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-a21711e6-0272-4456-ae98-e78e58084264 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-a21711e6-0272-4456-ae98-e78e58084264');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>That did not work as I’d have hoped (and took a long time to run!)  Instead I am going to gather the <code class="docutils literal notranslate"><span class="pre">MAX</span></code> price of each bottle by <em>item_description</em> and use that.  It won’t give perfect statistics but it will be better than what I have done.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+
+SELECT category_name, item_description, bottle_volume_ml, MAX(state_bottle_retail) as retail_max
+FROM `bigquery-public-data.iowa_liquor_sales.sales`
+GROUP BY category_name, item_description, bottle_volume_ml
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-e7e70754-4d8e-4af4-872b-813df0728a85">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>category_name</th>
+      <th>item_description</th>
+      <th>bottle_volume_ml</th>
+      <th>retail_max</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>DECANTERS &amp; SPECIALTY PACKAGES</td>
+      <td>Hennessy VS w/Hennessy Black 50ml</td>
+      <td>800</td>
+      <td>27.74</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>DECANTERS &amp; SPECIALTY PACKAGES</td>
+      <td>Johnnie Walker Collection Pack</td>
+      <td>800</td>
+      <td>89.99</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>DECANTERS &amp; SPECIALTY PACKAGES</td>
+      <td>Jim Beam Black w/4-50mls</td>
+      <td>950</td>
+      <td>20.48</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>DECANTERS &amp; SPECIALTY PACKAGES</td>
+      <td>Malibu w/50ml Black &amp; Red</td>
+      <td>850</td>
+      <td>11.24</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>DECANTERS &amp; SPECIALTY PACKAGES</td>
+      <td>Captain Morgan Original Spiced 1.75L w/CM Whit...</td>
+      <td>1950</td>
+      <td>27.00</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>16698</th>
+      <td>VODKA FLAVORED</td>
+      <td>Burnetts Appleberry Mini</td>
+      <td>500</td>
+      <td>6.38</td>
+    </tr>
+    <tr>
+      <th>16699</th>
+      <td>American Flavored Vodka</td>
+      <td>Pearl Vanilla Bean Mini</td>
+      <td>500</td>
+      <td>6.60</td>
+    </tr>
+    <tr>
+      <th>16700</th>
+      <td>None</td>
+      <td>360 Huckleberry Mini</td>
+      <td>500</td>
+      <td>7.80</td>
+    </tr>
+    <tr>
+      <th>16701</th>
+      <td>MISCELLANEOUS SCHNAPPS</td>
+      <td>99 Apples Mini Display</td>
+      <td>500</td>
+      <td>4.95</td>
+    </tr>
+    <tr>
+      <th>16702</th>
+      <td>CREAM LIQUEURS</td>
+      <td>Tippy Cow Vanilla Mini</td>
+      <td>500</td>
+      <td>11.13</td>
+    </tr>
+  </tbody>
+</table>
+<p>16703 rows × 4 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-e7e70754-4d8e-4af4-872b-813df0728a85')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-e7e70754-4d8e-4af4-872b-813df0728a85 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-e7e70754-4d8e-4af4-872b-813df0728a85');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+
+WITH statsTable as(
+SELECT category_name, AVG(retail_max) as average, STDDEV(retail_max) as standarddeviation 
+FROM (SELECT category_name, item_description, bottle_volume_ml, MAX(state_bottle_retail) as retail_max
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`
+      GROUP BY category_name, item_description, bottle_volume_ml) 
+GROUP BY category_name
+)
+
+SELECT t.category_name, COUNT(*) as bottles_over_two_sd
+FROM `bigquery-public-data.iowa_liquor_sales.sales` t JOIN statsTable 
+      ON t.category_name = statsTable.category_name
+WHERE t.state_bottle_retail &gt; statsTable.average + 2*statsTable.standarddeviation
+GROUP BY category_name
+ORDER BY bottles_over_two_sd
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-50594b48-1e32-4c83-b61d-b5debfbe84f8">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>category_name</th>
+      <th>bottles_over_two_sd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Mezcal</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>FLAVORED RUM</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PEPPERMINT SCHNAPPS</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Triple Sec</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CREME DE ALMOND</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>American Flavored Vodka</td>
+      <td>6817</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>Whiskey Liqueur</td>
+      <td>7330</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>Flavored Rum</td>
+      <td>10316</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>CANADIAN WHISKIES</td>
+      <td>15258</td>
+    </tr>
+    <tr>
+      <th>101</th>
+      <td>WHISKEY LIQUEUR</td>
+      <td>35516</td>
+    </tr>
+  </tbody>
+</table>
+<p>102 rows × 2 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-50594b48-1e32-4c83-b61d-b5debfbe84f8')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-50594b48-1e32-4c83-b61d-b5debfbe84f8 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-50594b48-1e32-4c83-b61d-b5debfbe84f8');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>Can you improve the way I have done this?  Does it make sense that there are that many bottles of Whiskey?</p>
+<p>I am just going to see if these are correct.  Let’s see if we can get the table to include total number of bottles.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+
+WITH statsTable as(
+SELECT category_name, AVG(retail_max) as average, STDDEV(retail_max) as standarddeviation 
+FROM (SELECT category_name, item_description, bottle_volume_ml, MAX(state_bottle_retail) as retail_max
+      FROM `bigquery-public-data.iowa_liquor_sales.sales`
+      GROUP BY category_name, item_description, bottle_volume_ml)
+GROUP BY category_name
+)
+
+SELECT t.category_name, 
+        COUNTIF(t.state_bottle_retail &gt; statsTable.average + 2*statsTable.standarddeviation) as bottles_over_two_sd, 
+        COUNT(*) as total_bottles, 
+        AVG(statsTable.average)as average_price, 
+        AVG(statsTable.standarddeviation) as standard_deviation_price
+FROM `bigquery-public-data.iowa_liquor_sales.sales` t JOIN statsTable 
+      ON t.category_name = statsTable.category_name
+GROUP BY category_name
+ORDER BY bottles_over_two_sd
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+  <div id="df-3c933b27-f279-4298-8625-1ee794cf7027">
+    <div class="colab-df-container">
+      <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>category_name</th>
+      <th>bottles_over_two_sd</th>
+      <th>total_bottles</th>
+      <th>average_price</th>
+      <th>standard_deviation_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>WATERMELON SCHNAPPS</td>
+      <td>0</td>
+      <td>17844</td>
+      <td>7.247500</td>
+      <td>4.970288</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ROOT BEER SCHNAPPS</td>
+      <td>0</td>
+      <td>13615</td>
+      <td>10.398182</td>
+      <td>3.146531</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>American Sloe Gins</td>
+      <td>0</td>
+      <td>4252</td>
+      <td>11.630000</td>
+      <td>7.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GRAPE SCHNAPPS</td>
+      <td>0</td>
+      <td>13044</td>
+      <td>10.630000</td>
+      <td>1.668772</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Distilled Spirits Specialty</td>
+      <td>0</td>
+      <td>293</td>
+      <td>20.760000</td>
+      <td>12.332202</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>American Flavored Vodka</td>
+      <td>6817</td>
+      <td>637286</td>
+      <td>11.274107</td>
+      <td>5.030962</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>Whiskey Liqueur</td>
+      <td>7330</td>
+      <td>651397</td>
+      <td>19.606241</td>
+      <td>21.243081</td>
+    </tr>
+    <tr>
+      <th>132</th>
+      <td>Flavored Rum</td>
+      <td>10316</td>
+      <td>328127</td>
+      <td>13.934458</td>
+      <td>5.546112</td>
+    </tr>
+    <tr>
+      <th>133</th>
+      <td>CANADIAN WHISKIES</td>
+      <td>15258</td>
+      <td>936212</td>
+      <td>18.787585</td>
+      <td>14.252754</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>WHISKEY LIQUEUR</td>
+      <td>35516</td>
+      <td>334572</td>
+      <td>13.477604</td>
+      <td>9.556290</td>
+    </tr>
+  </tbody>
+</table>
+<p>135 rows × 5 columns</p>
+</div>
+      <button class="colab-df-convert" onclick="convertToInteractive('df-3c933b27-f279-4298-8625-1ee794cf7027')"
+              title="Convert this dataframe to an interactive table."
+              style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+       width="24px">
+    <path d="M0 0h24v24H0V0z" fill="none"/>
+    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  </svg>
+      </button>
+
+  <style>
+    .colab-df-container {
+      display:flex;
+      flex-wrap:wrap;
+      gap: 12px;
+    }
+
+    .colab-df-convert {
+      background-color: #E8F0FE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      fill: #1967D2;
+      height: 32px;
+      padding: 0 0 0 0;
+      width: 32px;
+    }
+
+    .colab-df-convert:hover {
+      background-color: #E2EBFA;
+      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);
+      fill: #174EA6;
+    }
+
+    [theme=dark] .colab-df-convert {
+      background-color: #3B4455;
+      fill: #D2E3FC;
+    }
+
+    [theme=dark] .colab-df-convert:hover {
+      background-color: #434B5C;
+      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));
+      fill: #FFFFFF;
+    }
+  </style>
+
+      <script>
+        const buttonEl =
+          document.querySelector('#df-3c933b27-f279-4298-8625-1ee794cf7027 button.colab-df-convert');
+        buttonEl.style.display =
+          google.colab.kernel.accessAllowed ? 'block' : 'none';
+
+        async function convertToInteractive(key) {
+          const element = document.querySelector('#df-3c933b27-f279-4298-8625-1ee794cf7027');
+          const dataTable =
+            await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                     [key], {});
+          if (!dataTable) return;
+
+          const docLinkHtml = 'Like what you see? Visit the ' +
+            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+            + ' to learn more about interactive tables.';
+          element.innerHTML = '';
+          dataTable['output_type'] = 'display_data';
+          await google.colab.output.renderOutput(dataTable, element);
+          const docLink = document.createElement('div');
+          docLink.innerHTML = docLinkHtml;
+          element.appendChild(docLink);
+        }
+      </script>
+    </div>
+  </div>
+</div></div>
+</div>
+<p>Yeah maybe that is a reasonable number of whiskeys…</p>
+<p>If the price of the bottles was normally distributed, we’d only expect 2.5% but I doubt the price is normal.  Using the mean and standard deviation we see that it is clearly a funky distribution.</p>
+<div class="section" id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">¶</a></h2>
+<p>Challenge your mates with a difficult question.  Try to stump them and don’t forget to try it yourself!  For the quiz, pair (or thruple, three or less please!) up with someone in the class and try to come up with a challenge for you both to tackle.  I’d prefer you consider the datasets we have already looked at; liquors, bikeshare (stations or trips) and census.  Try to pose the challenge clearly and see if you can solve it.  Only new questions please!</p>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Please only use these if you are really stumped on what to ask!</p>
+<ol class="simple">
+<li><p>What zip code consumes the most liquor per capita in Iowa?</p></li>
+<li><p>Which zip code uses the bikeshare the most per capita in Austin?</p></li>
+<li><p>Does the percentage of children in an area effect the amount of liquor consumed?  (You need the per capita consumption for this to be accurate!)</p></li>
+<li><p>What type of bikeshare station had the most trips going over a day?</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Content\Data_Collecting"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="06_SQL_Joins.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">SQL Joins</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="08_html.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Reading Data From the Web</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By The Jupyter Book community<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
