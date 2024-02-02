@@ -1,476 +1,495 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Webpage Loading and Scrapping &#8212; Data Pre-Processing and Visualization OER</title>
-    
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Content/Data_Collecting/10_html_selenium';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Twitter a Social Media Scrape" href="11_Twitter.html" />
     <link rel="prev" title="HTML Tables" href="09_html_tables.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../Introduction.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../_static/JuliaSetECUColors.jpg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Data Pre-Processing and Visualization OER</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction.html">
-   Data Pre-Processing and Visualization
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Getting Started
- </span>
-</p>
+    
+    
+    <img src="../../_static/JuliaSetECUColors.jpg" class="logo__image only-light" alt="Data Pre-Processing and Visualization OER - Home"/>
+    <script>document.write(`<img src="../../_static/JuliaSetECUColors.jpg" class="logo__image only-dark" alt="Data Pre-Processing and Visualization OER - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Introduction.html">
+                    Data Pre-Processing and Visualization
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Python.html">
-   Jupyter Notebooks and Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_Pandas.html">
-   Pandas for Data Analysis
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Python.html">Jupyter Notebooks and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Pandas.html">Pandas for Data Analysis</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Gathering Data
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gathering Data</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="03_SQL.html">
-   Learning Some SQL with BigQuery
-  </a>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="08_html.html">
-   Reading Data From the Web
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="09_html_tables.html">
-     HTML Tables
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Webpage Loading and Scrapping
-    </a>
-   </li>
+<li class="toctree-l1"><a class="reference internal" href="03_SQL.html">Learning Some SQL with BigQuery</a></li>
+
+
+
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="08_html.html">Reading Data From the Web</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="09_html_tables.html">HTML Tables</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Webpage Loading and Scrapping</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="11_Twitter.html">Twitter a Social Media Scrape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_GatheringConclusion.html">Gathering Data Conclusion</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cleaning Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/14_Strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">Strings And Cleaning a DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/16_Dates.html">Dates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">Integers and Floats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">Factors and One Hot Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">Missing and Incomplete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">Exam 2 Review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Great Visualizations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">Graphical Excellence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">Graphical Integrity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">Graphical Sophistication</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Creating Visulaizations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/24_Amounts.html">Visualize Amounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/25_Histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">Many Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/27_Proportions.html">Proportions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/28_Associations.html">Visualizing Association</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">Visualization Conclusion</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Project_Examples/RecentVisualizations.html">Inverted Yield Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Examples/RecreatingMasters.html">NHL Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/mySolutions.html">My Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam1Solutions.html">Exam 1 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam2Solutions.html">Exam 2 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam3Solutions.html">Exam 3 Solutions Data Visualization and Preprocessing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Collecting/10_html_selenium.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_Twitter.html">
-   Twitter a Social Media Scrape
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_GatheringConclusion.html">
-   Gathering Data Conclusion
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Cleaning Data
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">
-   Data Types
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/14_Strings.html">
-   Strings
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">
-   Strings And Cleaning a DataFrame
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/16_Dates.html">
-   Dates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">
-   Integers and Floats
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">
-   Factors and One Hot Encoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">
-   Missing and Incomplete
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">
-   Exam 2 Review
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Great Visualizations
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">
-   Graphical Excellence
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">
-   Graphical Integrity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">
-   Graphical Sophistication
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Creating Visulaizations
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/24_Amounts.html">
-   Visualize Amounts
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/25_Histograms.html">
-   Histograms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">
-   Many Distributions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/27_Proportions.html">
-   Proportions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/28_Associations.html">
-   Visualizing Association
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">
-   Uncertainty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">
-   Visualization Conclusion
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Project Examples
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Project_Examples/RecentVisualizations.html">
-   Inverted Yield Curve
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Project_Examples/RecreatingMasters.html">
-   NHL Data Visualization
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Selected Solutions
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/mySolutions.html">
-   My Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam1Solutions.html">
-   Exam 1 Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam2Solutions.html">
-   Exam 2 Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam3Solutions.html">
-   Exam 3 Solutions Data Visualization and Preprocessing
-  </a>
- </li>
-</ul>
+</div>
 
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/nurfnick/Data_Viz" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Collecting/10_html_selenium.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Content/Data_Collecting/10_html_selenium.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+  
 </div>
-
 </div>
+              
+              
 
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Webpage Loading and Scrapping</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/Content/Data_Collecting/10_html_selenium.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/nurfnick/Data_Viz"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Collecting/10_html_selenium.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/nurfnick/Data_Viz/master?urlpath=tree/Content/Data_Collecting/10_html_selenium.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Collecting/10_html_selenium.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sports-worked-today">
-   Sports Worked Today
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#news-source-with-javascript">
-   News Source with Javascript
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#crawling-along-our-directory">
-   Crawling Along Our Directory
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#x-path">
-   X Path
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-selenium-commands">
-   Other Selenium Commands
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#waiting-is-hard">
-   Waiting Is Hard
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#your-turn">
-   Your Turn
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sports-worked-today">Sports Worked Today</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#news-source-with-javascript">News Source with Javascript</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crawling-along-our-directory">Crawling Along Our Directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x-path">X Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-selenium-commands">Other Selenium Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#waiting-is-hard">Waiting Is Hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <p><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/main/Content/Data_Collecting/10_html_selenium.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="webpage-loading-and-scrapping">
-<h1>Webpage Loading and Scrapping<a class="headerlink" href="#webpage-loading-and-scrapping" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="sports-worked-today">
-<h2>Sports Worked Today<a class="headerlink" href="#sports-worked-today" title="Permalink to this headline">¶</a></h2>
+<section class="tex2jax_ignore mathjax_ignore" id="webpage-loading-and-scrapping">
+<h1>Webpage Loading and Scrapping<a class="headerlink" href="#webpage-loading-and-scrapping" title="Link to this heading">#</a></h1>
+<section id="sports-worked-today">
+<h2>Sports Worked Today<a class="headerlink" href="#sports-worked-today" title="Link to this heading">#</a></h2>
 <p>More often than not, I’ll point my request at a page and return very little of the html code.  Let’s see an example!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1586,14 +1605,14 @@
       <button class="colab-df-convert" onclick="convertToInteractive('df-4249c56d-1106-4b73-8abd-7b7426f4c628')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -1658,12 +1677,12 @@
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>I usually have issues with this site but it worked today.  Great place for all sports data!</p>
-</div>
-<div class="section" id="news-source-with-javascript">
-<h2>News Source with Javascript<a class="headerlink" href="#news-source-with-javascript" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="news-source-with-javascript">
+<h2>News Source with Javascript<a class="headerlink" href="#news-source-with-javascript" title="Link to this heading">#</a></h2>
 <p>Here is a scrape I did a while back that still has the issues I want to discuss.  I’ve found the stripped away table from National Public Radio looking at the individuals involved in the attack at the capitol on 1/6/21.
 <a class="reference external" href="https://www.npr.org/2021/02/09/965472049/the-capitol-siege-the-arrested-and-their-stories#database">https://www.npr.org/2021/02/09/965472049/the-capitol-siege-the-arrested-and-their-stories#database</a></p>
 <p>The link will take you directly to the table I am insterested in scrapping.  From this page, I found where they reference the table from.  This gets me around parsing through all the extra frames.  It is stored as my <code class="docutils literal notranslate"><span class="pre">url</span></code> below.  Take a look at <a class="reference external" href="https://apps.npr.org/dailygraphics/graphics/capitol-riot-table-20210204/table.html">it</a>.</p>
@@ -1688,19 +1707,19 @@
 <p>This is where the big guns come in!  The code below was taken from <a class="reference external" href="https://colab.research.google.com/github/nestauk/im-tutorials/blob/3-ysi-tutorial/notebooks/Web-Scraping/Web%20Scraping%20Tutorial.ipynb">https://colab.research.google.com/github/nestauk/im-tutorials/blob/3-ysi-tutorial/notebooks/Web-Scraping/Web Scraping Tutorial.ipynb</a> it will install the packages we need to execute the scrape of the data.  The <code class="docutils literal notranslate"><span class="pre">chromium</span></code> is the Google chrome browser.  That is how we will go to the websites via the code.  <code class="docutils literal notranslate"><span class="pre">selenium</span></code> is the big tool.  It will allow us to interact on webpage and with the javascript.  Essentially the machine is opening a browser page and going to the website with the browser open!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># RUN THIS CELL WHEN USING THE NOTEBOOK ON COLAB - NO PREVIOUS INSTALLATION OF SELENIUM IS NEEDED
-# install chromium, its driver, and selenium
-!apt update
-!apt install chromium-chromedriver
-!pip install selenium
-# set options to be headless
-from selenium import webdriver
-options = webdriver.ChromeOptions()
-options.add_argument(&#39;--headless&#39;)
-options.add_argument(&#39;--no-sandbox&#39;)
-options.add_argument(&#39;--disable-dev-shm-usage&#39;)
-# open it, go to a website, and get results
-driver = webdriver.Chrome(&#39;chromedriver&#39;,options=options)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># RUN THIS CELL WHEN USING THE NOTEBOOK ON COLAB - NO PREVIOUS INSTALLATION OF SELENIUM IS NEEDED</span>
+<span class="c1"># install chromium, its driver, and selenium</span>
+<span class="err">!</span><span class="n">apt</span> <span class="n">update</span>
+<span class="err">!</span><span class="n">apt</span> <span class="n">install</span> <span class="n">chromium</span><span class="o">-</span><span class="n">chromedriver</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">selenium</span>
+<span class="c1"># set options to be headless</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+<span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--headless&#39;</span><span class="p">)</span>
+<span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--no-sandbox&#39;</span><span class="p">)</span>
+<span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--disable-dev-shm-usage&#39;</span><span class="p">)</span>
+<span class="c1"># open it, go to a website, and get results</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="s1">&#39;chromedriver&#39;</span><span class="p">,</span><span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1955,14 +1974,14 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
       <button class="colab-df-convert" onclick="convertToInteractive('df-05dfa7c0-cef1-4144-a9bb-f4b80ecba07f')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2027,12 +2046,12 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>Of course we can do much more will <code class="docutils literal notranslate"><span class="pre">selenium</span></code>.  You can actually program it to interact with the page, clicking on links, scrolling to the bottom of the page, etc.  These tools are very useful on some webpages!</p>
-</div>
-<div class="section" id="crawling-along-our-directory">
-<h2>Crawling Along Our Directory<a class="headerlink" href="#crawling-along-our-directory" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="crawling-along-our-directory">
+<h2>Crawling Along Our Directory<a class="headerlink" href="#crawling-along-our-directory" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
@@ -2274,14 +2293,14 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
       <button class="colab-df-convert" onclick="convertToInteractive('df-58ac4cae-7e9c-4300-8bb6-d74b0a642043')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2346,7 +2365,7 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>Here I have gathered the first page of the ECU directory.  Say I want to gather all the tables.  I am going to click on the Link that has each letter in the alphabet and add that to my list.</p>
 <div class="cell docutils container">
@@ -2553,14 +2572,14 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
       <button class="colab-df-convert" onclick="convertToInteractive('df-78ea2095-6a90-4d30-8663-e8e919e355ba')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2625,7 +2644,7 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>Now that I have the A’s I’ll do a for loop and automate.  Why type out all the letters when you can spend 5 minutes googling a solution?</p>
 <div class="cell docutils container">
@@ -2824,14 +2843,14 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
       <button class="colab-df-convert" onclick="convertToInteractive('df-992b0a10-948c-4a16-b6d8-7faab40470e0')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2896,14 +2915,14 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>Over all I would say this is very challenging and super specific to the website you are working on.  I tried many times to get <code class="docutils literal notranslate"><span class="pre">selenium</span></code> to find the links in many different ways.  I think the agreed upon method is <code class="docutils literal notranslate"><span class="pre">XPATH</span></code>.</p>
-</div>
-<div class="section" id="x-path">
-<h2>X Path<a class="headerlink" href="#x-path" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">XPath</span></code> is great for finding boxes and forms on webpages (maybe links too!)  You use the first call in the html to get just those elements of the page and then if needed another identifier.  Here is a nice image.</p>
-<p>![image.png](data:image/png;base64,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)</p>
+</section>
+<section id="x-path">
+<h2>X Path<a class="headerlink" href="#x-path" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">XPath</span></code> is great for finding boxes and forms on webpages (maybe links too!) You use the first call in the html to get just those elements of the page and then if needed another identifier. Here is a nice image.</p>
+<p><img alt="xpath.png" src="https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Content/xpath.png" /></p>
 <p>Let’s see this in action on a simple page.  <a class="reference external" href="https://duckduckgo.com/">DuckDuckGo</a> is a search engine.  We see that it has a box for entering a search. The entry box is called a ‘form’ with id ‘search_form_homepage’  I can get selenium to this by using <code class="docutils literal notranslate"><span class="pre">Xpath=//input[&#64;id=&quot;search_form_input_homepage&quot;]</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2917,9 +2936,9 @@ Successfully installed async-generator-1.10 cryptography-36.0.1 h11-0.13.0 outco
 </div>
 </div>
 <p>I can also get to the icon that makes it search on a path <code class="docutils literal notranslate"><span class="pre">input[&#64;id=&quot;search_button_homepage&quot;]</span></code></p>
-</div>
-<div class="section" id="other-selenium-commands">
-<h2>Other Selenium Commands<a class="headerlink" href="#other-selenium-commands" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="other-selenium-commands">
+<h2>Other Selenium Commands<a class="headerlink" href="#other-selenium-commands" title="Link to this heading">#</a></h2>
 <p>We used the <code class="docutils literal notranslate"><span class="pre">click()</span></code> command above.  I think that is really cool to see the driver interacting with the web page!  Let’s show you a few others that are nice.</p>
 <p><code class="docutils literal notranslate"><span class="pre">send_keys</span></code> will allow you to send information to the element you have selected!  You can use this to send text or even hit certain keys on your keyboard.  The one we’ll need is <code class="docutils literal notranslate"><span class="pre">Keys.ENTER</span></code> this hits the carriage return (yes I am that old that I still call it that!)  Let me search for myself.</p>
 <div class="cell docutils container">
@@ -2971,14 +2990,14 @@ https://www.listal.com/nicholas-jacob
 </div>
 </div>
 <p>You can also navigate the page with</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>refresh(), back, forward</p></li>
 <li><p>scroll()</p></li>
 </ol>
 <p>If you need to!</p>
-</div>
-<div class="section" id="waiting-is-hard">
-<h2>Waiting Is Hard<a class="headerlink" href="#waiting-is-hard" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="waiting-is-hard">
+<h2>Waiting Is Hard<a class="headerlink" href="#waiting-is-hard" title="Link to this heading">#</a></h2>
 <p>Lot’s of times I am finding that my python output is behind where I am browsing.  If that is the case, use a wait function to slow down the browsing.  The integer here is seconds.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -3013,12 +3032,12 @@ https://www.listal.com/nicholas-jacob
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="your-turn">
-<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Link to this heading">#</a></h2>
 <p>Use python to browse to google.  Search for something of interest and go to the first link.  Return the html from that first page.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -3032,7 +3051,7 @@ https://www.listal.com/nicholas-jacob
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Content\Data_Collecting"
         },
         predefinedOutput: true
@@ -3040,46 +3059,109 @@ https://www.listal.com/nicholas-jacob
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="09_html_tables.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">HTML Tables</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="09_html_tables.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">HTML Tables</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="11_Twitter.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="11_Twitter.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Twitter a Social Media Scrape</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-        
-        </div>
-    </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By The Jupyter Book community<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sports-worked-today">Sports Worked Today</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#news-source-with-javascript">News Source with Javascript</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crawling-along-our-directory">Crawling Along Our Directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x-path">X Path</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-selenium-commands">Other Selenium Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#waiting-is-hard">Waiting Is Hard</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

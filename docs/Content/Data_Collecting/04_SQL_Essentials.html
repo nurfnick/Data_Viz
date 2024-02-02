@@ -1,449 +1,488 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>SQL Essentials &#8212; Data Pre-Processing and Visualization OER</title>
-    
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Content/Data_Collecting/04_SQL_Essentials';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="SQL Sub-Queries" href="05_SQL_SubQuery.html" />
     <link rel="prev" title="Learning Some SQL with BigQuery" href="03_SQL.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../Introduction.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../_static/JuliaSetECUColors.jpg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Data Pre-Processing and Visualization OER</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction.html">
-   Data Pre-Processing and Visualization
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Getting Started
- </span>
-</p>
+    
+    
+    <img src="../../_static/JuliaSetECUColors.jpg" class="logo__image only-light" alt="Data Pre-Processing and Visualization OER - Home"/>
+    <script>document.write(`<img src="../../_static/JuliaSetECUColors.jpg" class="logo__image only-dark" alt="Data Pre-Processing and Visualization OER - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Introduction.html">
+                    Data Pre-Processing and Visualization
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Python.html">
-   Jupyter Notebooks and Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_Pandas.html">
-   Pandas for Data Analysis
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Python.html">Jupyter Notebooks and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Pandas.html">Pandas for Data Analysis</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Gathering Data
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gathering Data</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="03_SQL.html">
-   Learning Some SQL with BigQuery
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="08_html.html">
-   Reading Data From the Web
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="09_html_tables.html">
-     HTML Tables
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="10_html_selenium.html">
-     Webpage Loading and Scrapping
-    </a>
-   </li>
+<li class="toctree-l1"><a class="reference internal" href="03_SQL.html">Learning Some SQL with BigQuery</a></li>
+
+
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_html.html">Reading Data From the Web</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="09_html_tables.html">HTML Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_html_selenium.html">Webpage Loading and Scrapping</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="11_Twitter.html">Twitter a Social Media Scrape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_GatheringConclusion.html">Gathering Data Conclusion</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cleaning Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/14_Strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">Strings And Cleaning a DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/16_Dates.html">Dates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">Integers and Floats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">Factors and One Hot Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">Missing and Incomplete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">Exam 2 Review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Great Visualizations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">Graphical Excellence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">Graphical Integrity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">Graphical Sophistication</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Creating Visulaizations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/24_Amounts.html">Visualize Amounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/25_Histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">Many Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/27_Proportions.html">Proportions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/28_Associations.html">Visualizing Association</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">Visualization Conclusion</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Project_Examples/RecentVisualizations.html">Inverted Yield Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Examples/RecreatingMasters.html">NHL Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/mySolutions.html">My Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam1Solutions.html">Exam 1 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam2Solutions.html">Exam 2 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam3Solutions.html">Exam 3 Solutions Data Visualization and Preprocessing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Collecting/04_SQL_Essentials.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_Twitter.html">
-   Twitter a Social Media Scrape
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_GatheringConclusion.html">
-   Gathering Data Conclusion
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Cleaning Data
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">
-   Data Types
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/14_Strings.html">
-   Strings
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">
-   Strings And Cleaning a DataFrame
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/16_Dates.html">
-   Dates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">
-   Integers and Floats
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">
-   Factors and One Hot Encoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">
-   Missing and Incomplete
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">
-   Exam 2 Review
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Great Visualizations
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">
-   Graphical Excellence
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">
-   Graphical Integrity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">
-   Graphical Sophistication
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Creating Visulaizations
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/24_Amounts.html">
-   Visualize Amounts
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/25_Histograms.html">
-   Histograms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">
-   Many Distributions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/27_Proportions.html">
-   Proportions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/28_Associations.html">
-   Visualizing Association
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">
-   Uncertainty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">
-   Visualization Conclusion
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Project Examples
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Project_Examples/RecentVisualizations.html">
-   Inverted Yield Curve
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Project_Examples/RecreatingMasters.html">
-   NHL Data Visualization
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Selected Solutions
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/mySolutions.html">
-   My Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam1Solutions.html">
-   Exam 1 Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam2Solutions.html">
-   Exam 2 Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam3Solutions.html">
-   Exam 3 Solutions Data Visualization and Preprocessing
-  </a>
- </li>
-</ul>
+</div>
 
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/nurfnick/Data_Viz" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Collecting/04_SQL_Essentials.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Content/Data_Collecting/04_SQL_Essentials.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+  
 </div>
-
 </div>
+              
+              
 
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SQL Essentials</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/Content/Data_Collecting/04_SQL_Essentials.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/nurfnick/Data_Viz"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Collecting/04_SQL_Essentials.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/nurfnick/Data_Viz/master?urlpath=tree/Content/Data_Collecting/04_SQL_Essentials.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Collecting/04_SQL_Essentials.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#assignment">
-   Assignment
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#me-playing-around">
-   Me Playing Around
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-strings">Dealing With Strings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <p><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/main/Content/Data_Collecting/04_SQL_Essentials.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="sql-essentials">
-<h1>SQL Essentials<a class="headerlink" href="#sql-essentials" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="sql-essentials">
+<h1>SQL Essentials<a class="headerlink" href="#sql-essentials" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
@@ -461,18 +500,17 @@
 <p>Let’s start with the basics.  I’ll continue to work with the liquor store data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT *
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-LIMIT 5
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-e4df2a5f-c715-4e6b-84f3-fb55c56dcfe1">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "785bc232bb3d4fc6ab4fdb2973a0ff46"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "86c1ee8789e045b880015c320044cb4a"}</script><div class="output text_html">
+  <div id="df-fd461132-fa8b-4258-b6f8-cc176a6e6a28" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -500,10 +538,7 @@ LIMIT 5
       <th>store_location</th>
       <th>county_number</th>
       <th>county</th>
-      <th>category</th>
-      <th>category_name</th>
-      <th>vendor_number</th>
-      <th>vendor_name</th>
+      <th>...</th>
       <th>item_number</th>
       <th>item_description</th>
       <th>pack</th>
@@ -519,157 +554,143 @@ LIMIT 5
   <tbody>
     <tr>
       <th>0</th>
-      <td>INV-25210600054</td>
-      <td>2020-02-13</td>
-      <td>3385</td>
-      <td>Sam's Club 8162 / Cedar Rapids</td>
-      <td>2605 Blairs Ferry Rd NE</td>
-      <td>Cedar Rapids</td>
-      <td>52402.0</td>
-      <td>POINT (-91.67969 42.031819)</td>
-      <td>57</td>
-      <td>LINN</td>
-      <td>1081500.0</td>
-      <td>Triple Sec</td>
-      <td>55</td>
-      <td>SAZERAC NORTH AMERICA</td>
-      <td>86390</td>
-      <td>Montezuma Triple Sec</td>
+      <td>INV-23344200024</td>
+      <td>2019-11-19</td>
+      <td>4452</td>
+      <td>SELECT MART    GORDON DR</td>
+      <td>2825 GORDON DR</td>
+      <td>SIOUX CITY</td>
+      <td>51105</td>
+      <td>POINT(-96.372014 42.489632)</td>
+      <td>97</td>
+      <td>WOODBURY</td>
+      <td>...</td>
+      <td>100510</td>
+      <td>RUMCHATA MINICHATAS HOLIDAY MUG</td>
       <td>12</td>
-      <td>1000</td>
-      <td>2.13</td>
-      <td>3.20</td>
-      <td>48</td>
-      <td>153.60</td>
-      <td>48.0</td>
-      <td>12.68</td>
+      <td>25</td>
+      <td>5.00</td>
+      <td>7.50</td>
+      <td>1</td>
+      <td>7.50</td>
+      <td>0.02</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>S23115100025</td>
-      <td>2014-12-22</td>
-      <td>5004</td>
-      <td>Ida Grove Food Pride</td>
-      <td>200 SUSAN LAWRENCE DR</td>
-      <td>IDA GROVE</td>
-      <td>51445</td>
-      <td>None</td>
-      <td>47</td>
-      <td>Ida</td>
-      <td>1042100.0</td>
-      <td>IMPORTED DRY GINS</td>
-      <td>260</td>
-      <td>Diageo Americas</td>
-      <td>28867</td>
-      <td>Tanqueray Gin</td>
+      <td>INV-22726700022</td>
+      <td>2019-10-22</td>
+      <td>5504</td>
+      <td>NEIGHBORHOOD MART</td>
+      <td>2102 LAFAYETTE ST</td>
+      <td>WATERLOO</td>
+      <td>50703</td>
+      <td>POINT(-92.313923 42.489893)</td>
+      <td>7</td>
+      <td>BLACK HAWK</td>
+      <td>...</td>
+      <td>100794</td>
+      <td>RUMCHATA MINICHATAS SUMMER TUMBLER VAP</td>
       <td>12</td>
-      <td>1000</td>
-      <td>15.25</td>
-      <td>22.88</td>
-      <td>4</td>
-      <td>91.52</td>
-      <td>4.0</td>
-      <td>1.06</td>
+      <td>25</td>
+      <td>5.00</td>
+      <td>7.50</td>
+      <td>1</td>
+      <td>7.50</td>
+      <td>0.02</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>S18402900152</td>
-      <td>2014-04-14</td>
-      <td>4312</td>
-      <td>I-80 Liquor / Council Bluffs</td>
-      <td>2411 S 24TH ST #1</td>
-      <td>COUNCIL BLUFFS</td>
-      <td>51501</td>
-      <td>POINT (-95.8792 41.238092)</td>
-      <td>78</td>
-      <td>Pottawattamie</td>
-      <td>1042100.0</td>
-      <td>IMPORTED DRY GINS</td>
-      <td>35</td>
-      <td>Bacardi U.S.A., Inc.</td>
-      <td>28233</td>
-      <td>Bombay Sapphire Gin</td>
+      <td>INV-40707200098</td>
+      <td>2021-10-05</td>
+      <td>5423</td>
+      <td>STAMMER LIQUOR CORP</td>
+      <td>615 2ND AVE</td>
+      <td>SHELDON</td>
+      <td>51201.0</td>
+      <td>None</td>
+      <td>71</td>
+      <td>O'BRIEN</td>
+      <td>...</td>
+      <td>65259</td>
+      <td>JAGERMEISTER LIQUEUR MINI MEISTERS</td>
       <td>12</td>
-      <td>1000</td>
-      <td>17.61</td>
-      <td>26.41</td>
-      <td>11</td>
-      <td>290.51</td>
-      <td>11.0</td>
-      <td>2.91</td>
+      <td>20</td>
+      <td>4.93</td>
+      <td>7.40</td>
+      <td>1</td>
+      <td>7.40</td>
+      <td>0.02</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>S14219300007</td>
-      <td>2013-08-29</td>
-      <td>4844</td>
-      <td>Iowa City Fast Break</td>
-      <td>2580, NAPLES AVE</td>
-      <td>IOWA CITY</td>
-      <td>52240</td>
-      <td>POINT (-91.571064 41.632792)</td>
-      <td>52</td>
-      <td>Johnson</td>
-      <td>1011500.0</td>
-      <td>STRAIGHT RYE WHISKIES</td>
-      <td>255</td>
-      <td>Wilson Daniels Ltd.</td>
-      <td>27102</td>
-      <td>Templeton Rye</td>
-      <td>6</td>
-      <td>750</td>
-      <td>18.08</td>
-      <td>27.13</td>
-      <td>18</td>
-      <td>488.34</td>
-      <td>13.5</td>
-      <td>3.57</td>
+      <td>INV-61319400030</td>
+      <td>2023-08-16</td>
+      <td>5822</td>
+      <td>CASEY'S GENERAL STORE #2836 / MONROE</td>
+      <td>509 S MONROE ST</td>
+      <td>MONROE</td>
+      <td>50170.0</td>
+      <td>POINT(-93.10249604 41.51755801)</td>
+      <td>None</td>
+      <td>JASPER</td>
+      <td>...</td>
+      <td>65259</td>
+      <td>JAGERMEISTER LIQUEUR MINI MEISTERS</td>
+      <td>12</td>
+      <td>20</td>
+      <td>5.63</td>
+      <td>8.45</td>
+      <td>1</td>
+      <td>8.45</td>
+      <td>0.02</td>
+      <td>0.00</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>S24682700083</td>
-      <td>2015-03-24</td>
-      <td>2604</td>
-      <td>Hy-Vee Wine and Spirits / Lemars</td>
-      <td>1201 12TH AVE SW</td>
-      <td>LEMARS</td>
-      <td>51031</td>
-      <td>POINT (-96.18335000000002 42.778257)</td>
-      <td>75</td>
-      <td>Plymouth</td>
-      <td>1081365.0</td>
-      <td>TROPICAL FRUIT SCHNAPPS</td>
-      <td>421</td>
-      <td>Sazerac Co., Inc.</td>
-      <td>83907</td>
-      <td>Maui Blue Hawaiian Schnapps</td>
-      <td>12</td>
-      <td>1000</td>
-      <td>4.54</td>
-      <td>6.81</td>
-      <td>4</td>
-      <td>27.24</td>
-      <td>4.0</td>
-      <td>1.06</td>
+      <td>INV-33181800087</td>
+      <td>2021-01-04</td>
+      <td>2614</td>
+      <td>HY-VEE #3 FOOD &amp; DRUGSTORE / DAVENPORT</td>
+      <td>1823 E KIMBERLY RD</td>
+      <td>DAVENPORT</td>
+      <td>52807.0</td>
+      <td>POINT(-90.548919 41.556781)</td>
+      <td>82</td>
+      <td>SCOTT</td>
+      <td>...</td>
+      <td>100413</td>
+      <td>FIREBALL CINNAMON WHISKEY PARTY BUCKET</td>
+      <td>1</td>
+      <td>50</td>
+      <td>51.60</td>
+      <td>77.40</td>
+      <td>1</td>
+      <td>77.40</td>
+      <td>0.05</td>
+      <td>0.01</td>
     </tr>
   </tbody>
 </table>
+<p>5 rows × 24 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-e4df2a5f-c715-4e6b-84f3-fb55c56dcfe1')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-fd461132-fa8b-4258-b6f8-cc176a6e6a28')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -691,6 +712,10 @@ LIMIT 5
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -704,30 +729,160 @@ LIMIT 5
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-e4df2a5f-c715-4e6b-84f3-fb55c56dcfe1 button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-fd461132-fa8b-4258-b6f8-cc176a6e6a28 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-e4df2a5f-c715-4e6b-84f3-fb55c56dcfe1');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-fd461132-fa8b-4258-b6f8-cc176a6e6a28');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-760a8463-aa37-4787-a0ae-78b1f5c82a16">
+  <button class="colab-df-quickchart" onclick="quickchart('df-760a8463-aa37-4787-a0ae-78b1f5c82a16')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-760a8463-aa37-4787-a0ae-78b1f5c82a16 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
     </div>
   </div>
 </div></div>
@@ -735,17 +890,16 @@ LIMIT 5
 <p>Why did I run that command?  Well it gives me an idea of what is in the table to reference and think about what questions I might ask!  Let’s see how many gallons of liqour have been sold.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT SUM(volume_sold_gallons) as Total_Gallons_of_Liquor
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span> <span class="n">SUM</span><span class="p">(</span><span class="n">volume_sold_gallons</span><span class="p">)</span> <span class="k">as</span> <span class="n">Total_Gallons_of_Liquor</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-fa3e6766-01f8-4eb1-9a6b-81b3534738b1">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "987bcb16f75041e38bf314bf2b92bd35"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8f7bd3f7616545bd8ca8282555bd2fac"}</script><div class="output text_html">
+  <div id="df-0da6c2c3-1e43-43cb-ab3c-04fae34c554d" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -769,26 +923,26 @@ FROM `bigquery-public-data.iowa_liquor_sales.sales`
   <tbody>
     <tr>
       <th>0</th>
-      <td>5.560763e+07</td>
+      <td>68071897.63</td>
     </tr>
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-fa3e6766-01f8-4eb1-9a6b-81b3534738b1')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-0da6c2c3-1e43-43cb-ab3c-04fae34c554d')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -810,6 +964,10 @@ FROM `bigquery-public-data.iowa_liquor_sales.sales`
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -823,30 +981,33 @@ FROM `bigquery-public-data.iowa_liquor_sales.sales`
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-fa3e6766-01f8-4eb1-9a6b-81b3534738b1 button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-0da6c2c3-1e43-43cb-ab3c-04fae34c554d button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-fa3e6766-01f8-4eb1-9a6b-81b3534738b1');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-0da6c2c3-1e43-43cb-ab3c-04fae34c554d');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
     </div>
   </div>
 </div></div>
@@ -868,17 +1029,16 @@ FROM `bigquery-public-data.iowa_liquor_sales.sales`
 <p>Let’s make it more complicated.  Let’s see what the dollars per gallon is on the full dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT SUM(sale_dollars)/SUM(volume_sold_gallons) as Total_Dollars_Per_Gallon
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span> <span class="n">SUM</span><span class="p">(</span><span class="n">sale_dollars</span><span class="p">)</span><span class="o">/</span><span class="n">SUM</span><span class="p">(</span><span class="n">volume_sold_gallons</span><span class="p">)</span> <span class="k">as</span> <span class="n">Total_Dollars_Per_Gallon</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-4bdad4a8-e4e6-4857-bd31-92979ac86f2a">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "2365e0c18b9f4c9d8d12f446e0e8f589"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "beb277be6c4045eda108a845534dc4f0"}</script><div class="output text_html">
+  <div id="df-1df416ab-287f-4759-8f97-d3a280ad3591" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -902,26 +1062,26 @@ FROM `bigquery-public-data.iowa_liquor_sales.sales`
   <tbody>
     <tr>
       <th>0</th>
-      <td>57.373869</td>
+      <td>59.720321</td>
     </tr>
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-4bdad4a8-e4e6-4857-bd31-92979ac86f2a')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-1df416ab-287f-4759-8f97-d3a280ad3591')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -943,6 +1103,10 @@ FROM `bigquery-public-data.iowa_liquor_sales.sales`
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -956,30 +1120,33 @@ FROM `bigquery-public-data.iowa_liquor_sales.sales`
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-4bdad4a8-e4e6-4857-bd31-92979ac86f2a button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-1df416ab-287f-4759-8f97-d3a280ad3591 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-4bdad4a8-e4e6-4857-bd31-92979ac86f2a');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-1df416ab-287f-4759-8f97-d3a280ad3591');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
     </div>
   </div>
 </div></div>
@@ -987,19 +1154,18 @@ FROM `bigquery-public-data.iowa_liquor_sales.sales`
 <p>Okay not terribly interesting.  Let’s take that quesiton and add too it.  Let’s create a column that is dollars per gallon of liquor.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT sale_dollars/volume_sold_gallons as Dollars_Per_Gallon
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE volume_sold_gallons != 0
-LIMIT 5
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span> <span class="n">sale_dollars</span><span class="o">/</span><span class="n">volume_sold_gallons</span> <span class="k">as</span> <span class="n">Dollars_Per_Gallon</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">volume_sold_gallons</span> <span class="o">!=</span> <span class="mi">0</span>
+<span class="n">LIMIT</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-a6223d25-28ec-4476-8b99-759be51e05b9">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "488155dbb19e4a47bdd9001cc6999a79"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "5b76fce5b6fe4046867d9c5093800661"}</script><div class="output text_html">
+  <div id="df-66567a2a-bdbe-469b-baa5-1266838d76da" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1023,42 +1189,42 @@ LIMIT 5
   <tbody>
     <tr>
       <th>0</th>
-      <td>13.741325</td>
+      <td>7740.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>94.537815</td>
+      <td>7740.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>28.391167</td>
+      <td>7740.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>48.692516</td>
+      <td>7740.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>136.840336</td>
+      <td>7740.0</td>
     </tr>
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-a6223d25-28ec-4476-8b99-759be51e05b9')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-66567a2a-bdbe-469b-baa5-1266838d76da')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -1080,6 +1246,10 @@ LIMIT 5
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -1093,30 +1263,160 @@ LIMIT 5
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-a6223d25-28ec-4476-8b99-759be51e05b9 button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-66567a2a-bdbe-469b-baa5-1266838d76da button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-a6223d25-28ec-4476-8b99-759be51e05b9');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-66567a2a-bdbe-469b-baa5-1266838d76da');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-9e795c19-cf3f-4e12-840c-84f422d59471">
+  <button class="colab-df-quickchart" onclick="quickchart('df-9e795c19-cf3f-4e12-840c-84f422d59471')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-9e795c19-cf3f-4e12-840c-84f422d59471 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
     </div>
   </div>
 </div></div>
@@ -1124,18 +1424,17 @@ LIMIT 5
 <p>I have added a few new things here.  The <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause allows me to restrict what I consider.  You can combine several of the statements logically</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT sale_dollars/volume_sold_gallons as Dollars_Per_Gallon, item_description
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE volume_sold_gallons != 0 and category_name = &#39;Coffee Liqueurs&#39;
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span> <span class="n">sale_dollars</span><span class="o">/</span><span class="n">volume_sold_gallons</span> <span class="k">as</span> <span class="n">Dollars_Per_Gallon</span><span class="p">,</span> <span class="n">item_description</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">volume_sold_gallons</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;COFFEE LIQUEURS&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-73fdeb01-935d-471e-b6e2-25d6b1ce1f5b">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "a2a45010ac7e4f619d260902c1b16bd3"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "58402c12ce1145839808f1a99199ee11"}</script><div class="output text_html">
+  <div id="df-4000eeab-2ab8-4e2c-a0cc-c51fc69a8b9e" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1160,28 +1459,28 @@ WHERE volume_sold_gallons != 0 and category_name = &#39;Coffee Liqueurs&#39;
   <tbody>
     <tr>
       <th>0</th>
-      <td>136.363636</td>
-      <td>Iowa Coffee Company Liqueur</td>
+      <td>792.000000</td>
+      <td>KAHLUA COFFEE MINI</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>136.134454</td>
-      <td>Iowa Coffee Company Liqueur</td>
+      <td>792.000000</td>
+      <td>KAHLUA COFFEE MINI</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>136.134454</td>
-      <td>Iowa Coffee Company Liqueur</td>
+      <td>792.000000</td>
+      <td>KAHLUA COFFEE MINI</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>135.000000</td>
-      <td>Iowa Coffee Company Liqueur</td>
+      <td>112.333333</td>
+      <td>KAHLUA COFFEE</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>118.421053</td>
-      <td>Mozart Chocolate Coffee Cream Liqueur</td>
+      <td>108.222222</td>
+      <td>KAHLUA COFFEE</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1189,49 +1488,49 @@ WHERE volume_sold_gallons != 0 and category_name = &#39;Coffee Liqueurs&#39;
       <td>...</td>
     </tr>
     <tr>
-      <th>78766</th>
-      <td>91.474576</td>
-      <td>Kahlua French Vanilla Liqueur DISCO</td>
+      <th>177721</th>
+      <td>86.500000</td>
+      <td>KAHLUA COFFEE LIQUEUR</td>
     </tr>
     <tr>
-      <th>78767</th>
-      <td>91.474576</td>
-      <td>Kahlua French Vanilla Liqueur DISCO</td>
+      <th>177722</th>
+      <td>86.500000</td>
+      <td>KAHLUA COFFEE LIQUEUR</td>
     </tr>
     <tr>
-      <th>78768</th>
-      <td>91.474576</td>
-      <td>Kahlua French Vanilla Liqueur DISCO</td>
+      <th>177723</th>
+      <td>86.500000</td>
+      <td>KAHLUA COFFEE LIQUEUR</td>
     </tr>
     <tr>
-      <th>78769</th>
-      <td>91.474576</td>
-      <td>Kahlua French Vanilla Liqueur DISCO</td>
+      <th>177724</th>
+      <td>86.500000</td>
+      <td>KAHLUA COFFEE LIQUEUR</td>
     </tr>
     <tr>
-      <th>78770</th>
-      <td>91.474576</td>
-      <td>Kahlua French Vanilla Liqueur DISCO</td>
+      <th>177725</th>
+      <td>86.500000</td>
+      <td>KAHLUA COFFEE LIQUEUR</td>
     </tr>
   </tbody>
 </table>
-<p>78771 rows × 2 columns</p>
+<p>177726 rows × 2 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-73fdeb01-935d-471e-b6e2-25d6b1ce1f5b')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-4000eeab-2ab8-4e2c-a0cc-c51fc69a8b9e')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -1253,6 +1552,10 @@ WHERE volume_sold_gallons != 0 and category_name = &#39;Coffee Liqueurs&#39;
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -1266,30 +1569,160 @@ WHERE volume_sold_gallons != 0 and category_name = &#39;Coffee Liqueurs&#39;
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-73fdeb01-935d-471e-b6e2-25d6b1ce1f5b button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-4000eeab-2ab8-4e2c-a0cc-c51fc69a8b9e button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-73fdeb01-935d-471e-b6e2-25d6b1ce1f5b');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-4000eeab-2ab8-4e2c-a0cc-c51fc69a8b9e');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-40a5e649-d439-40fc-ad27-6e0b12e17c6e">
+  <button class="colab-df-quickchart" onclick="quickchart('df-40a5e649-d439-40fc-ad27-6e0b12e17c6e')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-40a5e649-d439-40fc-ad27-6e0b12e17c6e button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
     </div>
   </div>
 </div></div>
@@ -1297,19 +1730,18 @@ WHERE volume_sold_gallons != 0 and category_name = &#39;Coffee Liqueurs&#39;
 <p>I added the <code class="docutils literal notranslate"><span class="pre">item_description</span></code> so that I could see which ones were different.  It is not utilized the the analysis yet.  Let’s include it by getting the average price of coffee liqueurs based on the description.  To do this I’ll add the <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> command</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT AVG(sale_dollars/volume_sold_gallons) as Average_Dollars_Per_Gallon, item_description
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE volume_sold_gallons != 0 and category_name = &#39;Coffee Liqueurs&#39;
-GROUP BY item_description
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="n">sale_dollars</span><span class="o">/</span><span class="n">volume_sold_gallons</span><span class="p">)</span> <span class="k">as</span> <span class="n">Average_Dollars_Per_Gallon</span><span class="p">,</span> <span class="n">item_description</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">volume_sold_gallons</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;COFFEE LIQUEURS&#39;</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-88cc995d-52e2-4abe-98dc-0502d898a8a6">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "62c2ab38f85e48098d73e6356cea4a5f"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "f231c6461f5d4df19f15ac318b029309"}</script><div class="output text_html">
+  <div id="df-bce660f4-dca5-444b-a2a3-1dadb255b565" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1334,162 +1766,247 @@ GROUP BY item_description
   <tbody>
     <tr>
       <th>0</th>
-      <td>93.411691</td>
-      <td>Kahlua Coffee</td>
+      <td>98.042729</td>
+      <td>KAHLUA COFFEE</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>776.615963</td>
-      <td>Kahlua Coffee Mini</td>
+      <td>79.648073</td>
+      <td>KAHLUA COFFEE LIQUEUR MINI</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>92.405096</td>
-      <td>Kahlua Coffee Liqueur</td>
+      <td>93.760237</td>
+      <td>KAHLUA ESPECIAL</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>48.811417</td>
-      <td>Kamora Coffee Liqueur</td>
+      <td>89.804451</td>
+      <td>KAHLUA COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>109.767153</td>
-      <td>Patron Xo Cafe</td>
+      <td>38.196790</td>
+      <td>CHILA COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>76.032478</td>
-      <td>Kahlua Coffee Liqueur Mini</td>
+      <td>63.064841</td>
+      <td>KARIMBA COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>187.292855</td>
-      <td>Iowa Coffee Company Liqueur</td>
+      <td>16.996845</td>
+      <td>CONCIERE COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>41.034034</td>
-      <td>Kapali Coffee Liqueur</td>
+      <td>99.494591</td>
+      <td>KAHLUA VANILLA</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>94.736642</td>
-      <td>Kahlua Salted Caramel</td>
+      <td>70.697000</td>
+      <td>TEQUILA ROSE W/2 SHOT GLASSES HA</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>38.571044</td>
-      <td>Chila Coffee Liqueur</td>
+      <td>48.306810</td>
+      <td>KAMORA COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>96.502963</td>
-      <td>Kahlua Vanilla</td>
+      <td>110.811697</td>
+      <td>IRISHMAN IRISH COFFEE</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>38.358325</td>
-      <td>Caffe Lolita Coffee Liqueur</td>
+      <td>109.122690</td>
+      <td>PATRON XO CAFE</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>90.549048</td>
-      <td>Kahlua French Vanilla Liqueur DISCO</td>
+      <td>154.526005</td>
+      <td>IOWA COFFEE COMPANY LIQUEUR</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>44.152230</td>
-      <td>Copa De Oro Mexican Coffee</td>
+      <td>35.378913</td>
+      <td>SABROSO</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>107.826091</td>
-      <td>Patron XO Cafe</td>
+      <td>88.089693</td>
+      <td>KAHLUA MOCHA LIQUEUR</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>115.010680</td>
-      <td>Mozart Chocolate Coffee Cream Liqueur</td>
+      <td>99.575605</td>
+      <td>KAHLUA MIDNIGHT</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>205.745228</td>
-      <td>Kahlua French Vanilla Liqueur</td>
+      <td>134.012833</td>
+      <td>MR. BLACK COLD BREW COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>72.869733</td>
-      <td>Carolans Cold Brew</td>
+      <td>126.801440</td>
+      <td>LUXARDO ESPRESSO ITALIAN COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>137.784413</td>
-      <td>Original Secret Family Recipe - A Coffee Liqueur</td>
+      <td>68.273560</td>
+      <td>GRIND ESPRESSO SHOT</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>68.270587</td>
-      <td>Grind Espresso Shot</td>
+      <td>90.549048</td>
+      <td>KAHLUA FRENCH VANILLA LIQUEUR DISCO</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>90.705882</td>
-      <td>Kahlua Especial</td>
+      <td>114.019258</td>
+      <td>CANTERA NEGRA CAFE</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>117.936185</td>
-      <td>Tia Maria Coffee Liqueur</td>
+      <td>96.567398</td>
+      <td>KAHLUA SALTED CARAMEL</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>118.170457</td>
-      <td>J. Rieger &amp; Co. Caffe Amaro</td>
+      <td>42.167376</td>
+      <td>COPA DE ORO MEXICAN COFFEE</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>248.540562</td>
-      <td>CCD Coffee Liqueur</td>
+      <td>114.796784</td>
+      <td>MOZART CHOCOLATE COFFEE CREAM LIQUEUR</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>90.705882</td>
-      <td>Kahlua Peppermint Mocha</td>
+      <td>72.934872</td>
+      <td>CAROLANS COLD BREW</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>1136.210526</td>
-      <td>Kahlua Chili Chocolate</td>
+      <td>90.036168</td>
+      <td>AVION ESPRESSO</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>16.996845</td>
-      <td>Conciere Coffee Liqueur</td>
+      <td>138.051271</td>
+      <td>ORIGINAL SECRET FAMILY RECIPE - A COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>27</th>
+      <td>247.964566</td>
+      <td>CCD COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>1136.210526</td>
+      <td>KAHLUA CHILI CHOCOLATE</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>830.290931</td>
+      <td>KAHLUA COFFEE MINI</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>103.666408</td>
+      <td>J. RIEGER &amp; CO. CAFFE AMARO</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>98.117663</td>
+      <td>TIA MARIA COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>109.663866</td>
+      <td>PATRON XO CAFE DARK COCOA</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>181.670886</td>
+      <td>JUMPING GOAT COLD BREWED COFFEE LIQUEUR WITH N...</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>974.160000</td>
+      <td>KAMORA COFFEE LIQUEUR MINI</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>38.087056</td>
+      <td>CAFFE LOLITA COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>88.947355</td>
+      <td>KAHLUA FRENCH VANILLA LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>112.367730</td>
+      <td>CAZADORES CAFE</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>41.799355</td>
+      <td>KAPALI COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>163.065954</td>
+      <td>PATRON XO CAFE MINI</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>90.327941</td>
+      <td>KAHLUA PEPPERMINT MOCHA</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>102.377486</td>
+      <td>XO CAFE DARK COCOA</td>
+    </tr>
+    <tr>
+      <th>42</th>
       <td>65.656795</td>
-      <td>Dr McGillicuddys Coffee</td>
+      <td>DR MCGILLICUDDYS COFFEE</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>36.908517</td>
+      <td>HIRAM WALKER COFFEE BRANDY</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>181.670886</td>
+      <td>JUMPING GOAT COLD BREWED COFFEE LIQUEUR BLACK ...</td>
     </tr>
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-88cc995d-52e2-4abe-98dc-0502d898a8a6')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-bce660f4-dca5-444b-a2a3-1dadb255b565')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -1511,6 +2028,10 @@ GROUP BY item_description
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -1524,30 +2045,160 @@ GROUP BY item_description
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-88cc995d-52e2-4abe-98dc-0502d898a8a6 button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-bce660f4-dca5-444b-a2a3-1dadb255b565 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-88cc995d-52e2-4abe-98dc-0502d898a8a6');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-bce660f4-dca5-444b-a2a3-1dadb255b565');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-ed43814d-097b-4b66-8681-910e1516529a">
+  <button class="colab-df-quickchart" onclick="quickchart('df-ed43814d-097b-4b66-8681-910e1516529a')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-ed43814d-097b-4b66-8681-910e1516529a button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
     </div>
   </div>
 </div></div>
@@ -1555,20 +2206,19 @@ GROUP BY item_description
 <p>Okay but we pointed out earlier that there is no order…  Let’s force an order on it</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT AVG(sale_dollars/volume_sold_gallons) as Average_Dollars_Per_Gallon, item_description
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE volume_sold_gallons != 0 and category_name = &#39;Coffee Liqueurs&#39;
-GROUP BY item_description
-ORDER BY Average_Dollars_Per_Gallon DESC
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span> <span class="n">AVG</span><span class="p">(</span><span class="n">sale_dollars</span><span class="o">/</span><span class="n">volume_sold_gallons</span><span class="p">)</span> <span class="k">as</span> <span class="n">Average_Dollars_Per_Gallon</span><span class="p">,</span> <span class="n">item_description</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">volume_sold_gallons</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;COFFEE LIQUEURS&#39;</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">Average_Dollars_Per_Gallon</span> <span class="n">DESC</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-fec4ea5d-b7d7-47a8-ab81-2536f77e8a02">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "cb5f9138d2734036ac22af34af5dc1fa"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "8522076dcfe345e3aee289f01cdb735e"}</script><div class="output text_html">
+  <div id="df-a37891c5-8068-46d9-a7ca-edeabf799f01" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1594,161 +2244,246 @@ ORDER BY Average_Dollars_Per_Gallon DESC
     <tr>
       <th>0</th>
       <td>1136.210526</td>
-      <td>Kahlua Chili Chocolate</td>
+      <td>KAHLUA CHILI CHOCOLATE</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>776.615963</td>
-      <td>Kahlua Coffee Mini</td>
+      <td>974.160000</td>
+      <td>KAMORA COFFEE LIQUEUR MINI</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>248.540562</td>
-      <td>CCD Coffee Liqueur</td>
+      <td>830.290931</td>
+      <td>KAHLUA COFFEE MINI</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>205.745228</td>
-      <td>Kahlua French Vanilla Liqueur</td>
+      <td>247.964566</td>
+      <td>CCD COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>187.292855</td>
-      <td>Iowa Coffee Company Liqueur</td>
+      <td>181.670886</td>
+      <td>JUMPING GOAT COLD BREWED COFFEE LIQUEUR WITH N...</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>137.784413</td>
-      <td>Original Secret Family Recipe - A Coffee Liqueur</td>
+      <td>181.670886</td>
+      <td>JUMPING GOAT COLD BREWED COFFEE LIQUEUR BLACK ...</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>118.170457</td>
-      <td>J. Rieger &amp; Co. Caffe Amaro</td>
+      <td>163.065954</td>
+      <td>PATRON XO CAFE MINI</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>117.936185</td>
-      <td>Tia Maria Coffee Liqueur</td>
+      <td>154.526005</td>
+      <td>IOWA COFFEE COMPANY LIQUEUR</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>115.010680</td>
-      <td>Mozart Chocolate Coffee Cream Liqueur</td>
+      <td>138.051271</td>
+      <td>ORIGINAL SECRET FAMILY RECIPE - A COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>109.767153</td>
-      <td>Patron Xo Cafe</td>
+      <td>134.012833</td>
+      <td>MR. BLACK COLD BREW COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>107.826091</td>
-      <td>Patron XO Cafe</td>
+      <td>126.801440</td>
+      <td>LUXARDO ESPRESSO ITALIAN COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>96.502963</td>
-      <td>Kahlua Vanilla</td>
+      <td>114.796784</td>
+      <td>MOZART CHOCOLATE COFFEE CREAM LIQUEUR</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>94.736642</td>
-      <td>Kahlua Salted Caramel</td>
+      <td>114.019258</td>
+      <td>CANTERA NEGRA CAFE</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>93.411691</td>
-      <td>Kahlua Coffee</td>
+      <td>112.367730</td>
+      <td>CAZADORES CAFE</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>92.405096</td>
-      <td>Kahlua Coffee Liqueur</td>
+      <td>110.811697</td>
+      <td>IRISHMAN IRISH COFFEE</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>90.705882</td>
-      <td>Kahlua Especial</td>
+      <td>109.663866</td>
+      <td>PATRON XO CAFE DARK COCOA</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>90.705882</td>
-      <td>Kahlua Peppermint Mocha</td>
+      <td>109.122690</td>
+      <td>PATRON XO CAFE</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>90.549048</td>
-      <td>Kahlua French Vanilla Liqueur DISCO</td>
+      <td>103.666408</td>
+      <td>J. RIEGER &amp; CO. CAFFE AMARO</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>76.032478</td>
-      <td>Kahlua Coffee Liqueur Mini</td>
+      <td>102.377486</td>
+      <td>XO CAFE DARK COCOA</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>72.869733</td>
-      <td>Carolans Cold Brew</td>
+      <td>99.575605</td>
+      <td>KAHLUA MIDNIGHT</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>68.270587</td>
-      <td>Grind Espresso Shot</td>
+      <td>99.494591</td>
+      <td>KAHLUA VANILLA</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>65.656795</td>
-      <td>Dr McGillicuddys Coffee</td>
+      <td>98.117663</td>
+      <td>TIA MARIA COFFEE LIQUEUR</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>48.811417</td>
-      <td>Kamora Coffee Liqueur</td>
+      <td>98.042729</td>
+      <td>KAHLUA COFFEE</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>44.152230</td>
-      <td>Copa De Oro Mexican Coffee</td>
+      <td>96.567398</td>
+      <td>KAHLUA SALTED CARAMEL</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>41.034034</td>
-      <td>Kapali Coffee Liqueur</td>
+      <td>93.760237</td>
+      <td>KAHLUA ESPECIAL</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>38.571044</td>
-      <td>Chila Coffee Liqueur</td>
+      <td>90.549048</td>
+      <td>KAHLUA FRENCH VANILLA LIQUEUR DISCO</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>38.358325</td>
-      <td>Caffe Lolita Coffee Liqueur</td>
+      <td>90.327941</td>
+      <td>KAHLUA PEPPERMINT MOCHA</td>
     </tr>
     <tr>
       <th>27</th>
+      <td>90.036168</td>
+      <td>AVION ESPRESSO</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>89.804451</td>
+      <td>KAHLUA COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>88.947355</td>
+      <td>KAHLUA FRENCH VANILLA LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>88.089693</td>
+      <td>KAHLUA MOCHA LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>79.648073</td>
+      <td>KAHLUA COFFEE LIQUEUR MINI</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>72.934872</td>
+      <td>CAROLANS COLD BREW</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>70.697000</td>
+      <td>TEQUILA ROSE W/2 SHOT GLASSES HA</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>68.273560</td>
+      <td>GRIND ESPRESSO SHOT</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>65.656795</td>
+      <td>DR MCGILLICUDDYS COFFEE</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>63.064841</td>
+      <td>KARIMBA COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>48.306810</td>
+      <td>KAMORA COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>42.167376</td>
+      <td>COPA DE ORO MEXICAN COFFEE</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>41.799355</td>
+      <td>KAPALI COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>38.196790</td>
+      <td>CHILA COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>38.087056</td>
+      <td>CAFFE LOLITA COFFEE LIQUEUR</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>36.908517</td>
+      <td>HIRAM WALKER COFFEE BRANDY</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>35.378913</td>
+      <td>SABROSO</td>
+    </tr>
+    <tr>
+      <th>44</th>
       <td>16.996845</td>
-      <td>Conciere Coffee Liqueur</td>
+      <td>CONCIERE COFFEE LIQUEUR</td>
     </tr>
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-fec4ea5d-b7d7-47a8-ab81-2536f77e8a02')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-a37891c5-8068-46d9-a7ca-edeabf799f01')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -1770,6 +2505,10 @@ ORDER BY Average_Dollars_Per_Gallon DESC
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -1783,30 +2522,160 @@ ORDER BY Average_Dollars_Per_Gallon DESC
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-fec4ea5d-b7d7-47a8-ab81-2536f77e8a02 button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-a37891c5-8068-46d9-a7ca-edeabf799f01 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-fec4ea5d-b7d7-47a8-ab81-2536f77e8a02');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-a37891c5-8068-46d9-a7ca-edeabf799f01');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-195773f9-dc1c-45f2-83c0-9f95cabd01a4">
+  <button class="colab-df-quickchart" onclick="quickchart('df-195773f9-dc1c-45f2-83c0-9f95cabd01a4')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-195773f9-dc1c-45f2-83c0-9f95cabd01a4 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
     </div>
   </div>
 </div></div>
@@ -1817,25 +2686,24 @@ ORDER BY Average_Dollars_Per_Gallon DESC
 <p>Partition is like grouping.  I’ll add another liquor to use it</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT 
-  AVG(sale_dollars/volume_sold_gallons) as Average_Dollars_Per_Gallon, 
-  item_description, 
-  ROW_NUMBER() OVER(
-    PARTITION BY category_name
-    ORDER BY item_description) row_num
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE volume_sold_gallons != 0 and (category_name = &#39;Coffee Liqueurs&#39;)
-GROUP BY item_description, category_name
-ORDER BY Average_Dollars_Per_Gallon DESC
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span>
+  <span class="n">AVG</span><span class="p">(</span><span class="n">sale_dollars</span><span class="o">/</span><span class="n">volume_sold_gallons</span><span class="p">)</span> <span class="k">as</span> <span class="n">Average_Dollars_Per_Gallon</span><span class="p">,</span>
+  <span class="n">item_description</span><span class="p">,</span>
+  <span class="n">ROW_NUMBER</span><span class="p">()</span> <span class="n">OVER</span><span class="p">(</span>
+    <span class="n">PARTITION</span> <span class="n">BY</span> <span class="n">category_name</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">)</span> <span class="n">row_num</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">volume_sold_gallons</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;COFFEE LIQUEURS&#39;</span><span class="p">)</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">Average_Dollars_Per_Gallon</span> <span class="n">DESC</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-04fdd617-768a-465d-a115-54cd3544dc30">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "d241ab1f09694a088de589f74c03a06b"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3738fff4b85740039806da27e4e2a9e5"}</script><div class="output text_html">
+  <div id="df-e669daa7-f00d-4633-a46e-7b4c28ddedbc" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1862,189 +2730,291 @@ ORDER BY Average_Dollars_Per_Gallon DESC
     <tr>
       <th>0</th>
       <td>1136.210526</td>
-      <td>Kahlua Chili Chocolate</td>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>776.615963</td>
-      <td>Kahlua Coffee Mini</td>
-      <td>15</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>248.540562</td>
-      <td>CCD Coffee Liqueur</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>205.745228</td>
-      <td>Kahlua French Vanilla Liqueur</td>
-      <td>17</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>187.292855</td>
-      <td>Iowa Coffee Company Liqueur</td>
-      <td>9</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>137.784413</td>
-      <td>Original Secret Family Recipe - A Coffee Liqueur</td>
-      <td>25</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>118.170457</td>
-      <td>J. Rieger &amp; Co. Caffe Amaro</td>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>117.936185</td>
-      <td>Tia Maria Coffee Liqueur</td>
-      <td>28</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>115.010680</td>
-      <td>Mozart Chocolate Coffee Cream Liqueur</td>
-      <td>24</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>109.767153</td>
-      <td>Patron Xo Cafe</td>
-      <td>27</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>107.826091</td>
-      <td>Patron XO Cafe</td>
-      <td>26</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>96.502963</td>
-      <td>Kahlua Vanilla</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>94.736642</td>
-      <td>Kahlua Salted Caramel</td>
-      <td>20</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>93.411691</td>
-      <td>Kahlua Coffee</td>
-      <td>12</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>92.405096</td>
-      <td>Kahlua Coffee Liqueur</td>
-      <td>13</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>90.705882</td>
-      <td>Kahlua Especial</td>
-      <td>16</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>90.705882</td>
-      <td>Kahlua Peppermint Mocha</td>
-      <td>19</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>90.549048</td>
-      <td>Kahlua French Vanilla Liqueur DISCO</td>
+      <td>KAHLUA CHILI CHOCOLATE</td>
       <td>18</td>
     </tr>
     <tr>
-      <th>18</th>
-      <td>76.032478</td>
-      <td>Kahlua Coffee Liqueur Mini</td>
-      <td>14</td>
+      <th>1</th>
+      <td>974.160000</td>
+      <td>KAMORA COFFEE LIQUEUR MINI</td>
+      <td>32</td>
     </tr>
     <tr>
-      <th>19</th>
-      <td>72.869733</td>
-      <td>Carolans Cold Brew</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>68.270587</td>
-      <td>Grind Espresso Shot</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>65.656795</td>
-      <td>Dr McGillicuddys Coffee</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>48.811417</td>
-      <td>Kamora Coffee Liqueur</td>
+      <th>2</th>
+      <td>830.290931</td>
+      <td>KAHLUA COFFEE MINI</td>
       <td>22</td>
     </tr>
     <tr>
-      <th>23</th>
-      <td>44.152230</td>
-      <td>Copa De Oro Mexican Coffee</td>
+      <th>3</th>
+      <td>247.964566</td>
+      <td>CCD COFFEE LIQUEUR</td>
       <td>6</td>
     </tr>
     <tr>
+      <th>4</th>
+      <td>181.670886</td>
+      <td>JUMPING GOAT COLD BREWED COFFEE LIQUEUR BLACK ...</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>181.670886</td>
+      <td>JUMPING GOAT COLD BREWED COFFEE LIQUEUR WITH N...</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>163.065954</td>
+      <td>PATRON XO CAFE MINI</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>154.526005</td>
+      <td>IOWA COFFEE COMPANY LIQUEUR</td>
+      <td>13</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>138.051271</td>
+      <td>ORIGINAL SECRET FAMILY RECIPE - A COFFEE LIQUEUR</td>
+      <td>38</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>134.012833</td>
+      <td>MR. BLACK COLD BREW COFFEE LIQUEUR</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>126.801440</td>
+      <td>LUXARDO ESPRESSO ITALIAN COFFEE LIQUEUR</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>114.796784</td>
+      <td>MOZART CHOCOLATE COFFEE CREAM LIQUEUR</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>114.019258</td>
+      <td>CANTERA NEGRA CAFE</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>112.367730</td>
+      <td>CAZADORES CAFE</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>110.811697</td>
+      <td>IRISHMAN IRISH COFFEE</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>109.663866</td>
+      <td>PATRON XO CAFE DARK COCOA</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>109.122690</td>
+      <td>PATRON XO CAFE</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>103.666408</td>
+      <td>J. RIEGER &amp; CO. CAFFE AMARO</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>102.377486</td>
+      <td>XO CAFE DARK COCOA</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>99.575605</td>
+      <td>KAHLUA MIDNIGHT</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>99.494591</td>
+      <td>KAHLUA VANILLA</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>98.117663</td>
+      <td>TIA MARIA COFFEE LIQUEUR</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>98.042729</td>
+      <td>KAHLUA COFFEE</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>96.567398</td>
+      <td>KAHLUA SALTED CARAMEL</td>
+      <td>29</td>
+    </tr>
+    <tr>
       <th>24</th>
-      <td>41.034034</td>
-      <td>Kapali Coffee Liqueur</td>
+      <td>93.760237</td>
+      <td>KAHLUA ESPECIAL</td>
       <td>23</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>38.571044</td>
-      <td>Chila Coffee Liqueur</td>
-      <td>4</td>
+      <td>90.549048</td>
+      <td>KAHLUA FRENCH VANILLA LIQUEUR DISCO</td>
+      <td>25</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>38.358325</td>
-      <td>Caffe Lolita Coffee Liqueur</td>
-      <td>2</td>
+      <td>90.327941</td>
+      <td>KAHLUA PEPPERMINT MOCHA</td>
+      <td>28</td>
     </tr>
     <tr>
       <th>27</th>
+      <td>90.036168</td>
+      <td>AVION ESPRESSO</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>89.804451</td>
+      <td>KAHLUA COFFEE LIQUEUR</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>88.947355</td>
+      <td>KAHLUA FRENCH VANILLA LIQUEUR</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>88.089693</td>
+      <td>KAHLUA MOCHA LIQUEUR</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>79.648073</td>
+      <td>KAHLUA COFFEE LIQUEUR MINI</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>72.934872</td>
+      <td>CAROLANS COLD BREW</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>70.697000</td>
+      <td>TEQUILA ROSE W/2 SHOT GLASSES HA</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>68.273560</td>
+      <td>GRIND ESPRESSO SHOT</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>65.656795</td>
+      <td>DR MCGILLICUDDYS COFFEE</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>63.064841</td>
+      <td>KARIMBA COFFEE LIQUEUR</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>48.306810</td>
+      <td>KAMORA COFFEE LIQUEUR</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>42.167376</td>
+      <td>COPA DE ORO MEXICAN COFFEE</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>41.799355</td>
+      <td>KAPALI COFFEE LIQUEUR</td>
+      <td>33</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>38.196790</td>
+      <td>CHILA COFFEE LIQUEUR</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>38.087056</td>
+      <td>CAFFE LOLITA COFFEE LIQUEUR</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>36.908517</td>
+      <td>HIRAM WALKER COFFEE BRANDY</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>35.378913</td>
+      <td>SABROSO</td>
+      <td>42</td>
+    </tr>
+    <tr>
+      <th>44</th>
       <td>16.996845</td>
-      <td>Conciere Coffee Liqueur</td>
-      <td>5</td>
+      <td>CONCIERE COFFEE LIQUEUR</td>
+      <td>8</td>
     </tr>
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-04fdd617-768a-465d-a115-54cd3544dc30')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-e669daa7-f00d-4633-a46e-7b4c28ddedbc')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -2066,6 +3036,10 @@ ORDER BY Average_Dollars_Per_Gallon DESC
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -2079,30 +3053,160 @@ ORDER BY Average_Dollars_Per_Gallon DESC
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-04fdd617-768a-465d-a115-54cd3544dc30 button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-e669daa7-f00d-4633-a46e-7b4c28ddedbc button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-04fdd617-768a-465d-a115-54cd3544dc30');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-e669daa7-f00d-4633-a46e-7b4c28ddedbc');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-330f026a-64c2-4f63-87b7-b69d85472b80">
+  <button class="colab-df-quickchart" onclick="quickchart('df-330f026a-64c2-4f63-87b7-b69d85472b80')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-330f026a-64c2-4f63-87b7-b69d85472b80 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
     </div>
   </div>
 </div></div>
@@ -2110,31 +3214,30 @@ ORDER BY Average_Dollars_Per_Gallon DESC
 <p>You should notice that the <code class="docutils literal notranslate"><span class="pre">ROW_NUMBER</span></code> didn’t do what we needed.  You will not be able to do the row nor rank on the column we created because it is not yet available to the SQL call.  This leads to sub-processees.  Let’s show one today and come back to it next class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-WITH t as(
-SELECT 
-  AVG(sale_dollars/volume_sold_gallons) as Average_Dollars_Per_Gallon, 
-  item_description, category_name
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE volume_sold_gallons != 0 and (category_name = &#39;Coffee Liqueurs&#39; or category_name = &#39;Imported Vodkas&#39;)
-GROUP BY item_description, category_name
-ORDER BY Average_Dollars_Per_Gallon DESC
-)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">WITH</span> <span class="n">t</span> <span class="k">as</span><span class="p">(</span>
+<span class="n">SELECT</span>
+  <span class="n">AVG</span><span class="p">(</span><span class="n">sale_dollars</span><span class="o">/</span><span class="n">volume_sold_gallons</span><span class="p">)</span> <span class="k">as</span> <span class="n">Average_Dollars_Per_Gallon</span><span class="p">,</span>
+  <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">volume_sold_gallons</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;COFFEE LIQUEURS&#39;</span> <span class="ow">or</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;IMPORTED VODKAS&#39;</span><span class="p">)</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">Average_Dollars_Per_Gallon</span> <span class="n">DESC</span>
+<span class="p">)</span>
 
-SELECT *, 
-    RANK() OVER(
-    PARTITION BY category_name
-    ORDER BY Average_Dollars_Per_Gallon) rk_num
-FROM t
-ORDER BY rk_num
+<span class="n">SELECT</span> <span class="o">*</span><span class="p">,</span>
+    <span class="n">RANK</span><span class="p">()</span> <span class="n">OVER</span><span class="p">(</span>
+    <span class="n">PARTITION</span> <span class="n">BY</span> <span class="n">category_name</span>
+    <span class="n">ORDER</span> <span class="n">BY</span> <span class="n">Average_Dollars_Per_Gallon</span><span class="p">)</span> <span class="n">rk_num</span>
+<span class="n">FROM</span> <span class="n">t</span>
+<span class="n">ORDER</span> <span class="n">BY</span> <span class="n">rk_num</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-cfe36062-5486-4caa-8792-7c1deae9f2a5">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "49580c4e2cca46f7a0ec934f93c937eb"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "d81d43ce65ec46b29bce65e5f05dd2e5"}</script><div class="output text_html">
+  <div id="df-bbd22aa7-a56b-4aa4-8ede-2a59dbad6459" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -2162,36 +3265,36 @@ ORDER BY rk_num
     <tr>
       <th>0</th>
       <td>16.996845</td>
-      <td>Conciere Coffee Liqueur</td>
-      <td>Coffee Liqueurs</td>
+      <td>CONCIERE COFFEE LIQUEUR</td>
+      <td>COFFEE LIQUEURS</td>
       <td>1</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>23.335834</td>
-      <td>SOOH Relska 80 Proof Vodka</td>
-      <td>Imported Vodkas</td>
+      <td>16.573795</td>
+      <td>PURUS ORGANIC VODKA MINI</td>
+      <td>IMPORTED VODKAS</td>
       <td>1</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>38.358325</td>
-      <td>Caffe Lolita Coffee Liqueur</td>
-      <td>Coffee Liqueurs</td>
+      <td>35.378913</td>
+      <td>SABROSO</td>
+      <td>COFFEE LIQUEURS</td>
       <td>2</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>27.608509</td>
-      <td>Polar Ice</td>
-      <td>Imported Vodkas</td>
+      <td>23.316243</td>
+      <td>SOOH RELSKA 80 PROOF VODKA</td>
+      <td>IMPORTED VODKAS</td>
       <td>2</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>38.571044</td>
-      <td>Chila Coffee Liqueur</td>
-      <td>Coffee Liqueurs</td>
+      <td>36.908517</td>
+      <td>HIRAM WALKER COFFEE BRANDY</td>
+      <td>COFFEE LIQUEURS</td>
       <td>3</td>
     </tr>
     <tr>
@@ -2202,59 +3305,59 @@ ORDER BY rk_num
       <td>...</td>
     </tr>
     <tr>
-      <th>164</th>
-      <td>2921.600000</td>
-      <td>Grey Goose Essences Strawberry &amp; Lemongrass Mini</td>
-      <td>Imported Vodkas</td>
-      <td>137</td>
+      <th>346</th>
+      <td>2939.445000</td>
+      <td>GREY GOOSE ESSENCES STRAWBERRY &amp; LEMONGRASS MINI</td>
+      <td>IMPORTED VODKAS</td>
+      <td>302</td>
     </tr>
     <tr>
-      <th>165</th>
-      <td>2935.463736</td>
-      <td>Grey Goose Essences Watermelon &amp; Basil Mini</td>
-      <td>Imported Vodkas</td>
-      <td>138</td>
+      <th>347</th>
+      <td>2945.650394</td>
+      <td>GREY GOOSE ESSENCES WATERMELON &amp; BASIL MINI</td>
+      <td>IMPORTED VODKAS</td>
+      <td>303</td>
     </tr>
     <tr>
-      <th>166</th>
+      <th>348</th>
       <td>9000.000000</td>
-      <td>Outerspace Vodka Mini</td>
-      <td>Imported Vodkas</td>
-      <td>139</td>
+      <td>OUTERSPACE VODKA MINI</td>
+      <td>IMPORTED VODKAS</td>
+      <td>304</td>
     </tr>
     <tr>
-      <th>167</th>
+      <th>349</th>
       <td>16996.723367</td>
-      <td>E.T.51 Premium Vodka Mini</td>
-      <td>Imported Vodkas</td>
-      <td>140</td>
+      <td>E.T.51 PREMIUM VODKA MINI</td>
+      <td>IMPORTED VODKAS</td>
+      <td>305</td>
     </tr>
     <tr>
-      <th>168</th>
+      <th>350</th>
       <td>17136.000000</td>
-      <td>E.T. 51 Premium Vodka Mini</td>
-      <td>Imported Vodkas</td>
-      <td>141</td>
+      <td>E.T. 51 PREMIUM VODKA MINI</td>
+      <td>IMPORTED VODKAS</td>
+      <td>306</td>
     </tr>
   </tbody>
 </table>
-<p>169 rows × 4 columns</p>
+<p>351 rows × 4 columns</p>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-cfe36062-5486-4caa-8792-7c1deae9f2a5')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-bbd22aa7-a56b-4aa4-8ede-2a59dbad6459')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -2276,6 +3379,10 @@ ORDER BY rk_num
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -2289,63 +3396,182 @@ ORDER BY rk_num
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-cfe36062-5486-4caa-8792-7c1deae9f2a5 button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-bbd22aa7-a56b-4aa4-8ede-2a59dbad6459 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-cfe36062-5486-4caa-8792-7c1deae9f2a5');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-bbd22aa7-a56b-4aa4-8ede-2a59dbad6459');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-c8bd7691-9537-45ea-b432-6681b6082ac3">
+  <button class="colab-df-quickchart" onclick="quickchart('df-c8bd7691-9537-45ea-b432-6681b6082ac3')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-c8bd7691-9537-45ea-b432-6681b6082ac3 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
     </div>
   </div>
 </div></div>
 </div>
 <p>We will come back to this but a nice taste of some of the really powerful aspects of SQL!</p>
-<div class="section" id="assignment">
-<h2>Assignment<a class="headerlink" href="#assignment" title="Permalink to this headline">¶</a></h2>
-<p>Assignement for today</p>
-<ol class="simple">
-<li><p>Start a notebook getting BigQuery to work. Feel free to use the authentication atop.</p></li>
-<li><p>Navigate to the dataset ‘austin_bikeshare.bikeshare_trips’</p></li>
-<li><p>Compute the average time for a trip based on starting point</p></li>
-<li><p>Compute how many trips start at each starting point.</p></li>
-</ol>
-</div>
-<div class="section" id="me-playing-around">
-<h2>Me Playing Around<a class="headerlink" href="#me-playing-around" title="Permalink to this headline">¶</a></h2>
+<section id="dealing-with-strings">
+<h2>Dealing With Strings<a class="headerlink" href="#dealing-with-strings" title="Link to this heading">#</a></h2>
 <p>I wanted to find why ‘vodka’ wasn’t in the table.  Well it was but with other qualifiers.  I needed to use a string command <code class="docutils literal notranslate"><span class="pre">LIKE</span></code> I also looked at <code class="docutils literal notranslate"><span class="pre">CONTAINS</span></code> but didn’t get it to work.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-SELECT category_name
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name LIKE &#39;%Vodka%&#39;
-GROUP BY category_name
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">SELECT</span> <span class="n">category_name</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="n">LIKE</span> <span class="s1">&#39;%VODKA%&#39;</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">category_name</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">
-  <div id="df-aeb76027-237e-458b-bd75-5f7fdb15a16a">
-    <div class="colab-df-container">
-      <div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "4024701c13eb4376ac78bbd659de0282"}</script><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "c271dd89a8364826a86dfddaebf4c1df"}</script><div class="output text_html">
+  <div id="df-5f037f10-9dab-4c6c-92e3-71fd6b48ac17" class="colab-df-container">
+    <div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -2369,46 +3595,66 @@ GROUP BY category_name
   <tbody>
     <tr>
       <th>0</th>
-      <td>Imported Vodka</td>
+      <td>VODKA FLAVORED</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>American Vodka</td>
+      <td>IMPORTED VODKAS</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>American Vodkas</td>
+      <td>IMPORTED FLAVORED VODKA</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Imported Vodkas</td>
+      <td>VODKA 80 PROOF</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>American Flavored Vodka</td>
+      <td>100 PROOF VODKA</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>Imported Flavored Vodka</td>
+      <td>IMPORTED VODKA - MISC</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>OTHER PROOF VODKA</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>AMERICAN FLAVORED VODKA</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>AMERICAN VODKAS</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>IMPORTED VODKA - CHERRY</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>LOW PROOF VODKA</td>
     </tr>
   </tbody>
 </table>
 </div>
-      <button class="colab-df-convert" onclick="convertToInteractive('df-aeb76027-237e-458b-bd75-5f7fdb15a16a')"
-              title="Convert this dataframe to an interactive table."
-              style="display:none;">
+    <div class="colab-df-buttons">
 
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
-       width="24px">
-    <path d="M0 0h24v24H0V0z" fill="none"/>
-    <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
+  <div class="colab-df-container">
+    <button class="colab-df-convert" onclick="convertToInteractive('df-5f037f10-9dab-4c6c-92e3-71fd6b48ac17')"
+            title="Convert this dataframe to an interactive table."
+            style="display:none;">
+
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960">
+    <path d="M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z"/>
   </svg>
-      </button>
+    </button>
 
   <style>
     .colab-df-container {
       display:flex;
-      flex-wrap:wrap;
       gap: 12px;
     }
 
@@ -2430,6 +3676,10 @@ GROUP BY category_name
       fill: #174EA6;
     }
 
+    .colab-df-buttons div {
+      margin-bottom: 4px;
+    }
+
     [theme=dark] .colab-df-convert {
       background-color: #3B4455;
       fill: #D2E3FC;
@@ -2443,36 +3693,176 @@ GROUP BY category_name
     }
   </style>
 
-      <script>
-        const buttonEl =
-          document.querySelector('#df-aeb76027-237e-458b-bd75-5f7fdb15a16a button.colab-df-convert');
-        buttonEl.style.display =
-          google.colab.kernel.accessAllowed ? 'block' : 'none';
+    <script>
+      const buttonEl =
+        document.querySelector('#df-5f037f10-9dab-4c6c-92e3-71fd6b48ac17 button.colab-df-convert');
+      buttonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
 
-        async function convertToInteractive(key) {
-          const element = document.querySelector('#df-aeb76027-237e-458b-bd75-5f7fdb15a16a');
-          const dataTable =
-            await google.colab.kernel.invokeFunction('convertToInteractive',
-                                                     [key], {});
-          if (!dataTable) return;
+      async function convertToInteractive(key) {
+        const element = document.querySelector('#df-5f037f10-9dab-4c6c-92e3-71fd6b48ac17');
+        const dataTable =
+          await google.colab.kernel.invokeFunction('convertToInteractive',
+                                                    [key], {});
+        if (!dataTable) return;
 
-          const docLinkHtml = 'Like what you see? Visit the ' +
-            '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
-            + ' to learn more about interactive tables.';
-          element.innerHTML = '';
-          dataTable['output_type'] = 'display_data';
-          await google.colab.output.renderOutput(dataTable, element);
-          const docLink = document.createElement('div');
-          docLink.innerHTML = docLinkHtml;
-          element.appendChild(docLink);
-        }
-      </script>
+        const docLinkHtml = 'Like what you see? Visit the ' +
+          '<a target="_blank" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'
+          + ' to learn more about interactive tables.';
+        element.innerHTML = '';
+        dataTable['output_type'] = 'display_data';
+        await google.colab.output.renderOutput(dataTable, element);
+        const docLink = document.createElement('div');
+        docLink.innerHTML = docLinkHtml;
+        element.appendChild(docLink);
+      }
+    </script>
+  </div>
+
+
+<div id="df-8be58a3e-1d53-49fd-acde-d831e8c67f90">
+  <button class="colab-df-quickchart" onclick="quickchart('df-8be58a3e-1d53-49fd-acde-d831e8c67f90')"
+            title="Suggest charts"
+            style="display:none;">
+
+<svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
+     width="24px">
+    <g>
+        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+    </g>
+</svg>
+  </button>
+
+<style>
+  .colab-df-quickchart {
+      --bg-color: #E8F0FE;
+      --fill-color: #1967D2;
+      --hover-bg-color: #E2EBFA;
+      --hover-fill-color: #174EA6;
+      --disabled-fill-color: #AAA;
+      --disabled-bg-color: #DDD;
+  }
+
+  [theme=dark] .colab-df-quickchart {
+      --bg-color: #3B4455;
+      --fill-color: #D2E3FC;
+      --hover-bg-color: #434B5C;
+      --hover-fill-color: #FFFFFF;
+      --disabled-bg-color: #3B4455;
+      --disabled-fill-color: #666;
+  }
+
+  .colab-df-quickchart {
+    background-color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    fill: var(--fill-color);
+    height: 32px;
+    padding: 0;
+    width: 32px;
+  }
+
+  .colab-df-quickchart:hover {
+    background-color: var(--hover-bg-color);
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+    fill: var(--button-hover-fill-color);
+  }
+
+  .colab-df-quickchart-complete:disabled,
+  .colab-df-quickchart-complete:disabled:hover {
+    background-color: var(--disabled-bg-color);
+    fill: var(--disabled-fill-color);
+    box-shadow: none;
+  }
+
+  .colab-df-spinner {
+    border: 2px solid var(--fill-color);
+    border-color: transparent;
+    border-bottom-color: var(--fill-color);
+    animation:
+      spin 1s steps(1) infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+      border-left-color: var(--fill-color);
+    }
+    20% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    30% {
+      border-color: transparent;
+      border-left-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+      border-right-color: var(--fill-color);
+    }
+    40% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-top-color: var(--fill-color);
+    }
+    60% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+    }
+    80% {
+      border-color: transparent;
+      border-right-color: var(--fill-color);
+      border-bottom-color: var(--fill-color);
+    }
+    90% {
+      border-color: transparent;
+      border-bottom-color: var(--fill-color);
+    }
+  }
+</style>
+
+  <script>
+    async function quickchart(key) {
+      const quickchartButtonEl =
+        document.querySelector('#' + key + ' button');
+      quickchartButtonEl.disabled = true;  // To prevent multiple clicks.
+      quickchartButtonEl.classList.add('colab-df-spinner');
+      try {
+        const charts = await google.colab.kernel.invokeFunction(
+            'suggestCharts', [key], {});
+      } catch (error) {
+        console.error('Error during call to suggestCharts:', error);
+      }
+      quickchartButtonEl.classList.remove('colab-df-spinner');
+      quickchartButtonEl.classList.add('colab-df-quickchart-complete');
+    }
+    (() => {
+      let quickchartButtonEl =
+        document.querySelector('#df-8be58a3e-1d53-49fd-acde-d831e8c67f90 button');
+      quickchartButtonEl.style.display =
+        google.colab.kernel.accessAllowed ? 'block' : 'none';
+    })();
+  </script>
+</div>
+
     </div>
   </div>
 </div></div>
 </div>
-</div>
-</div>
+</section>
+<section id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Link to this heading">#</a></h2>
+<p>Assignement for today</p>
+<ol class="arabic simple">
+<li><p>Start a notebook getting BigQuery to work. Feel free to use the authentication atop.</p></li>
+<li><p>Navigate to the dataset ‘austin_bikeshare.bikeshare_trips’</p></li>
+<li><p>Compute the average time for a trip based on starting point</p></li>
+<li><p>Compute how many trips start at each starting point.</p></li>
+</ol>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -2486,7 +3876,7 @@ GROUP BY category_name
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Content\Data_Collecting"
         },
         predefinedOutput: true
@@ -2494,46 +3884,104 @@ GROUP BY category_name
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="03_SQL.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Learning Some SQL with BigQuery</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03_SQL.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Learning Some SQL with BigQuery</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="05_SQL_SubQuery.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="05_SQL_SubQuery.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">SQL Sub-Queries</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-        
-        </div>
-    </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By The Jupyter Book community<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-strings">Dealing With Strings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
