@@ -9,15 +9,13 @@ parts:
   - caption:  Gathering Data
     chapters:
       - file: Content/Data_Collecting/03_SQL.ipynb
-        sections:
-        - file: Content/Data_Collecting/04_SQL_Essentials.ipynb
-        - file: Content/Data_Collecting/05_SQL_SubQuery.ipynb
-        - file: Content/Data_Collecting/06_SQL_Joins.ipynb
-        - file: Content/Data_Collecting/07_SQL_Wrap.ipynb
+      - file: Content/Data_Collecting/04_SQL_Essentials.ipynb
+      - file: Content/Data_Collecting/05_SQL_SubQuery.ipynb
+      - file: Content/Data_Collecting/06_SQL_Joins.ipynb
+      - file: Content/Data_Collecting/07_SQL_Wrap.ipynb
       - file: Content/Data_Collecting/08_html.ipynb
-        sections:
-        - file: Content/Data_Collecting/09_html_tables.ipynb
-        - file: Content/Data_Collecting/10_html_selenium.ipynb
+      - file: Content/Data_Collecting/09_html_tables.ipynb
+      - file: Content/Data_Collecting/10_html_selenium.ipynb
       - file: Content/Data_Collecting/11_Twitter.ipynb
       - file: Content/Data_Collecting/12_GatheringConclusion.ipynb
   - caption: Cleaning Data

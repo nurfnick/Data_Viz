@@ -1,466 +1,493 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Visualize Amounts &#8212; Data Pre-Processing and Visualization OER</title>
-    
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Content/Data_Visualization/24_Amounts';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Histograms" href="25_Histograms.html" />
     <link rel="prev" title="Graphical Sophistication" href="23_Graphical_Sophistication.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../Introduction.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../_static/JuliaSetECUColors.jpg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Data Pre-Processing and Visualization OER</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction.html">
-   Data Pre-Processing and Visualization
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Getting Started
- </span>
-</p>
+    
+    
+    <img src="../../_static/JuliaSetECUColors.jpg" class="logo__image only-light" alt="Data Pre-Processing and Visualization OER - Home"/>
+    <script>document.write(`<img src="../../_static/JuliaSetECUColors.jpg" class="logo__image only-dark" alt="Data Pre-Processing and Visualization OER - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Introduction.html">
+                    Data Pre-Processing and Visualization
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Collecting/01_Python.html">
-   Jupyter Notebooks and Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Collecting/02_Pandas.html">
-   Pandas for Data Analysis
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Collecting/01_Python.html">Jupyter Notebooks and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Collecting/02_Pandas.html">Pandas for Data Analysis</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Gathering Data
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gathering Data</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Collecting/03_SQL.html">
-   Learning Some SQL with BigQuery
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../Data_Collecting/08_html.html">
-   Reading Data From the Web
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Data_Collecting/09_html_tables.html">
-     HTML Tables
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../Data_Collecting/10_html_selenium.html">
-     Webpage Loading and Scrapping
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Collecting/11_Twitter.html">
-   Twitter a Social Media Scrape
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Collecting/12_GatheringConclusion.html">
-   Gathering Data Conclusion
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Collecting/03_SQL.html">Learning Some SQL with BigQuery</a></li>
+
+
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Data_Collecting/08_html.html">Reading Data From the Web</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Data_Collecting/09_html_tables.html">HTML Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Data_Collecting/10_html_selenium.html">Webpage Loading and Scrapping</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Cleaning Data
- </span>
-</p>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Collecting/11_Twitter.html">Twitter a Social Media Scrape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Collecting/12_GatheringConclusion.html">Gathering Data Conclusion</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cleaning Data</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">
-   Data Types
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/14_Strings.html">
-   Strings
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">
-   Strings And Cleaning a DataFrame
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/16_Dates.html">
-   Dates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">
-   Integers and Floats
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">
-   Factors and One Hot Encoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">
-   Missing and Incomplete
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">
-   Exam 2 Review
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/14_Strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">Strings And Cleaning a DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/16_Dates.html">Dates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">Integers and Floats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">Factors and One Hot Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">Missing and Incomplete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">Exam 2 Review</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Great Visualizations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Great Visualizations</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="21_Graphical_Excellence.html">
-   Graphical Excellence
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="22_Graphical_Integrity.html">
-   Graphical Integrity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="23_Graphical_Sophistication.html">
-   Graphical Sophistication
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="21_Graphical_Excellence.html">Graphical Excellence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="22_Graphical_Integrity.html">Graphical Integrity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="23_Graphical_Sophistication.html">Graphical Sophistication</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Creating Visulaizations
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Creating Visulaizations</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Visualize Amounts
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="25_Histograms.html">
-   Histograms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="26_Many_Distributions.html">
-   Many Distributions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="27_Proportions.html">
-   Proportions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="28_Associations.html">
-   Visualizing Association
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="29_Uncertainty.html">
-   Uncertainty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="30_Visualize_Conclusion.html">
-   Visualization Conclusion
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Visualize Amounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="25_Histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="26_Many_Distributions.html">Many Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="27_Proportions.html">Proportions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="28_Associations.html">Visualizing Association</a></li>
+<li class="toctree-l1"><a class="reference internal" href="29_Uncertainty.html">Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="30_Visualize_Conclusion.html">Visualization Conclusion</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Project Examples
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project Examples</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Project_Examples/RecentVisualizations.html">
-   Inverted Yield Curve
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Project_Examples/RecreatingMasters.html">
-   NHL Data Visualization
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Examples/RecentVisualizations.html">Inverted Yield Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Examples/RecreatingMasters.html">NHL Data Visualization</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Selected Solutions
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Solutions</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/mySolutions.html">
-   My Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam1Solutions.html">
-   Exam 1 Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam2Solutions.html">
-   Exam 2 Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam3Solutions.html">
-   Exam 3 Solutions Data Visualization and Preprocessing
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/mySolutions.html">My Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam1Solutions.html">Exam 1 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam2Solutions.html">Exam 2 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam3Solutions.html">Exam 3 Solutions Data Visualization and Preprocessing</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/Content/Data_Visualization/24_Amounts.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/nurfnick/Data_Viz"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Visualization/24_Amounts.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main">
         
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Visualization/24_Amounts.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
 
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
 
-            <!-- Launch buttons -->
 
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/nurfnick/Data_Viz/master?urlpath=tree/Content/Data_Visualization/24_Amounts.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Visualization/24_Amounts.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/nurfnick/Data_Viz" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Visualization/24_Amounts.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Content/Data_Visualization/24_Amounts.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
+  
 </div>
+</div>
+              
+              
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Visualize Amounts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bar-charts">
-   Bar Charts
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#dot-plots-work-well-too">
-   Dot Plots Work Well Too
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#adding-labels">
-   Adding Labels
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bar-charts-with-multiple-data">
-   Bar Charts with Multiple Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#your-turn">
-   Your Turn
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-charts">Bar Charts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-plots-work-well-too">Dot Plots Work Well Too</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-labels">Adding Labels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-charts-with-multiple-data">Bar Charts with Multiple Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <p><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/main/Content/Data_Visualization/24_Amounts.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="visualize-amounts">
-<h1>Visualize Amounts<a class="headerlink" href="#visualize-amounts" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="visualize-amounts">
+<h1>Visualize Amounts<a class="headerlink" href="#visualize-amounts" title="Link to this heading">#</a></h1>
 <p>To get started in visualizing, we’ll look at one of the simplest ideas, single quantaties.  Let’s grab some data too!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -471,8 +498,8 @@
 </div>
 </div>
 </div>
-<div class="section" id="bar-charts">
-<h2>Bar Charts<a class="headerlink" href="#bar-charts" title="Permalink to this headline">¶</a></h2>
+<section id="bar-charts">
+<h2>Bar Charts<a class="headerlink" href="#bar-charts" title="Link to this heading">#</a></h2>
 <p>I’ll give a small bar chart of the means of the different Classes of flowers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -500,7 +527,7 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Class&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_7_1.png" src="../../_images/24_Amounts_7_1.png" />
+<img alt="../../_images/d00142ad0d3cf81eb6b96d48221175076d17ac9380f87e7e36700463a696929f.png" src="../../_images/d00142ad0d3cf81eb6b96d48221175076d17ac9380f87e7e36700463a696929f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -513,7 +540,7 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Class&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_8_1.png" src="../../_images/24_Amounts_8_1.png" />
+<img alt="../../_images/d00142ad0d3cf81eb6b96d48221175076d17ac9380f87e7e36700463a696929f.png" src="../../_images/d00142ad0d3cf81eb6b96d48221175076d17ac9380f87e7e36700463a696929f.png" />
 </div>
 </div>
 <p>There are lots of options some of which we should be using reguarly.  A title is always nice</p>
@@ -527,7 +554,7 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Mean by Class&#39;}, xlabel=&#39;Class&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_10_1.png" src="../../_images/24_Amounts_10_1.png" />
+<img alt="../../_images/d57b8d748e8503b1b2b0446d7b39eaa311c40e7603797727931ad5909823081f.png" src="../../_images/d57b8d748e8503b1b2b0446d7b39eaa311c40e7603797727931ad5909823081f.png" />
 </div>
 </div>
 <p>A vertical description on what the <span class="math notranslate nohighlight">\(y\)</span> axis represents should not be forgotten!</p>
@@ -543,7 +570,7 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Mean by Class&#39;}, xlabel=&#39;Class&#39;, ylabel=&#39;Mean of Sepal Length&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_12_1.png" src="../../_images/24_Amounts_12_1.png" />
+<img alt="../../_images/2f7f4739f3e6ab1b0672ff9a1a765d02160d3128391b64fb00b51f30b59fe2fc.png" src="../../_images/2f7f4739f3e6ab1b0672ff9a1a765d02160d3128391b64fb00b51f30b59fe2fc.png" />
 </div>
 </div>
 <p>One of the complaints about a graphic like this is the length of the class titles.  It takes up a lot of vertical space.  With a <code class="docutils literal notranslate"><span class="pre">barh</span></code> you can change the orientation of the bars.</p>
@@ -559,7 +586,7 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Mean by Class&#39;}, ylabel=&#39;Class&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_14_1.png" src="../../_images/24_Amounts_14_1.png" />
+<img alt="../../_images/5914c5f3f11acba2370044aa73a9c01dfe1e77ad559ba7d0de4d55c9f3c7ba13.png" src="../../_images/5914c5f3f11acba2370044aa73a9c01dfe1e77ad559ba7d0de4d55c9f3c7ba13.png" />
 </div>
 </div>
 <p>I couldn’t get the label of the values to appear, maybe you can?</p>
@@ -582,13 +609,13 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;workout_type&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_19_1.png" src="../../_images/24_Amounts_19_1.png" />
+<img alt="../../_images/f7ededf3868374c482ee78ef6c6d428629ba4bf738fdfdb1e37ab89b85492ac9.png" src="../../_images/f7ededf3868374c482ee78ef6c6d428629ba4bf738fdfdb1e37ab89b85492ac9.png" />
 </div>
 </div>
 <p>To clear this up you could use a point instead of a bar!</p>
-</div>
-<div class="section" id="dot-plots-work-well-too">
-<h2>Dot Plots Work Well Too<a class="headerlink" href="#dot-plots-work-well-too" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="dot-plots-work-well-too">
+<h2>Dot Plots Work Well Too<a class="headerlink" href="#dot-plots-work-well-too" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;workout_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">calories</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;workout_type&#39;</span><span class="p">)</span>
@@ -599,7 +626,7 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;mean&#39;, ylabel=&#39;workout_type&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_22_1.png" src="../../_images/24_Amounts_22_1.png" />
+<img alt="../../_images/b1750746a00b860fa53b00f7fa571b7ad41b6e43e768b3625b439492c47f66b6.png" src="../../_images/b1750746a00b860fa53b00f7fa571b7ad41b6e43e768b3625b439492c47f66b6.png" />
 </div>
 </div>
 <p>This creates other issues in that the origin of the figure is not zero.  To fix that, we simply require that the x limits go from 0 to 310.</p>
@@ -613,31 +640,31 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;mean&#39;, ylabel=&#39;workout_type&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_24_1.png" src="../../_images/24_Amounts_24_1.png" />
+<img alt="../../_images/ccb5f5df884995e793809ef495dc0b40c06c389729b6577dc86bd6333c385804.png" src="../../_images/ccb5f5df884995e793809ef495dc0b40c06c389729b6577dc86bd6333c385804.png" />
 </div>
 </div>
 <p>All the workout types are giving us about the same bang for our buck, at least in mean calories.</p>
-</div>
-<div class="section" id="adding-labels">
-<h2>Adding Labels<a class="headerlink" href="#adding-labels" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="adding-labels">
+<h2>Adding Labels<a class="headerlink" href="#adding-labels" title="Link to this heading">#</a></h2>
 <p>It might also be nice to see the numbers presented with the data.  This is esspecially nice for a small number of quantities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;workout_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">calories</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;workout_type&#39;</span><span class="p">)</span><span class="c1">#this made the same graph as above.</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;workout_type&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">calories</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;mean&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span><span class="n">ascending</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[</span><span class="s1">&#39;mean&#39;</span><span class="p">]):</span> <span class="c1">#here I loop through the values, k, and indicies ,i.</span>
-  <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)),[</span><span class="n">k</span><span class="o">+.</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="o">+.</span><span class="mi">2</span><span class="p">])</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)),[</span><span class="n">k</span><span class="o">+</span><span class="mf">.2</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mf">.2</span><span class="p">])</span>
 
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/24_Amounts_28_0.png" src="../../_images/24_Amounts_28_0.png" />
+<img alt="../../_images/4b06703c53723b2db79d26e1d0282667fbfb6b4de6eba913c1a6d6664caf5143.png" src="../../_images/4b06703c53723b2db79d26e1d0282667fbfb6b4de6eba913c1a6d6664caf5143.png" />
 </div>
 </div>
-</div>
-<div class="section" id="bar-charts-with-multiple-data">
-<h2>Bar Charts with Multiple Data<a class="headerlink" href="#bar-charts-with-multiple-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="bar-charts-with-multiple-data">
+<h2>Bar Charts with Multiple Data<a class="headerlink" href="#bar-charts-with-multiple-data" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Class&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
@@ -648,7 +675,7 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Class&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_30_1.png" src="../../_images/24_Amounts_30_1.png" />
+<img alt="../../_images/b17bd40bc1cbbb5aaaa3370c34a43c7346a5241ab21dd64f97198441d17c560f.png" src="../../_images/b17bd40bc1cbbb5aaaa3370c34a43c7346a5241ab21dd64f97198441d17c560f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -661,13 +688,13 @@ Name: SepalLength, dtype: float64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;Class&#39;&gt;
 </pre></div>
 </div>
-<img alt="../../_images/24_Amounts_31_1.png" src="../../_images/24_Amounts_31_1.png" />
+<img alt="../../_images/99083e86535bd4a4c52ce1728ce5db98a625926439ed12947aeeffe38e369a13.png" src="../../_images/99083e86535bd4a4c52ce1728ce5db98a625926439ed12947aeeffe38e369a13.png" />
 </div>
 </div>
 <p>If you want to add labels, it should be simple but the version on colab is out of date…  I update here.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install --upgrade matplotlib
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">matplotlib</span>
 </pre></div>
 </div>
 </div>
@@ -711,7 +738,7 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.7/dist-pack
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/24_Amounts_36_0.png" src="../../_images/24_Amounts_36_0.png" />
+<img alt="../../_images/5b012ff20f0161a07f7c91bc4e32d85a9f5f2c8fad1ff134d306406058ce737f.png" src="../../_images/5b012ff20f0161a07f7c91bc4e32d85a9f5f2c8fad1ff134d306406058ce737f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -724,20 +751,20 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.7/dist-pack
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/24_Amounts_37_0.png" src="../../_images/24_Amounts_37_0.png" />
+<img alt="../../_images/089d1959989450da6347e688a935788870f4ff09af01f2655d0af356b19d8e92.png" src="../../_images/089d1959989450da6347e688a935788870f4ff09af01f2655d0af356b19d8e92.png" />
 </div>
 </div>
 <p>Be careful with the stacked as it is giving a cummulative total.  This doesn’t really make any sense here…</p>
-</div>
-<div class="section" id="your-turn">
-<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Link to this heading">#</a></h2>
 <p>Using the <a class="reference external" href="https://raw.githubusercontent.com/nurfnick/Data_Viz/main/Data_Sets/AB_NYC_2019.csv">Air B&amp;B NYC data</a> complete the following tasks.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Create a bar graph of the maximum ‘price’ by ‘neighbourhood_group’.  Include the ‘price’ in your graph</p></li>
 <li><p>Create a multiple bar graph with ‘neighbourhood_group’ and ‘room_type’ by looking at the average ‘price’.</p></li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -751,7 +778,7 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.7/dist-pack
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Content\Data_Visualization"
         },
         predefinedOutput: true
@@ -759,46 +786,107 @@ Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.7/dist-pack
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="23_Graphical_Sophistication.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Graphical Sophistication</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="23_Graphical_Sophistication.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Graphical Sophistication</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="25_Histograms.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="25_Histograms.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Histograms</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-        
-        </div>
-    </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By The Jupyter Book community<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-charts">Bar Charts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dot-plots-work-well-too">Dot Plots Work Well Too</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-labels">Adding Labels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bar-charts-with-multiple-data">Bar Charts with Multiple Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

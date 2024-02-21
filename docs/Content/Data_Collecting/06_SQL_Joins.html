@@ -1,459 +1,490 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>SQL Joins &#8212; Data Pre-Processing and Visualization OER</title>
-    
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
-    
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
-
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=afe5de03"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Content/Data_Collecting/06_SQL_Joins';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="SQL Wrap Up" href="07_SQL_Wrap.html" />
     <link rel="prev" title="SQL Sub-Queries" href="05_SQL_SubQuery.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../index.html">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../Introduction.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../_static/JuliaSetECUColors.jpg" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Data Pre-Processing and Visualization OER</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Introduction.html">
-   Data Pre-Processing and Visualization
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Getting Started
- </span>
-</p>
+    
+    
+    <img src="../../_static/JuliaSetECUColors.jpg" class="logo__image only-light" alt="Data Pre-Processing and Visualization OER - Home"/>
+    <script>document.write(`<img src="../../_static/JuliaSetECUColors.jpg" class="logo__image only-dark" alt="Data Pre-Processing and Visualization OER - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Introduction.html">
+                    Data Pre-Processing and Visualization
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_Python.html">
-   Jupyter Notebooks and Python
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_Pandas.html">
-   Pandas for Data Analysis
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_Python.html">Jupyter Notebooks and Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Pandas.html">Pandas for Data Analysis</a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Gathering Data
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Gathering Data</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="03_SQL.html">
-   Learning Some SQL with BigQuery
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="08_html.html">
-   Reading Data From the Web
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="09_html_tables.html">
-     HTML Tables
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="10_html_selenium.html">
-     Webpage Loading and Scrapping
-    </a>
-   </li>
+<li class="toctree-l1"><a class="reference internal" href="03_SQL.html">Learning Some SQL with BigQuery</a></li>
+
+
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="08_html.html">Reading Data From the Web</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="09_html_tables.html">HTML Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_html_selenium.html">Webpage Loading and Scrapping</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="11_Twitter.html">Twitter a Social Media Scrape</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_GatheringConclusion.html">Gathering Data Conclusion</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Cleaning Data</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/14_Strings.html">Strings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">Strings And Cleaning a DataFrame</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/16_Dates.html">Dates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">Integers and Floats</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">Factors and One Hot Encoding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">Missing and Incomplete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">Exam 2 Review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Great Visualizations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">Graphical Excellence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">Graphical Integrity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">Graphical Sophistication</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Creating Visulaizations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/24_Amounts.html">Visualize Amounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/25_Histograms.html">Histograms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">Many Distributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/27_Proportions.html">Proportions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/28_Associations.html">Visualizing Association</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">Uncertainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">Visualization Conclusion</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Project Examples</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Project_Examples/RecentVisualizations.html">Inverted Yield Curve</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Project_Examples/RecreatingMasters.html">NHL Data Visualization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selected Solutions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/mySolutions.html">My Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam1Solutions.html">Exam 1 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam2Solutions.html">Exam 2 Solutions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Solutions/Exam3Solutions.html">Exam 3 Solutions Data Visualization and Preprocessing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Collecting/06_SQL_Joins.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_Twitter.html">
-   Twitter a Social Media Scrape
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_GatheringConclusion.html">
-   Gathering Data Conclusion
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Cleaning Data
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/13_Data_Types.html">
-   Data Types
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/14_Strings.html">
-   Strings
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/15_String_Cleaning.html">
-   Strings And Cleaning a DataFrame
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/16_Dates.html">
-   Dates
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/17_Ints_and_Floats.html">
-   Integers and Floats
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/18_One_Hot_Encoding.html">
-   Factors and One Hot Encoding
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/19_Missing_and_Incomplete.html">
-   Missing and Incomplete
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Cleaning/20_Cleaning_Conclusion.html">
-   Exam 2 Review
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Great Visualizations
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/21_Graphical_Excellence.html">
-   Graphical Excellence
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/22_Graphical_Integrity.html">
-   Graphical Integrity
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/23_Graphical_Sophistication.html">
-   Graphical Sophistication
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Creating Visulaizations
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/24_Amounts.html">
-   Visualize Amounts
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/25_Histograms.html">
-   Histograms
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/26_Many_Distributions.html">
-   Many Distributions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/27_Proportions.html">
-   Proportions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/28_Associations.html">
-   Visualizing Association
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/29_Uncertainty.html">
-   Uncertainty
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Data_Visualization/30_Visualize_Conclusion.html">
-   Visualization Conclusion
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Project Examples
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Project_Examples/RecentVisualizations.html">
-   Inverted Yield Curve
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Project_Examples/RecreatingMasters.html">
-   NHL Data Visualization
-  </a>
- </li>
-</ul>
-<p class="caption">
- <span class="caption-text">
-  Selected Solutions
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/mySolutions.html">
-   My Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam1Solutions.html">
-   Exam 1 Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam2Solutions.html">
-   Exam 2 Solutions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Solutions/Exam3Solutions.html">
-   Exam 3 Solutions Data Visualization and Preprocessing
-  </a>
- </li>
-</ul>
+</div>
 
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/nurfnick/Data_Viz" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Collecting/06_SQL_Joins.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Content/Data_Collecting/06_SQL_Joins.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+  
 </div>
-
 </div>
+              
+              
 
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>SQL Joins</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/Content/Data_Collecting/06_SQL_Joins.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/nurfnick/Data_Viz"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/nurfnick/Data_Viz/issues/new?title=Issue%20on%20page%20%2FContent/Data_Collecting/06_SQL_Joins.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/nurfnick/Data_Viz/master?urlpath=tree/Content/Data_Collecting/06_SQL_Joins.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        <a class="colab-button" href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/master/Content/Data_Collecting/06_SQL_Joins.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
-                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
-                    src="../../_static/images/logo_colab.png"
-                    alt="Interact on Colab">Colab</button></a>
-        
-        
-    </div>
-</div>
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav" aria-label="Page">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#inner-joins">
-   Inner Joins
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#outer-joins">
-   Outer Joins
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#joining-other-tables">
-   Joining Other Tables
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#your-turn">
-   Your Turn
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-joins">Inner Joins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outer-joins">Outer Joins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-other-tables">Joining Other Tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <p><a href="https://colab.research.google.com/github/nurfnick/Data_Viz/blob/main/Content/Data_Collecting/06_SQL_Joins.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<div class="tex2jax_ignore mathjax_ignore section" id="sql-joins">
-<h1>SQL Joins<a class="headerlink" href="#sql-joins" title="Permalink to this headline">¶</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="sql-joins">
+<h1>SQL Joins<a class="headerlink" href="#sql-joins" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">auth</span>
@@ -469,16 +500,16 @@
 </div>
 </div>
 <p>Next we will try to tackle <code class="docutils literal notranslate"><span class="pre">JOINS</span></code>.  There are many ways to join tables in SQL.</p>
-<div class="section" id="inner-joins">
-<h2>Inner Joins<a class="headerlink" href="#inner-joins" title="Permalink to this headline">¶</a></h2>
+<section id="inner-joins">
+<h2>Inner Joins<a class="headerlink" href="#inner-joins" title="Link to this heading">#</a></h2>
 <p>The easiest way is a cross join.  Essentially this is a cartesian product of the two datasets.  It will create a very large dataset as it is multiplicative in the number of rows.  Here is a small table to start (10 rows)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
 
-SELECT *
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name = &#39;Imported Whiskies&#39;
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Imported Whiskies&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -807,14 +838,14 @@ WHERE category_name = &#39;Imported Whiskies&#39;
       <button class="colab-df-convert" onclick="convertToInteractive('df-ca9e9203-178c-49b7-8640-101404b14b29')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -879,19 +910,19 @@ WHERE category_name = &#39;Imported Whiskies&#39;
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>Now we’ll use that table and add to it every column from the same table with the <code class="docutils literal notranslate"><span class="pre">JOIN</span></code>.  Note that the <code class="docutils literal notranslate"><span class="pre">ON</span></code> clause  is over the <em>category_name</em> and they all have the same category name!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-WITH t as(
-SELECT *
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name = &#39;Imported Whiskies&#39;)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">WITH</span> <span class="n">t</span> <span class="k">as</span><span class="p">(</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Imported Whiskies&#39;</span><span class="p">)</span>
 
-SELECT *
-FROM t as table1 JOIN t as table2 ON table1.category_name = table2.category_name
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">t</span> <span class="k">as</span> <span class="n">table1</span> <span class="n">JOIN</span> <span class="n">t</span> <span class="k">as</span> <span class="n">table2</span> <span class="n">ON</span> <span class="n">table1</span><span class="o">.</span><span class="n">category_name</span> <span class="o">=</span> <span class="n">table2</span><span class="o">.</span><span class="n">category_name</span>
 </pre></div>
 </div>
 </div>
@@ -1536,14 +1567,14 @@ FROM t as table1 JOIN t as table2 ON table1.category_name = table2.category_name
       <button class="colab-df-convert" onclick="convertToInteractive('df-30a98d25-ea70-4441-85f5-3b96f1f91365')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -1608,20 +1639,20 @@ FROM t as table1 JOIN t as table2 ON table1.category_name = table2.category_name
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>So why would we want to do this?  Well now we could compare each bottle to every other bottle.  We could ask how many bottles cost more than this one.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-WITH t as(
-SELECT *
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name = &#39;Imported Whiskies&#39;)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">WITH</span> <span class="n">t</span> <span class="k">as</span><span class="p">(</span>
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Imported Whiskies&#39;</span><span class="p">)</span>
 
-SELECT table1.item_description, SUM(CASE WHEN table1.state_bottle_retail &lt; table2.state_bottle_retail THEN 1 ELSE 0 END) as number_more_expensive
-FROM t as table1 JOIN t as table2 ON table1.category_name = table2.category_name
-GROUP BY table1.item_description
+<span class="n">SELECT</span> <span class="n">table1</span><span class="o">.</span><span class="n">item_description</span><span class="p">,</span> <span class="n">SUM</span><span class="p">(</span><span class="n">CASE</span> <span class="n">WHEN</span> <span class="n">table1</span><span class="o">.</span><span class="n">state_bottle_retail</span> <span class="o">&lt;</span> <span class="n">table2</span><span class="o">.</span><span class="n">state_bottle_retail</span> <span class="n">THEN</span> <span class="mi">1</span> <span class="n">ELSE</span> <span class="mi">0</span> <span class="n">END</span><span class="p">)</span> <span class="k">as</span> <span class="n">number_more_expensive</span>
+<span class="n">FROM</span> <span class="n">t</span> <span class="k">as</span> <span class="n">table1</span> <span class="n">JOIN</span> <span class="n">t</span> <span class="k">as</span> <span class="n">table2</span> <span class="n">ON</span> <span class="n">table1</span><span class="o">.</span><span class="n">category_name</span> <span class="o">=</span> <span class="n">table2</span><span class="o">.</span><span class="n">category_name</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">table1</span><span class="o">.</span><span class="n">item_description</span>
 </pre></div>
 </div>
 </div>
@@ -1678,14 +1709,14 @@ GROUP BY table1.item_description
       <button class="colab-df-convert" onclick="convertToInteractive('df-65f2d1a5-41bc-4adf-8380-a28982fae95b')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -1750,17 +1781,17 @@ GROUP BY table1.item_description
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>Wait, I thought I only had 10 bottles?  What we see here is that I had really only 4 bottles.  Let’s fix this!  In the first table, I am including much more than I need and I should just group them by item_description there too</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
 
-SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name = &#39;Imported Whiskies&#39;
-GROUP BY item_description, category_name
+<span class="n">SELECT</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">state_bottle_retail</span><span class="p">)</span> <span class="k">as</span> <span class="n">state_bottle_retail</span><span class="p">,</span> <span class="n">category_name</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Imported Whiskies&#39;</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span>
 </pre></div>
 </div>
 </div>
@@ -1822,14 +1853,14 @@ GROUP BY item_description, category_name
       <button class="colab-df-convert" onclick="convertToInteractive('df-c2ff92c3-9f18-4ce1-b6a1-dcf8c68e8325')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -1894,21 +1925,21 @@ GROUP BY item_description, category_name
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>Now if I get that back into my join, I should get the desired outcome.  You should also ask yourself why category name was kept.  It was needed for the cross join!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
-WITH t as(
-SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name = &#39;Imported Whiskies&#39;
-GROUP BY item_description, category_name)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
+<span class="n">WITH</span> <span class="n">t</span> <span class="k">as</span><span class="p">(</span>
+<span class="n">SELECT</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">state_bottle_retail</span><span class="p">)</span> <span class="k">as</span> <span class="n">state_bottle_retail</span><span class="p">,</span> <span class="n">category_name</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Imported Whiskies&#39;</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span><span class="p">)</span>
 
-SELECT table1.item_description, SUM(CASE WHEN table1.state_bottle_retail &lt; table2.state_bottle_retail THEN 1 ELSE 0 END) as number_more_expensive, table1.state_bottle_retail as price
-FROM t as table1 JOIN t as table2 ON table1.category_name = table2.category_name
-GROUP BY table1.item_description, table1.state_bottle_retail
+<span class="n">SELECT</span> <span class="n">table1</span><span class="o">.</span><span class="n">item_description</span><span class="p">,</span> <span class="n">SUM</span><span class="p">(</span><span class="n">CASE</span> <span class="n">WHEN</span> <span class="n">table1</span><span class="o">.</span><span class="n">state_bottle_retail</span> <span class="o">&lt;</span> <span class="n">table2</span><span class="o">.</span><span class="n">state_bottle_retail</span> <span class="n">THEN</span> <span class="mi">1</span> <span class="n">ELSE</span> <span class="mi">0</span> <span class="n">END</span><span class="p">)</span> <span class="k">as</span> <span class="n">number_more_expensive</span><span class="p">,</span> <span class="n">table1</span><span class="o">.</span><span class="n">state_bottle_retail</span> <span class="k">as</span> <span class="n">price</span>
+<span class="n">FROM</span> <span class="n">t</span> <span class="k">as</span> <span class="n">table1</span> <span class="n">JOIN</span> <span class="n">t</span> <span class="k">as</span> <span class="n">table2</span> <span class="n">ON</span> <span class="n">table1</span><span class="o">.</span><span class="n">category_name</span> <span class="o">=</span> <span class="n">table2</span><span class="o">.</span><span class="n">category_name</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">table1</span><span class="o">.</span><span class="n">item_description</span><span class="p">,</span> <span class="n">table1</span><span class="o">.</span><span class="n">state_bottle_retail</span>
 </pre></div>
 </div>
 </div>
@@ -1970,14 +2001,14 @@ GROUP BY table1.item_description, table1.state_bottle_retail
       <button class="colab-df-convert" onclick="convertToInteractive('df-d2984090-c2c7-40dc-8ba7-743f91377e0c')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2042,27 +2073,27 @@ GROUP BY table1.item_description, table1.state_bottle_retail
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>A word of note here!  The inner join preformed here will only join two datasets <strong>if</strong> the <code class="docutils literal notranslate"><span class="pre">ON</span></code> matches.  When it does not, the row will not be included in the join.  Let’s see that in action!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
 
-WITH iw as(
-SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name = &#39;Imported Whiskies&#39;
-GROUP BY item_description, category_name)
+<span class="n">WITH</span> <span class="n">iw</span> <span class="k">as</span><span class="p">(</span>
+<span class="n">SELECT</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">state_bottle_retail</span><span class="p">)</span> <span class="k">as</span> <span class="n">state_bottle_retail</span><span class="p">,</span> <span class="n">category_name</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Imported Whiskies&#39;</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span><span class="p">)</span>
 
 
-SELECT *
-FROM iw JOIN 
-      (SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
-      FROM `bigquery-public-data.iowa_liquor_sales.sales`
-      WHERE category_name = &#39;Coffee Liqueurs&#39;
-      GROUP BY item_description, category_name) as cl
-      ON iw.category_name = cl.category_name
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">iw</span> <span class="n">JOIN</span> 
+      <span class="p">(</span><span class="n">SELECT</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">state_bottle_retail</span><span class="p">)</span> <span class="k">as</span> <span class="n">state_bottle_retail</span><span class="p">,</span> <span class="n">category_name</span>
+      <span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+      <span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Coffee Liqueurs&#39;</span>
+      <span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">cl</span>
+      <span class="n">ON</span> <span class="n">iw</span><span class="o">.</span><span class="n">category_name</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="n">category_name</span>
 </pre></div>
 </div>
 </div>
@@ -2103,14 +2134,14 @@ FROM iw JOIN
       <button class="colab-df-convert" onclick="convertToInteractive('df-ce627bfd-655f-4477-8de6-f331a5d63def')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2175,31 +2206,31 @@ FROM iw JOIN
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>Nothing was printed because nothing will match!  All the data was lost!  Now this example seems a little far fetched but often your tables may have missing or omitted data.  It doesn’t mean that row should be lost because the column you were working with didn’t have a match!  We examine this in the next section.</p>
-</div>
-<div class="section" id="outer-joins">
-<h2>Outer Joins<a class="headerlink" href="#outer-joins" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="outer-joins">
+<h2>Outer Joins<a class="headerlink" href="#outer-joins" title="Link to this heading">#</a></h2>
 <p>Let’s take the last example and do a <code class="docutils literal notranslate"><span class="pre">LEFT</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></code> this will force the left table (<em>Imported Whiskies</em>) to be included in the table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
 
-WITH iw as(
-SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name = &#39;Imported Whiskies&#39;
-GROUP BY item_description, category_name)
+<span class="n">WITH</span> <span class="n">iw</span> <span class="k">as</span><span class="p">(</span>
+<span class="n">SELECT</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">state_bottle_retail</span><span class="p">)</span> <span class="k">as</span> <span class="n">state_bottle_retail</span><span class="p">,</span> <span class="n">category_name</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Imported Whiskies&#39;</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span><span class="p">)</span>
 
 
-SELECT *
-FROM iw LEFT OUTER JOIN 
-      (SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
-      FROM `bigquery-public-data.iowa_liquor_sales.sales`
-      WHERE category_name = &#39;Coffee Liqueurs&#39;
-      GROUP BY item_description, category_name) as cl
-      ON iw.category_name = cl.category_name
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">iw</span> <span class="n">LEFT</span> <span class="n">OUTER</span> <span class="n">JOIN</span> 
+      <span class="p">(</span><span class="n">SELECT</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">state_bottle_retail</span><span class="p">)</span> <span class="k">as</span> <span class="n">state_bottle_retail</span><span class="p">,</span> <span class="n">category_name</span>
+      <span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+      <span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Coffee Liqueurs&#39;</span>
+      <span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">cl</span>
+      <span class="n">ON</span> <span class="n">iw</span><span class="o">.</span><span class="n">category_name</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="n">category_name</span>
 </pre></div>
 </div>
 </div>
@@ -2276,14 +2307,14 @@ FROM iw LEFT OUTER JOIN
       <button class="colab-df-convert" onclick="convertToInteractive('df-c7bc2a21-8802-491f-b7da-2f982e6b3585')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2348,28 +2379,28 @@ FROM iw LEFT OUTER JOIN
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>The Whiskies appear even though they never matched the coffee Liqueurs!</p>
 <p>Can you guess what <code class="docutils literal notranslate"><span class="pre">RIGHT</span> <span class="pre">OUTER</span> <span class="pre">JOIN</span></code> will do?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
 
-WITH iw as(
-SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
-FROM `bigquery-public-data.iowa_liquor_sales.sales`
-WHERE category_name = &#39;Imported Whiskies&#39;
-GROUP BY item_description, category_name)
+<span class="n">WITH</span> <span class="n">iw</span> <span class="k">as</span><span class="p">(</span>
+<span class="n">SELECT</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">state_bottle_retail</span><span class="p">)</span> <span class="k">as</span> <span class="n">state_bottle_retail</span><span class="p">,</span> <span class="n">category_name</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+<span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Imported Whiskies&#39;</span>
+<span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span><span class="p">)</span>
 
 
-SELECT *
-FROM iw RIGHT OUTER JOIN
-      (SELECT item_description, MAX(state_bottle_retail) as state_bottle_retail, category_name
-      FROM `bigquery-public-data.iowa_liquor_sales.sales`
-      WHERE category_name = &#39;Coffee Liqueurs&#39;
-      GROUP BY item_description, category_name) as cl
-      ON iw.category_name = cl.category_name
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="n">iw</span> <span class="n">RIGHT</span> <span class="n">OUTER</span> <span class="n">JOIN</span>
+      <span class="p">(</span><span class="n">SELECT</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">MAX</span><span class="p">(</span><span class="n">state_bottle_retail</span><span class="p">)</span> <span class="k">as</span> <span class="n">state_bottle_retail</span><span class="p">,</span> <span class="n">category_name</span>
+      <span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span>
+      <span class="n">WHERE</span> <span class="n">category_name</span> <span class="o">=</span> <span class="s1">&#39;Coffee Liqueurs&#39;</span>
+      <span class="n">GROUP</span> <span class="n">BY</span> <span class="n">item_description</span><span class="p">,</span> <span class="n">category_name</span><span class="p">)</span> <span class="k">as</span> <span class="n">cl</span>
+      <span class="n">ON</span> <span class="n">iw</span><span class="o">.</span><span class="n">category_name</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="n">category_name</span>
 </pre></div>
 </div>
 </div>
@@ -2662,14 +2693,14 @@ FROM iw RIGHT OUTER JOIN
       <button class="colab-df-convert" onclick="convertToInteractive('df-82fbbf85-33ce-4f2c-84ec-53e5a3879e7c')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2734,20 +2765,20 @@ FROM iw RIGHT OUTER JOIN
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>We guarantee all the right table’s entries are included!</p>
-</div>
-<div class="section" id="joining-other-tables">
-<h2>Joining Other Tables<a class="headerlink" href="#joining-other-tables" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="joining-other-tables">
+<h2>Joining Other Tables<a class="headerlink" href="#joining-other-tables" title="Link to this heading">#</a></h2>
 <p>Up to now, I have just been joining the same table together.  What is really great about a relational database is the relations!  Let’s try to get information from another table into ours!  I am wondering if some counties drink more liquor than others.  Well of course more populous counties will so let’s see if we can get the population added by zipcode.  I’ll pull data from the 2010 census.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
 
-SELECT *
-FROM `bigquery-public-data.census_bureau_usa.population_by_zip_2010`
-LIMIT 10
+<span class="n">SELECT</span> <span class="o">*</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">census_bureau_usa</span><span class="o">.</span><span class="n">population_by_zip_2010</span><span class="err">`</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
 </pre></div>
 </div>
 </div>
@@ -2878,14 +2909,14 @@ LIMIT 10
       <button class="colab-df-convert" onclick="convertToInteractive('df-7f133a20-91a3-4211-abe8-8755fcf5e274')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -2950,18 +2981,18 @@ LIMIT 10
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>So I want to add population to a row but keep any sales even if the population does not work.  You should note that the census breaks down population by age and gender.  I just want the total and that happens when those three categories are <code class="docutils literal notranslate"><span class="pre">NULL</span></code> so I ask that.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
 
-SELECT liquor.city,liquor.zip_code,liquor.category_name,liquor.bottles_sold,zip.population
-FROM `bigquery-public-data.iowa_liquor_sales.sales` as liquor LEFT OUTER JOIN `bigquery-public-data.census_bureau_usa.population_by_zip_2010` as zip 
-      ON liquor.zip_code = zip.zipcode
-WHERE zip.gender IS NULL AND zip.minimum_age IS NULL AND zip.maximum_age IS NULL
-LIMIT 10
+<span class="n">SELECT</span> <span class="n">liquor</span><span class="o">.</span><span class="n">city</span><span class="p">,</span><span class="n">liquor</span><span class="o">.</span><span class="n">zip_code</span><span class="p">,</span><span class="n">liquor</span><span class="o">.</span><span class="n">category_name</span><span class="p">,</span><span class="n">liquor</span><span class="o">.</span><span class="n">bottles_sold</span><span class="p">,</span><span class="nb">zip</span><span class="o">.</span><span class="n">population</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">iowa_liquor_sales</span><span class="o">.</span><span class="n">sales</span><span class="err">`</span> <span class="k">as</span> <span class="n">liquor</span> <span class="n">LEFT</span> <span class="n">OUTER</span> <span class="n">JOIN</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">census_bureau_usa</span><span class="o">.</span><span class="n">population_by_zip_2010</span><span class="err">`</span> <span class="k">as</span> <span class="nb">zip</span> 
+      <span class="n">ON</span> <span class="n">liquor</span><span class="o">.</span><span class="n">zip_code</span> <span class="o">=</span> <span class="nb">zip</span><span class="o">.</span><span class="n">zipcode</span>
+<span class="n">WHERE</span> <span class="nb">zip</span><span class="o">.</span><span class="n">gender</span> <span class="n">IS</span> <span class="n">NULL</span> <span class="n">AND</span> <span class="nb">zip</span><span class="o">.</span><span class="n">minimum_age</span> <span class="n">IS</span> <span class="n">NULL</span> <span class="n">AND</span> <span class="nb">zip</span><span class="o">.</span><span class="n">maximum_age</span> <span class="n">IS</span> <span class="n">NULL</span>
+<span class="n">LIMIT</span> <span class="mi">10</span>
 </pre></div>
 </div>
 </div>
@@ -3081,14 +3112,14 @@ LIMIT 10
       <button class="colab-df-convert" onclick="convertToInteractive('df-78e4d865-d6f5-4b92-8e45-b3b7db70ca39')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -3153,21 +3184,21 @@ LIMIT 10
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
 <p>There are still some issues here!  Newton has a zip code but it is being interpreted as a float then converted to a string.  This would require some data munging that we have yet to discuss!  In any case this gives us a nice table where we could ask more complicated questions!</p>
-</div>
-<div class="section" id="your-turn">
-<h2>Your Turn<a class="headerlink" href="#your-turn" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="your-turn">
+<h2>Your Turn<a class="headerlink" href="#your-turn" title="Link to this heading">#</a></h2>
 <p>Examine the average trip on Austin bike share grouping by <em>property_type</em> column from the <em>bikeshare_stations</em> table.  Is average time on trips starting from ‘parkland’ longer than from ‘sidewalks’?  To answer this question you must join the <em>bikeshare_trips</em> and <em>bikeshare_stations</em> on the <em>start_station_name</em> and the <em>name</em> from their respective tables.</p>
 <p>The below table is from <em>bikeshare_stations</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>%%bigquery --project pic-math
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">bigquery</span> <span class="o">--</span><span class="n">project</span> <span class="n">pic</span><span class="o">-</span><span class="n">math</span>
 
-SELECT name, property_type
-FROM `bigquery-public-data.austin_bikeshare.bikeshare_stations`
-LIMIT 50
+<span class="n">SELECT</span> <span class="n">name</span><span class="p">,</span> <span class="n">property_type</span>
+<span class="n">FROM</span> <span class="err">`</span><span class="n">bigquery</span><span class="o">-</span><span class="n">public</span><span class="o">-</span><span class="n">data</span><span class="o">.</span><span class="n">austin_bikeshare</span><span class="o">.</span><span class="n">bikeshare_stations</span><span class="err">`</span>
+<span class="n">LIMIT</span> <span class="mi">50</span>
 
 </pre></div>
 </div>
@@ -3455,14 +3486,14 @@ LIMIT 50
       <button class="colab-df-convert" onclick="convertToInteractive('df-fb20c0cb-b36e-4cd9-8c82-35f9a0e35622')"
               title="Convert this dataframe to an interactive table."
               style="display:none;">
-
+        
   <svg xmlns="http://www.w3.org/2000/svg" height="24px"viewBox="0 0 24 24"
        width="24px">
     <path d="M0 0h24v24H0V0z" fill="none"/>
     <path d="M18.56 5.44l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94zm-11 1L8.5 8.5l.94-2.06 2.06-.94-2.06-.94L8.5 2.5l-.94 2.06-2.06.94zm10 10l.94 2.06.94-2.06 2.06-.94-2.06-.94-.94-2.06-.94 2.06-2.06.94z"/><path d="M17.41 7.96l-1.37-1.37c-.4-.4-.92-.59-1.43-.59-.52 0-1.04.2-1.43.59L10.3 9.45l-7.72 7.72c-.78.78-.78 2.05 0 2.83L4 21.41c.39.39.9.59 1.41.59.51 0 1.02-.2 1.41-.59l7.78-7.78 2.81-2.81c.8-.78.8-2.07 0-2.86zM5.41 20L4 18.59l7.72-7.72 1.47 1.35L5.41 20z"/>
   </svg>
       </button>
-
+      
   <style>
     .colab-df-container {
       display:flex;
@@ -3527,10 +3558,10 @@ LIMIT 50
       </script>
     </div>
   </div>
-</div></div>
+  </div></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -3544,7 +3575,7 @@ LIMIT 50
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Content\Data_Collecting"
         },
         predefinedOutput: true
@@ -3552,46 +3583,106 @@ LIMIT 50
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="05_SQL_SubQuery.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">SQL Sub-Queries</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_SQL_SubQuery.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">SQL Sub-Queries</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="07_SQL_Wrap.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="07_SQL_Wrap.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">SQL Wrap Up</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-        
-        </div>
-    </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By The Jupyter Book community<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-      </div>
-    </div>
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inner-joins">Inner Joins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outer-joins">Outer Joins</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#joining-other-tables">Joining Other Tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-turn">Your Turn</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
 
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
