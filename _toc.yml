@@ -33,7 +33,7 @@ parts:
       - file: Content/Data_Visualization/21_Graphical_Excellence.ipynb
       - file: Content/Data_Visualization/22_Graphical_Integrity.ipynb
       - file: Content/Data_Visualization/23_Graphical_Sophistication.ipynb
-  - caption: Creating Visulaizations
+  - caption: Creating Visualizations
     chapters:
       - file: Content/Data_Visualization/24_Amounts.ipynb
       - file: Content/Data_Visualization/25_Histograms.ipynb
